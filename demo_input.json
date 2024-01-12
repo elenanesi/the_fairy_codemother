@@ -1,0 +1,46 @@
+{
+    "browser_distribution": {
+        "safari": 50,
+        "chrome": 25,
+        "firefox": 25
+    },
+
+    "source_distribution": {
+        "paid media": 50,
+        "organic": 25,
+        "direct": 25
+    },
+
+    "ctr_by_source": {
+        "paid media": 0.5,
+        "organic": 0.3,
+        "direct": 0.2
+    },
+
+    "user_flows": {
+        "complete_purchase": 50,
+        "browse_without_purchase": 50
+    },
+    "dimensions": {
+        "source": "example_source",
+        "medium": "example_medium",
+        "campaign": "example_campaign"
+    },
+
+    "paid media":{
+	    "source" : "google",
+	    "medium" : "cpc",
+	    "campaign" : "test_campaign"
+    },
+
+    "organic":{
+	    "source" : "google",
+	    "medium" : "organic"
+    },
+
+    "direct":{
+	    "source" : "direct",
+	    "medium" : "none"
+    }
+
+    }
