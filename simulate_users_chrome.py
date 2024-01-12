@@ -14,7 +14,7 @@ from elena_util import *
 
 page_categories = ["home", "category", "product"]
 product_categories = ["apples", "kiwis", "oranges"]
-path_functions = ["bounce", "engaged"]
+path_functions = ["bounce","engaged", "product", "add_to_cart"]
 
 # get info from demo_input.json file to get the necessary input for paths
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
@@ -129,8 +129,9 @@ def execute_browsing_flow(browser, source):
 
     #determine path
     path = random.choice(path_functions)
+    #path = "add_to_cart"
 
-    if path == "engaged":
+    if path != "bounced":
         # Choose a random category for the product
         # Example: Click on a link with the text "Example Link"
         try:
@@ -140,7 +141,26 @@ def execute_browsing_flow(browser, source):
         	time.sleep(10)
         except Exception as e:
         	print(f"Error occurred: {e}")
-
+    else:
+    	print("Bounced.")
+    if path == "product" or path == "add_to_cart":
+    	print("product or add to cart")
+    	#determine product page and go to it
+    	#category = random.choice(product_categories)
+    	#product_id = str(random.randint(1, 3))
+    	category = "apples"
+    	product_id = "1"
+    	driver.get(f"{base_url}{category}/{product_id}.php{utm_parameters}")
+    	print("got to product page")
+    if path == "add_to_cart":
+    	print("add to cart branch.")
+    	try:
+    		link = driver.find_element(By.CLASS_NAME, "cart")
+    		link.click()
+    		print("Added to cart.")
+    		time.sleep(10)
+    	except Exception as e:
+    		print(f"Error occurred: {e}")
     driver.quit()
 
 
@@ -165,7 +185,7 @@ def main():
     processes = []
 
     # Create and start a separate process for each user
-    for i in range(5):  # Change this number to the number of users you want to simulate
+    for i in range(10):  # Change this number to the number of users you want to simulate
         p = Process(target=simulate_user) #target the simulate_user function
         p.start()
         processes.append(p)
