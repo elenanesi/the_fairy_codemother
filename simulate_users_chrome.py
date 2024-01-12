@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.common.by import By
+
 from multiprocessing import Process
 import time
 import random
@@ -12,6 +14,7 @@ from elena_util import *
 
 page_categories = ["home", "category", "product"]
 product_categories = ["apples", "kiwis", "oranges"]
+path_functions = ["bounce", "engaged"]
 
 # get info from demo_input.json file to get the necessary input for paths
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
@@ -79,7 +82,7 @@ def execute_browsing_flow(browser, source):
     # Determine the base URL for navigation
     base_url = "http://www.thefairycodemother.com/demo_project/"
 
-    # Check the value of 'page' and navigate accordingly
+    # Assign a random landing page
     if page == "product":
         # Choose a random category for the product
         category = random.choice(product_categories)
@@ -103,6 +106,7 @@ def execute_browsing_flow(browser, source):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     # Stay on the page for 10 seconds
     time.sleep(10)
+
     # Retrieve "_ga" cookie value
     ga_cookie = driver.get_cookie("_ga")
     if ga_cookie:
@@ -121,6 +125,22 @@ def execute_browsing_flow(browser, source):
         # Save the updated list to the file
         with open(client_ids_file, 'w') as file:
             json.dump(client_ids, file)
+
+
+    #determine path
+    path = random.choice(path_functions)
+
+    if path == "engaged":
+        # Choose a random category for the product
+        # Example: Click on a link with the text "Example Link"
+        try:
+        	link = driver.find_element(By.LINK_TEXT,"Yes")
+        	link.click()
+        	print("Clicked on the link.")
+        	time.sleep(10)
+        except Exception as e:
+        	print(f"Error occurred: {e}")
+
     driver.quit()
 
 
