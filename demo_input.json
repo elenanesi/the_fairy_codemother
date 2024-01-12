@@ -18,8 +18,11 @@
     },
 
     "user_flows": {
-        "complete_purchase": 50,
-        "browse_without_purchase": 50
+        "bounced_session": 30,
+        "hub_pages": 40,
+        "product_pages": 10,
+        "purchase_intention": 10,
+        "complete_purchase": 10
     },
     "dimensions": {
         "source": "example_source",

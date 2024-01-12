@@ -10,6 +10,9 @@ import sched
 
 from elena_util import *
 
+page_categories = ["home", "category", "product"]
+product_categories = ["apples", "kiwis", "oranges"]
+
 # get info from demo_input.json file to get the necessary input for paths
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
 if os.path.exists("demo_input.json"):
@@ -28,6 +31,7 @@ def random_choice_based_on_distribution(distribution_dict):
     return random.choices(items, weights=weights, k=1)[0]
 
 def execute_purchase_flow(browser, source):
+	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
     print(f"execute_purchase_flow")
     options = ChromeOptions()
     service = ChromeService(executable_path='/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver')  # Update the path
@@ -60,15 +64,40 @@ def execute_purchase_flow(browser, source):
     driver.quit()
 
 def execute_browsing_flow(browser, source):
+    ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
     print(f"execute_browsing_flow fired")
-    #define browser; fixed for now
+    # Define browser; fixed for now
     options = ChromeOptions()
     service = ChromeService(executable_path='/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver')  # Update the path
     driver = webdriver.Chrome(service=service, options=options)
+    # End of browser setup
+
+    # Setup of landing page
     utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
     print(f"Selected utms: {utm_parameters}")
-    driver.get("http://www.thefairycodemother.com/demo_project/page_3.php" + utm_parameters)  # Your website URL
-    
+    page = random.choice(page_categories)  # Choosing a random page category
+    # Determine the base URL for navigation
+    base_url = "http://www.thefairycodemother.com/demo_project/"
+
+    # Check the value of 'page' and navigate accordingly
+    if page == "product":
+        # Choose a random category for the product
+        category = random.choice(product_categories)
+        # Generate a random product ID between 1 and 10
+        product_id = str(random.randint(1, 3))
+        # Construct and navigate to the product URL
+        driver.get(f"{base_url}{category}/{product_id}.php{utm_parameters}")
+
+    elif page == "category":
+        # Choose a random category
+        category = random.choice(product_categories)
+        # Navigate to the category URL
+        driver.get(f"{base_url}{category}.php{utm_parameters}")
+
+    else:
+        # Navigate to a generic page URL
+        driver.get(f"{base_url}{page}.php{utm_parameters}")
+
     # Add navigation actions here
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -83,7 +112,6 @@ def execute_browsing_flow(browser, source):
         if os.path.exists(client_ids_file):
             with open(client_ids_file, 'r') as file:
                 client_ids = json.load(file)
-                print(f"client_ids: {client_ids}")
         else:
             client_ids = []
 
@@ -95,6 +123,7 @@ def execute_browsing_flow(browser, source):
             json.dump(client_ids, file)
     driver.quit()
 
+
 def simulate_user():
     
     # define a browser to use; using the dedicated demo_input.json file
@@ -104,12 +133,12 @@ def simulate_user():
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
     print(f"Selected Source: {source}")
     # define path: purchase or not?
-    #is_purchase = random.random() < demo_input['ctr_by_source'][source]
-    #if is_purchase:
-    #    execute_purchase_flow(browser, source)
-    #else:
-    #    execute_browsing_flow(browser, source)
-    execute_browsing_flow(browser, source)	
+    is_purchase = random.random() < demo_input['ctr_by_source'][source]
+    if is_purchase:
+        execute_purchase_flow(browser, source)
+    else:
+        execute_browsing_flow(browser, source)
+    # execute_browsing_flow(browser, source)	
 
 def main():
     # List to hold all the Process objects, needed to support multiple fake users visiting at once
