@@ -73,7 +73,6 @@ def consent(driver, page):
     except TimeoutException:
         print("Timed out waiting for cookie banner to appear");
         return;
-
     
 def save_user_id (driver):
     # Retrieve "_ga" cookie value
@@ -136,6 +135,7 @@ def add_to_cart(driver):
     category = random.choice(product_categories)
     product_id = str(random.randint(1, 3))
     url = f"{base_url}{category}/{product_id}.php"
+    purchase_prm = f"?cat={category}&prod={product_id}"
     driver.get(url)
     try: 
         WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
@@ -145,11 +145,14 @@ def add_to_cart(driver):
             link.click()
             print("Added to cart.")
             time.sleep(5)
+            return purchase_prm
         except Exception as e:
             print(f"An error occurred w add to cart click on {url}: {e}")
+            return purchase_prm
 
     except TimeoutException:
         print("product page did not load")
+        return purchase_prm
 
 def execute_purchase_flow(browser, source, headless):
     global HEADLESS
@@ -169,6 +172,7 @@ def execute_purchase_flow(browser, source, headless):
         else:
             utm_parameters="?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
     print(f"Selected utms: {utm_parameters}")
+    
     # Add navigation actions here
 
     url = "http://www.thefairycodemother.com/demo_project/home.php"+ utm_parameters
@@ -179,12 +183,12 @@ def execute_purchase_flow(browser, source, headless):
     
     # Stay on the page for 5 seconds and go to the next page
     time.sleep(5)
-    add_to_cart(driver)
+    purchase_prm = add_to_cart(driver)
     time.sleep(5)  
-    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php")
+    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php"+purchase_prm)
     print("begin checkout")
     time.sleep(5)  
-    driver.get("http://www.thefairycodemother.com/demo_project/purchase.php")
+    driver.get("http://www.thefairycodemother.com/demo_project/purchase.php"+purchase_prm)
     print("purchase happened")
 
     driver.quit()
