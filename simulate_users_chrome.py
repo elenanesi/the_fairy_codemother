@@ -4,6 +4,13 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+
+
 
 from multiprocessing import Process
 import time
@@ -49,13 +56,21 @@ def consent(driver, page):
     }
 
     click_class = random_choice_based_on_distribution(consent_distribution)
+
+    WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+
     try:
-        time.sleep(5)
-        link = driver.find_element(By.CLASS_NAME, click_class)
-        link.click()
-        print(f"consent given is {click_class}")
-    except Exception as e:
-        print(f"Elena, An error occurred with page {page}: {e}")
+        # Wait up to 10 seconds before throwing a TimeoutException unless it finds the element
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "allow-all-button"))
+            )
+    # Now you can interact with the element since it's loaded
+    except TimeoutException:
+        print("Timed out waiting for the page to load or element to appear")
+
+    link = driver.find_element(By.CLASS_NAME, click_class)
+    link.click()
+    print(f"consent was given successfully as: {click_class}")
     
 def save_user_id (driver):
     # Retrieve "_ga" cookie value
@@ -168,14 +183,14 @@ def execute_browsing_flow(browser, source, headless):
 
     # ----------> Navigation section <----------
 
-    # Give/deny consent
-    consent(driver, landing_page)
-
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     # Stay on the page for 10 seconds
     time.sleep(5)
+
+    # Give/deny consent
+    consent(driver, landing_page)
 
     #determine path
     path = random.choice(path_functions)
@@ -199,7 +214,7 @@ def execute_browsing_flow(browser, source, headless):
     	#determine product page and go to it
     	#category = random.choice(product_categories)
     	#product_id = str(random.randint(1, 3))
-    	category = "apples"
+    	category = random.choice(product_categories)
     	product_id = "1"
     	driver.get(f"{base_url}{category}/{product_id}.php")
     	print("got to product page")
