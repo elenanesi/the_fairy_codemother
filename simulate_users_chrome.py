@@ -114,6 +114,7 @@ def execute_purchase_flow(browser, source, headless):
     print(f"execute_purchase_flow")
     options = ChromeOptions()
     print(f"this is headless status: {headless}")
+    headless = int(headless)
     if (headless==1):
         options.add_argument("--headless")  # Enables headless mode
     service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
@@ -138,6 +139,7 @@ def execute_browsing_flow(browser, source, headless):
     # Define browser; fixed for now
     options = ChromeOptions()
     print(f"this is headless status: {headless}")
+    headless = int(headless)
     if (headless==1):
         options.add_argument("--headless")  # Enables headless mode
     service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
