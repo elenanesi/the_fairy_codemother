@@ -10,8 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 
-
-
 from multiprocessing import Process
 import time
 import random
@@ -57,20 +55,25 @@ def consent(driver, page):
 
     click_class = random_choice_based_on_distribution(consent_distribution)
 
-    WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+    try: 
+        WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+        return;
 
     try:
         # Wait up to 10 seconds before throwing a TimeoutException unless it finds the element
         element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "allow-all-button"))
             )
+        link = driver.find_element(By.CLASS_NAME, click_class)
+        link.click()
+        print(f"consent was given successfully as: {click_class}")
     # Now you can interact with the element since it's loaded
     except TimeoutException:
-        print("Timed out waiting for the page to load or element to appear")
+        print("Timed out waiting for cookie banner to appear");
+        return;
 
-    link = driver.find_element(By.CLASS_NAME, click_class)
-    link.click()
-    print(f"consent was given successfully as: {click_class}")
     
 def save_user_id (driver):
     # Retrieve "_ga" cookie value
@@ -134,7 +137,6 @@ def execute_purchase_flow(browser, source, headless):
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
     print(f"execute_purchase_flow")
     options = ChromeOptions()
-    print(f"this is headless status: {headless}")
     headless = int(headless)
     if (headless==1):
         options.add_argument("--headless")  # Enables headless mode
@@ -209,24 +211,30 @@ def execute_browsing_flow(browser, source, headless):
         	print(f"Elena, an error occurred with click on link with page {landing_page}: {e}")
     else:
     	print("Bounced.")
+
     if path == "product" or path == "add_to_cart":
-    	print("product or add to cart")
-    	#determine product page and go to it
-    	#category = random.choice(product_categories)
-    	#product_id = str(random.randint(1, 3))
-    	category = random.choice(product_categories)
-    	product_id = "1"
-    	driver.get(f"{base_url}{category}/{product_id}.php")
-    	print("got to product page")
-    if path == "add_to_cart":
-    	print("add to cart branch.")
-    	try:
-    		link = driver.find_element(By.CLASS_NAME, "cart")
-    		link.click()
-    		print("Added to cart.")
-    		time.sleep(10)
-    	except Exception as e:
-    		print(f"Elena, an error occurred w add to cart click on {landing_page}: {e}")
+        print("product or add to cart")
+        #determine product page and go to it
+        #category = random.choice(product_categories)
+        #product_id = str(random.randint(1, 3))
+        category = random.choice(product_categories)
+        product_id = "1"
+        driver.get(f"{base_url}{category}/{product_id}.php")
+        try: 
+            WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+            print("got to product page")
+        except TimeoutException:
+            print("Page did not load")
+
+        if path == "add_to_cart":
+            print("add to cart branch.")        
+            try:
+                link = driver.find_element(By.CLASS_NAME, "cart")
+                link.click()
+                print("Added to cart.")
+                time.sleep(5)
+            except Exception as e:
+                print(f"An error occurred w add to cart click on {landing_page}: {e}")
     driver.quit()
 
 def simulate_user(headless):
