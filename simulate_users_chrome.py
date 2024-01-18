@@ -210,6 +210,12 @@ def simulate_user(headless):
     else:
         execute_browsing_flow(browser, source, headless)	
 
+def log_execution_time(start_time, args):
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    with open("execution_log.txt", "a") as file:
+        file.write(f"Execution time: {elapsed_time:.2f} seconds, Arguments: {args}\n")
+
 def main():
     global HEADLESS
     global NR_USERS
@@ -228,11 +234,18 @@ def main():
 
 
 if __name__ == "__main__":
-    print("Hello I am main")
+    start_time = time.time()
+    arguments = []
+
+    print(f"Hello I am main at {start_time}")
+
     if len(sys.argv) > 0:
         HEADLESS = sys.argv[1]
+        arguments.append(sys.argv[1])
         print(f"argument {HEADLESS}{sys.argv[1]}")
     if len(sys.argv) > 1:
         NR_USERS = int(sys.argv[2])
+        arguments.append(sys.argv[2])
         print(f"argument {sys.argv[2]}")
     main()
+    log_execution_time(start_time, arguments)
