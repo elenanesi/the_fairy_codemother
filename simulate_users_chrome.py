@@ -9,21 +9,27 @@ from multiprocessing import Process
 import time
 import random
 import sched
+import sys
+
 
 from elena_util import *
 
 page_categories = ["home", "category", "product"]
 product_categories = ["apples", "kiwis", "oranges"]
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
+HEADLESS = 1
+NR_USERS = 50
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' #using Canary driver
 # Determine the base URL for navigation
 base_url = "http://www.thefairycodemother.com/demo_project/"
-
 # get info from demo_input.json file to get the necessary input for paths
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
 if os.path.exists("demo_input.json"):
-	with open("demo_input.json", 'r') as file:
-		demo_input = json.load(file)
+    with open("demo_input.json", 'r') as file:
+        demo_input = json.load(file)
+else:
+    print ("demo_input.json is missing!!")
+
 
 def random_choice_based_on_distribution(distribution_dict):
     """
@@ -50,7 +56,6 @@ def consent(driver):
     except Exception as e:
         print(f"Elena, An error occurred: {e}")
     
-
 def save_user_id (driver):
     # Retrieve "_ga" cookie value
     ga_cookie = driver.get_cookie("_ga")
@@ -103,10 +108,14 @@ def get_landing_page(driver, source):
         driver.get(url)
         return url
 
-def execute_purchase_flow(browser, source):
+def execute_purchase_flow(browser, source, headless):
+    global HEADLESS
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
     print(f"execute_purchase_flow")
     options = ChromeOptions()
+    print(f"this is headless status: {headless}")
+    if (headless==1):
+        options.add_argument("--headless")  # Enables headless mode
     service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
     driver = webdriver.Chrome(service=service, options=options)
     utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
@@ -122,11 +131,15 @@ def execute_purchase_flow(browser, source):
 
     driver.quit()
 
-def execute_browsing_flow(browser, source):
+def execute_browsing_flow(browser, source, headless):
+    
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
     print(f"execute_browsing_flow fired")
     # Define browser; fixed for now
     options = ChromeOptions()
+    print(f"this is headless status: {headless}")
+    if (headless==1):
+        options.add_argument("--headless")  # Enables headless mode
     service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
     driver = webdriver.Chrome(service=service, options=options)
     # End of browser setup
@@ -182,7 +195,7 @@ def execute_browsing_flow(browser, source):
     		print(f"Elena, an error occurred w add to cart click on {landing_page}: {e}")
     driver.quit()
 
-def simulate_user():
+def simulate_user(headless):
     
     # define a browser to use; using the dedicated demo_input.json file
     browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
@@ -193,17 +206,19 @@ def simulate_user():
     # define path: purchase or not?
     is_purchase = random.random() < demo_input['ctr_by_source'][source]
     if is_purchase:
-        execute_purchase_flow(browser, source)
+        execute_purchase_flow(browser, source, headless)
     else:
-        execute_browsing_flow(browser, source)	
+        execute_browsing_flow(browser, source, headless)	
 
 def main():
+    global HEADLESS
+    global NR_USERS
     # List to hold all the Process objects, needed to support multiple fake users visiting at once
     processes = []
 
     # Create and start a separate process for each user
-    for i in range(10):  # Change this number to the number of users you want to simulate
-        p = Process(target=simulate_user) #target the simulate_user function
+    for i in range(NR_USERS):  # Change this number to the number of users you want to simulate
+        p = Process(target=simulate_user, args=(HEADLESS,)) #target the simulate_user function
         p.start()
         processes.append(p)
 
@@ -211,5 +226,13 @@ def main():
     for p in processes:
         p.join()
 
+
 if __name__ == "__main__":
+    print("Hello I am main")
+    if len(sys.argv) > 0:
+        HEADLESS = sys.argv[1]
+        print(f"argument {HEADLESS}{sys.argv[1]}")
+    if len(sys.argv) > 1:
+        NR_USERS = int(sys.argv[2])
+        print(f"argument {sys.argv[2]}")
     main()
