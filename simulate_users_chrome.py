@@ -15,6 +15,9 @@ from elena_util import *
 page_categories = ["home", "category", "product"]
 product_categories = ["apples", "kiwis", "oranges"]
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
+CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' #using Canary driver
+# Determine the base URL for navigation
+base_url = "http://www.thefairycodemother.com/demo_project/"
 
 # get info from demo_input.json file to get the necessary input for paths
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
@@ -33,19 +36,22 @@ def random_choice_based_on_distribution(distribution_dict):
     weights = list(distribution_dict.values())
     return random.choices(items, weights=weights, k=1)[0]
 
-def execute_purchase_flow(browser, source):
-	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
-    print(f"execute_purchase_flow")
-    options = ChromeOptions()
-    service = ChromeService(executable_path='/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver')  # Update the path
-    driver = webdriver.Chrome(service=service, options=options)
-    utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
-    driver.get("http://www.thefairycodemother.com/demo_project/page_3.php" + utm_parameters)  # Your website URL
-    # Add navigation actions here
-    # Scroll to the bottom of the page
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    # Stay on the page for 10 seconds
-    time.sleep(10)
+def consent(driver):
+    consent_distribution = {
+        'allow-all-button': 70,
+        'deny-all-button': 30
+    }
+
+    click_class = random_choice_based_on_distribution(consent_distribution)
+    try:
+        link = driver.find_element(By.CLASS_NAME, click_class)
+        link.click()
+        print(f"consent given is {click_class}")
+    except Exception as e:
+        print(f"Elena, An error occurred: {e}")
+    
+
+def save_user_id (driver):
     # Retrieve "_ga" cookie value
     ga_cookie = driver.get_cookie("_ga")
     if ga_cookie:
@@ -64,23 +70,13 @@ def execute_purchase_flow(browser, source):
         # Save the updated list to the file
         with open(client_ids_file, 'w') as file:
             json.dump(client_ids, file)
-    driver.quit()
 
-def execute_browsing_flow(browser, source):
-    ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
-    print(f"execute_browsing_flow fired")
-    # Define browser; fixed for now
-    options = ChromeOptions()
-    service = ChromeService(executable_path='/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver')  # Update the path
-    driver = webdriver.Chrome(service=service, options=options)
-    # End of browser setup
-
+def get_landing_page(driver, source):
     # Setup of landing page
     utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
     print(f"Selected utms: {utm_parameters}")
     page = random.choice(page_categories)  # Choosing a random page category
-    # Determine the base URL for navigation
-    base_url = "http://www.thefairycodemother.com/demo_project/"
+    
 
     # Assign a random landing page
     if page == "product":
@@ -89,43 +85,66 @@ def execute_browsing_flow(browser, source):
         # Generate a random product ID between 1 and 10
         product_id = str(random.randint(1, 3))
         # Construct and navigate to the product URL
-        driver.get(f"{base_url}{category}/{product_id}.php{utm_parameters}")
+        url = f"{base_url}{category}/{product_id}.php{utm_parameters}"
+        driver.get(url)
+        return url
 
     elif page == "category":
         # Choose a random category
         category = random.choice(product_categories)
         # Navigate to the category URL
-        driver.get(f"{base_url}{category}.php{utm_parameters}")
+        url = f"{base_url}{category}.php{utm_parameters}"
+        driver.get(url)
+        return url
 
     else:
         # Navigate to a generic page URL
-        driver.get(f"{base_url}{page}.php{utm_parameters}")
+        url = f"{base_url}{page}.php{utm_parameters}"
+        driver.get(url)
+        return url
 
+def execute_purchase_flow(browser, source):
+	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
+    print(f"execute_purchase_flow")
+    options = ChromeOptions()
+    service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
+    driver = webdriver.Chrome(service=service, options=options)
+    utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
+    driver.get("http://www.thefairycodemother.com/demo_project/page_3.php" + utm_parameters)  # Your website URL
     # Add navigation actions here
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     # Stay on the page for 10 seconds
     time.sleep(10)
 
-    # Retrieve "_ga" cookie value
-    ga_cookie = driver.get_cookie("_ga")
-    if ga_cookie:
-        ga_value = ga_cookie['value']
-        # Load existing client IDs from file, if it exists
-        client_ids_file = 'client_ids.json'
-        if os.path.exists(client_ids_file):
-            with open(client_ids_file, 'r') as file:
-                client_ids = json.load(file)
-        else:
-            client_ids = []
+    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php")  
+    driver.get("http://www.thefairycodemother.com/demo_project/purchase.php")
 
-        # Add the new client ID
-        client_ids.append(ga_value)
+    driver.quit()
 
-        # Save the updated list to the file
-        with open(client_ids_file, 'w') as file:
-            json.dump(client_ids, file)
+def execute_browsing_flow(browser, source):
+    ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
+    print(f"execute_browsing_flow fired")
+    # Define browser; fixed for now
+    options = ChromeOptions()
+    service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
+    driver = webdriver.Chrome(service=service, options=options)
+    # End of browser setup
 
+    # Choose a random landing page
+    landing_page = get_landing_page(driver, source)
+    
+
+    # ----------> Navigation section <----------
+
+    # Give/deny consent
+    consent(driver)
+
+    # Scroll to the bottom of the page
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    # Stay on the page for 10 seconds
+    time.sleep(10)
 
     #determine path
     path = random.choice(path_functions)
@@ -140,7 +159,7 @@ def execute_browsing_flow(browser, source):
         	print("Clicked on the link.")
         	time.sleep(10)
         except Exception as e:
-        	print(f"Error occurred: {e}")
+        	print(f"Elena, an error occurred with click on link with page {landing_page}: {e}")
     else:
     	print("Bounced.")
     if path == "product" or path == "add_to_cart":
@@ -150,7 +169,7 @@ def execute_browsing_flow(browser, source):
     	#product_id = str(random.randint(1, 3))
     	category = "apples"
     	product_id = "1"
-    	driver.get(f"{base_url}{category}/{product_id}.php{utm_parameters}")
+    	driver.get(f"{base_url}{category}/{product_id}.php")
     	print("got to product page")
     if path == "add_to_cart":
     	print("add to cart branch.")
@@ -160,9 +179,8 @@ def execute_browsing_flow(browser, source):
     		print("Added to cart.")
     		time.sleep(10)
     	except Exception as e:
-    		print(f"Error occurred: {e}")
+    		print(f"Elena, an error occurred w add to cart click on {landing_page}: {e}")
     driver.quit()
-
 
 def simulate_user():
     
@@ -177,8 +195,7 @@ def simulate_user():
     if is_purchase:
         execute_purchase_flow(browser, source)
     else:
-        execute_browsing_flow(browser, source)
-    # execute_browsing_flow(browser, source)	
+        execute_browsing_flow(browser, source)	
 
 def main():
     # List to hold all the Process objects, needed to support multiple fake users visiting at once
