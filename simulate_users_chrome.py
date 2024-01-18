@@ -42,7 +42,7 @@ def random_choice_based_on_distribution(distribution_dict):
     weights = list(distribution_dict.values())
     return random.choices(items, weights=weights, k=1)[0]
 
-def consent(driver):
+def consent(driver, page):
     consent_distribution = {
         'allow-all-button': 70,
         'deny-all-button': 30
@@ -50,11 +50,12 @@ def consent(driver):
 
     click_class = random_choice_based_on_distribution(consent_distribution)
     try:
+        time.sleep(5)
         link = driver.find_element(By.CLASS_NAME, click_class)
         link.click()
         print(f"consent given is {click_class}")
     except Exception as e:
-        print(f"Elena, An error occurred: {e}")
+        print(f"Elena, An error occurred with page {page}: {e}")
     
 def save_user_id (driver):
     # Retrieve "_ga" cookie value
@@ -78,7 +79,12 @@ def save_user_id (driver):
 
 def get_landing_page(driver, source):
     # Setup of landing page
-    utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
+    utm_parameters = ""
+    if (source != "direct"):
+        if "organic" in source:
+            utm_parameters="?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium']
+        else:
+            utm_parameters="?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
     print(f"Selected utms: {utm_parameters}")
     page = random.choice(page_categories)  # Choosing a random page category
     
@@ -119,15 +125,26 @@ def execute_purchase_flow(browser, source, headless):
         options.add_argument("--headless")  # Enables headless mode
     service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
     driver = webdriver.Chrome(service=service, options=options)
-    utm_parameters = "?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
-    driver.get("http://www.thefairycodemother.com/demo_project/page_3.php" + utm_parameters)  # Your website URL
+    # Setup of landing page
+    utm_parameters = ""
+    if (source != "direct"):
+        if "organic" in source:
+            utm_parameters="?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium']
+        else:
+            utm_parameters="?utm_source=" + demo_input[source]['source'] + "&utm_medium=" + demo_input[source]['medium'] + "&utm_campaign=" + demo_input[source].get('campaign', '')
+    print(f"Selected utms: {utm_parameters}")
     # Add navigation actions here
+
+    url = "http://www.thefairycodemother.com/demo_project/home.php"+ utm_parameters
+    driver.get(url)  # Your website URL
+    consent(driver, url)
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    # Stay on the page for 10 seconds
-    time.sleep(10)
-
-    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php")  
+    
+    # Stay on the page for 5 seconds and go to the next page
+    time.sleep(5)
+    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php")
+    time.sleep(5)  
     driver.get("http://www.thefairycodemother.com/demo_project/purchase.php")
 
     driver.quit()
@@ -138,7 +155,6 @@ def execute_browsing_flow(browser, source, headless):
     print(f"execute_browsing_flow fired")
     # Define browser; fixed for now
     options = ChromeOptions()
-    print(f"this is headless status: {headless}")
     headless = int(headless)
     if (headless==1):
         options.add_argument("--headless")  # Enables headless mode
@@ -153,13 +169,13 @@ def execute_browsing_flow(browser, source, headless):
     # ----------> Navigation section <----------
 
     # Give/deny consent
-    consent(driver)
+    consent(driver, landing_page)
 
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     # Stay on the page for 10 seconds
-    time.sleep(10)
+    time.sleep(5)
 
     #determine path
     path = random.choice(path_functions)
@@ -169,10 +185,11 @@ def execute_browsing_flow(browser, source, headless):
         # Choose a random category for the product
         # Example: Click on a link with the text "Example Link"
         try:
-        	link = driver.find_element(By.LINK_TEXT,"Yes")
-        	link.click()
-        	print("Clicked on the link.")
-        	time.sleep(10)
+            time.sleep(5)
+            link = driver.find_element(By.LINK_TEXT,"Yes")
+            link.click()
+            print("Clicked on the link.")
+            time.sleep(5)
         except Exception as e:
         	print(f"Elena, an error occurred with click on link with page {landing_page}: {e}")
     else:
@@ -233,7 +250,6 @@ def main():
     # Wait for all processes to finish
     for p in processes:
         p.join()
-
 
 if __name__ == "__main__":
     start_time = time.time()
