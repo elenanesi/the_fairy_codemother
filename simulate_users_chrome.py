@@ -132,6 +132,25 @@ def get_landing_page(driver, source):
         driver.get(url)
         return url
 
+def add_to_cart(driver):
+    category = random.choice(product_categories)
+    product_id = str(random.randint(1, 3))
+    url = f"{base_url}{category}/{product_id}.php"
+    driver.get(url)
+    try: 
+        WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+        print("got to product page")
+        try:
+            link = driver.find_element(By.CLASS_NAME, "cart")
+            link.click()
+            print("Added to cart.")
+            time.sleep(5)
+        except Exception as e:
+            print(f"An error occurred w add to cart click on {url}: {e}")
+
+    except TimeoutException:
+        print("product page did not load")
+
 def execute_purchase_flow(browser, source, headless):
     global HEADLESS
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
@@ -160,9 +179,13 @@ def execute_purchase_flow(browser, source, headless):
     
     # Stay on the page for 5 seconds and go to the next page
     time.sleep(5)
+    add_to_cart(driver)
+    time.sleep(5)  
     driver.get("http://www.thefairycodemother.com/demo_project/checkout.php")
+    print("begin checkout")
     time.sleep(5)  
     driver.get("http://www.thefairycodemother.com/demo_project/purchase.php")
+    print("purchase happened")
 
     driver.quit()
 
@@ -215,10 +238,10 @@ def execute_browsing_flow(browser, source, headless):
     if path == "product" or path == "add_to_cart":
         print("product or add to cart")
         #determine product page and go to it
-        #category = random.choice(product_categories)
-        #product_id = str(random.randint(1, 3))
+        
+        
         category = random.choice(product_categories)
-        product_id = "1"
+        product_id = str(random.randint(1, 3))
         driver.get(f"{base_url}{category}/{product_id}.php")
         try: 
             WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
