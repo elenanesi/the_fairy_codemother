@@ -90,25 +90,33 @@ def consent(driver, page):
         print("Timed out waiting for cookie banner to appear");
         return;
     
-def save_user_id (driver):
-    # Retrieve "_ga" cookie value and save it in a json file to simulate returning users
+def save_user_id(driver):
+    # Retrieve cookies
     ga_cookie = driver.get_cookie("_ga")
-    if ga_cookie:
-        ga_value = ga_cookie['value']
-        # Load existing client IDs from file, if it exists
-        client_ids_file = 'client_ids.json'
-        if os.path.exists(client_ids_file):
-            with open(client_ids_file, 'r') as file:
-                client_ids = json.load(file)
-        else:
-            client_ids = []
+    ga_1L1YW7SZFP_cookie = driver.get_cookie("_ga_1L1YW7SZFP")
 
-        # Add the new client ID
-        client_ids.append(ga_value)
+    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+    client_ids = []
 
-        # Save the updated list to the file
-        with open(client_ids_file, 'w') as file:
-            json.dump(client_ids, file)
+    # Load existing cookie pairs from file, if it exists
+    if os.path.exists(client_ids_file):
+        with open(client_ids_file, 'r') as file:
+            client_ids = json.load(file)
+
+    if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
+        # Check if both cookies are present and add their values
+        if ga_cookie and ga_1L1YW7SZFP_cookie:
+            client_ids.append({
+                '_ga': ga_cookie['value'],
+                '_ga_1L1YW7SZFP': ga_1L1YW7SZFP_cookie['value']
+            })
+
+            # Save the updated list to the file
+            with open(client_ids_file, 'w') as file:
+                json.dump(client_ids, file)
+
+    else: 
+        print(f"sorry, IDs are already {len(client_ids)}")
 
 def get_landing_page(driver, source):
     # Setup of landing page
@@ -176,20 +184,18 @@ def browser_setup(browser, headless):
     if browser == "firefox":
         # Firefox browser setup
         options = FirefoxOptions()
-       # headless = int(headless)
-       # if headless == 1:
-        #    options.add_argument("--headless")  # Enables headless mode
+        headless = int(headless)
+        if headless == 1:
+            options.add_argument("--headless")  # Enables headless mode
         service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
         return webdriver.Firefox(service=service, options=options)
-        #return webdriver.Firefox(service=service)
     elif browser == "chrome":
         options = ChromeOptions()
-        #headless = int(headless)
-        #if (headless==1):
-        #    options.add_argument("--headless")  # Enables headless mode
+        headless = int(headless)
+        if (headless==1):
+            options.add_argument("--headless")  # Enables headless mode
         service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
-        return webdriver.Chrome(service=service)
-        #return webdriver.Chrome(service=service, options=options)
+        return webdriver.Chrome(service=service, options=options)
 
 def execute_purchase_flow(browser, source, headless):
     global HEADLESS
@@ -215,6 +221,7 @@ def execute_purchase_flow(browser, source, headless):
     url = "http://www.thefairycodemother.com/demo_project/home.php"+ utm_parameters
     driver.get(url)  # Your website URL
     consent(driver, url)
+    save_user_id(driver)
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     
@@ -229,9 +236,6 @@ def execute_purchase_flow(browser, source, headless):
     print("purchase happened")
 
     driver.quit()
-
-
-
 
 def execute_browsing_flow(browser, source, headless):
     
@@ -254,6 +258,7 @@ def execute_browsing_flow(browser, source, headless):
 
     # Give/deny consent
     consent(driver, landing_page)
+    save_user_id(driver)
 
     #determine path
     path = random.choice(path_functions)

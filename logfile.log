@@ -1,6 +1,6 @@
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-Hello I am main and I started at 1705700701.3626251
+Hello I am main and I started at 1705701601.1190531
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
@@ -42,20 +42,25 @@ Hello I am main and I started at 1705700701.3626251
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
 Selected Browser: firefox
-Selected Source: social media
+Selected Source: direct
 execute_browsing_flow fired
 browser_setup for firefox
-Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
+Selected utms: 
 consent was given successfully as: deny-all-button
 Clicked on the link.
-product or add to cart
-got to product page
 Selected Browser: firefox
 Selected Source: paid media
 execute_browsing_flow fired
 browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: deny-all-button
+consent was given successfully as: allow-all-button
+Clicked on the link.
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: allow-all-button
 Clicked on the link.
 product or add to cart
 got to product page
@@ -66,13 +71,8 @@ browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=organic
 consent was given successfully as: allow-all-button
 Clicked on the link.
-Selected Browser: firefox
-Selected Source: social media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
-consent was given successfully as: deny-all-button
-Clicked on the link.
+product or add to cart
+got to product page
 Selected Browser: firefox
 Selected Source: social media
 execute_browsing_flow fired
@@ -80,102 +80,6 @@ browser_setup for firefox
 Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
 consent was given successfully as: allow-all-button
 Clicked on the link.
-Selected Browser: firefox
-Selected Source: direct
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: firefox
-Selected Source: direct
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: 
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: firefox
-Selected Source: direct
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: firefox
-Selected Source: direct
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: firefox
-Selected Source: direct
-execute_browsing_flow fired
-browser_setup for firefox
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
 Selected Browser: firefox
 Selected Source: organic
 execute_browsing_flow fired
@@ -185,24 +89,52 @@ consent was given successfully as: allow-all-button
 Clicked on the link.
 product or add to cart
 got to product page
-add to cart branch.
-Added to cart.
+Selected Browser: firefox
+Selected Source: social media
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
+consent was given successfully as: allow-all-button
+Clicked on the link.
+Selected Browser: firefox
+Selected Source: organic
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=google&utm_medium=organic
+consent was given successfully as: allow-all-button
+Clicked on the link.
+Selected Browser: firefox
+Selected Source: organic
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=google&utm_medium=organic
+consent was given successfully as: allow-all-button
+Clicked on the link.
 Selected Browser: firefox
 Selected Source: direct
 execute_browsing_flow fired
 browser_setup for firefox
 Selected utms: 
-consent was given successfully as: deny-all-button
+consent was given successfully as: allow-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: allow-all-button
 Clicked on the link.
 product or add to cart
 got to product page
 add to cart branch.
 Added to cart.
 Selected Browser: firefox
-Selected Source: direct
+Selected Source: paid media
 execute_browsing_flow fired
 browser_setup for firefox
-Selected utms: 
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
 consent was given successfully as: deny-all-button
 Clicked on the link.
 product or add to cart
@@ -213,6 +145,15 @@ Selected Browser: firefox
 Selected Source: organic
 execute_purchase_flow
 Selected utms: ?utm_source=google&utm_medium=organic
+consent was given successfully as: allow-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Selected Browser: firefox
+Selected Source: direct
+execute_purchase_flow
+Selected utms: 
 consent was given successfully as: deny-all-button
 got to product page
 Added to cart.
@@ -227,7 +168,66 @@ got to product page
 Added to cart.
 begin checkout
 purchase happened
-Script executed on 2024-01-19 22:45:01
-Execution time: 119.98 seconds
-Script executed on 2024-01-19 22:47:25
-Execution time: 27.10 seconds
+Selected Browser: firefox
+Selected Source: direct
+execute_purchase_flow
+Selected utms: 
+consent was given successfully as: allow-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Selected Browser: firefox
+Selected Source: paid media
+execute_purchase_flow
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: allow-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Selected Browser: firefox
+Selected Source: paid media
+execute_purchase_flow
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: allow-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Selected Browser: firefox
+Selected Source: paid media
+execute_purchase_flow
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: allow-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Selected Browser: firefox
+Selected Source: paid media
+execute_purchase_flow
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: deny-all-button
+got to product page
+Added to cart.
+begin checkout
+purchase happened
+Script executed on 2024-01-19 23:00:01
+Execution time: 102.55 seconds
+Script executed on 2024-01-19 23:45:37
+Execution time: 21.73 seconds
+Script executed on 2024-01-19 23:48:45
+Execution time: 21.71 seconds
+Script executed on 2024-01-19 23:53:54
+Execution time: 26.47 seconds
+Script executed on 2024-01-19 23:54:45
+Execution time: 26.71 seconds
+Script executed on 2024-01-20 00:01:58
+Execution time: 17.79 seconds
+Script executed on 2024-01-20 00:02:51
+Execution time: 21.51 seconds
+Script executed on 2024-01-20 00:05:42
+Execution time: 17.78 seconds
+Script executed on 2024-01-20 00:06:34
+Execution time: 21.59 seconds
