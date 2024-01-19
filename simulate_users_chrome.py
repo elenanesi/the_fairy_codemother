@@ -9,8 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from multiprocessing import Process
+from datetime import datetime
 import time
-import datetime
 import warnings
 import random
 import sched
@@ -33,9 +33,10 @@ path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
 HEADLESS = 1
 # number of users and sessions to run at every execution of the script
-NR_USERS = 50
+NR_USERS = 20
 #location of the chrome driver
-CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' #using Canary driver
+CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
+FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 # Base URL for navigation, my localhost website
 base_url = "http://www.thefairycodemother.com/demo_project/"
 # get info from demo_input.json file to get the necessary input for paths (CVR and distribution)
@@ -50,7 +51,8 @@ else:
 
 def random_choice_based_on_distribution(distribution_dict):
     """
-    Selects an item based on a distribution of probabilities.
+    Selects an item based on a distribution of probabilities 
+    In this script it is called with a distribution from the demo_input.json file as an input
 
     :param distribution_dict: A dictionary where keys are items to choose from and values are their corresponding probabilities.
     :return: A randomly selected key based on the distribution.
@@ -60,6 +62,9 @@ def random_choice_based_on_distribution(distribution_dict):
     return random.choices(items, weights=weights, k=1)[0]
 
 def consent(driver, page):
+    # used to click on cookie banner and give/deny consent to cookies with a 70-30 distribution
+
+    #define distribution
     consent_distribution = {
         'allow-all-button': 70,
         'deny-all-button': 30
@@ -67,27 +72,26 @@ def consent(driver, page):
 
     click_class = random_choice_based_on_distribution(consent_distribution)
 
-    try: 
+    try: # wait for page load
         WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
     except TimeoutException:
         print("Timed out waiting for page to load")
         return;
 
     try:
-        # Wait up to 10 seconds before throwing a TimeoutException unless it finds the element
+        # Wait up to 10 seconds for the cookie banner to appear and click on it if does, otherwise throw a TimeoutException
         element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "allow-all-button"))
+            EC.presence_of_element_located((By.CLASS_NAME, "cookie-banner"))
             )
         link = driver.find_element(By.CLASS_NAME, click_class)
         link.click()
         print(f"consent was given successfully as: {click_class}")
-    # Now you can interact with the element since it's loaded
     except TimeoutException:
         print("Timed out waiting for cookie banner to appear");
         return;
     
 def save_user_id (driver):
-    # Retrieve "_ga" cookie value
+    # Retrieve "_ga" cookie value and save it in a json file to simulate returning users
     ga_cookie = driver.get_cookie("_ga")
     if ga_cookie:
         ga_value = ga_cookie['value']
@@ -166,6 +170,27 @@ def add_to_cart(driver):
         print("product page did not load")
         return purchase_prm
 
+def browser_setup(browser, headless):
+    print(f"browser_setup for {browser}")
+
+    if browser == "firefox":
+        # Firefox browser setup
+        options = FirefoxOptions()
+       # headless = int(headless)
+       # if headless == 1:
+        #    options.add_argument("--headless")  # Enables headless mode
+        service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
+        return webdriver.Firefox(service=service, options=options)
+        #return webdriver.Firefox(service=service)
+    elif browser == "chrome":
+        options = ChromeOptions()
+        #headless = int(headless)
+        #if (headless==1):
+        #    options.add_argument("--headless")  # Enables headless mode
+        service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
+        return webdriver.Chrome(service=service)
+        #return webdriver.Chrome(service=service, options=options)
+
 def execute_purchase_flow(browser, source, headless):
     global HEADLESS
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
@@ -205,18 +230,15 @@ def execute_purchase_flow(browser, source, headless):
 
     driver.quit()
 
+
+
+
 def execute_browsing_flow(browser, source, headless):
     
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
     print(f"execute_browsing_flow fired")
-    # Define browser; fixed for now
-    options = ChromeOptions()
-    headless = int(headless)
-    if (headless==1):
-        options.add_argument("--headless")  # Enables headless mode
-    service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
-    driver = webdriver.Chrome(service=service, options=options)
-    # End of browser setup
+    # Define browser; 
+    driver = browser_setup(browser, headless)
 
     # Choose a random landing page
     landing_page = get_landing_page(driver, source)
@@ -279,13 +301,14 @@ def execute_browsing_flow(browser, source, headless):
 def simulate_user(headless):
     
     # define a browser to use; using the dedicated demo_input.json file
-    browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
+    #browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
+    browser = "firefox"
     print(f"Selected Browser: {browser}")
     # define an Acquisition source to use; using the dedicated demo_input.json file
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
     print(f"Selected Source: {source}")
     # define path: purchase or not?
-    is_purchase = random.random() < demo_input['ctr_by_source'][source]
+    is_purchase = random.random() < demo_input['cvr_by_source'][source]
     if is_purchase:
         execute_purchase_flow(browser, source, headless)
     else:
@@ -294,12 +317,16 @@ def simulate_user(headless):
 def log_execution_time(start_time, args):
     end_time = time.time()
     elapsed_time = end_time - start_time
+
+    # Convert start_time from timestamp to datetime
+    start_time_formatted = datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')
+
     with open("execution_log.txt", "a") as file:
         file.write(f"Execution time: {elapsed_time:.2f} seconds, Arguments: {args}\n")
 
     with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
-        log_file.write(f"Script executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-        log_file.write(f"Execution time: {execution_time}\n")
+        log_file.write(f"Script executed on {start_time_formatted}\n")
+        log_file.write(f"Execution time: {elapsed_time:.2f} seconds\n")
 
 def main():
     global HEADLESS

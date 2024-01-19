@@ -1,8 +1,7 @@
 {
     "browser_distribution": {
-        "safari": 50,
-        "chrome": 25,
-        "firefox": 25
+        "chrome": 70,
+        "firefox": 30
     },
 
     "source_distribution": {
@@ -12,25 +11,11 @@
         "direct": 30
     },
 
-    "ctr_by_source": {
+    "cvr_by_source": {
         "paid media": 0.5,
         "organic": 0.3,
         "social media": 0.1,
         "direct": 0.3
-    },
-
-    "user_flows": {
-        "bounced_session": 30,
-        "hub_pages": 40,
-        "product_pages": 10,
-        "purchase_intention": 10,
-        "complete_purchase": 10
-    },
-
-    "dimensions": {
-        "source": "example_source",
-        "medium": "example_medium",
-        "campaign": "example_campaign"
     },
 
     "paid media":{
@@ -50,4 +35,6 @@
         "campaign": "social_campaign_test1"
     }
 
-    }
+
+
+}

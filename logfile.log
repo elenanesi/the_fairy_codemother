@@ -1,6 +1,6 @@
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-Hello I am main and I started at 1705689000.3785348
+Hello I am main and I started at 1705700701.3626251
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
@@ -41,399 +41,58 @@ Hello I am main and I started at 1705689000.3785348
   warnings.warn(
 /Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-Selected Browser: safari
-Selected Source: paid media
+Selected Browser: firefox
+Selected Source: social media
 execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
+browser_setup for firefox
+Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
+consent was given successfully as: deny-all-button
 Clicked on the link.
 product or add to cart
 got to product page
-Selected Browser: chrome
+Selected Browser: firefox
 Selected Source: paid media
 execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
 consent was given successfully as: deny-all-button
 Clicked on the link.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: deny-all-button
-Clicked on the link.
+product or add to cart
+got to product page
 Selected Browser: firefox
 Selected Source: organic
 execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: chrome
-Selected Source: social media
-execute_browsing_flow fired
-Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: deny-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=organic
 consent was given successfully as: allow-all-button
 Clicked on the link.
 Selected Browser: firefox
 Selected Source: social media
 execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
 consent was given successfully as: deny-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
 Clicked on the link.
 Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: chrome
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: firefox
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: deny-all-button
-Clicked on the link.
-Selected Browser: chrome
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: chrome
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: safari
-Selected Source: direct
-execute_browsing_flow fired
-Selected utms: 
-consent was given successfully as: deny-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: chrome
-Selected Source: paid media
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: firefox
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: organic
-execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: allow-all-button
-Clicked on the link.
-Selected Browser: chrome
 Selected Source: social media
 execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
 consent was given successfully as: allow-all-button
 Clicked on the link.
-product or add to cart
-got to product page
-Selected Browser: safari
-Selected Source: paid media
-execute_purchase_flow
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: organic
-execute_purchase_flow
-Selected utms: ?utm_source=google&utm_medium=organic
-consent was given successfully as: deny-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: chrome
-Selected Source: paid media
-execute_purchase_flow
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: deny-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: deny-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
 Selected Browser: firefox
 Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: paid media
-execute_purchase_flow
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: firefox
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: deny-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: firefox
-Selected Source: organic
 execute_browsing_flow fired
-Selected utms: ?utm_source=google&utm_medium=organic
+browser_setup for firefox
+Selected utms: 
 consent was given successfully as: deny-all-button
 Clicked on the link.
 product or add to cart
 got to product page
-add to cart branch.
-Added to cart.
-Selected Browser: safari
+Selected Browser: firefox
 Selected Source: paid media
 execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
 consent was given successfully as: allow-all-button
 Clicked on the link.
@@ -441,9 +100,64 @@ product or add to cart
 got to product page
 add to cart branch.
 Added to cart.
-Selected Browser: chrome
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: allow-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+add to cart branch.
+Added to cart.
+Selected Browser: firefox
 Selected Source: paid media
 execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: deny-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+Selected Browser: firefox
+Selected Source: paid media
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: allow-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: deny-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+add to cart branch.
+Added to cart.
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: deny-all-button
+Clicked on the link.
+Selected Browser: firefox
+Selected Source: paid media
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+consent was given successfully as: allow-all-button
+Clicked on the link.
+Selected Browser: firefox
+Selected Source: paid media
+execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
 consent was given successfully as: allow-all-button
 Clicked on the link.
@@ -451,11 +165,12 @@ product or add to cart
 got to product page
 add to cart branch.
 Added to cart.
-Selected Browser: safari
-Selected Source: social media
+Selected Browser: firefox
+Selected Source: direct
 execute_browsing_flow fired
-Selected utms: ?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1
-consent was given successfully as: allow-all-button
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: deny-all-button
 Clicked on the link.
 product or add to cart
 got to product page
@@ -464,6 +179,7 @@ Added to cart.
 Selected Browser: firefox
 Selected Source: organic
 execute_browsing_flow fired
+browser_setup for firefox
 Selected utms: ?utm_source=google&utm_medium=organic
 consent was given successfully as: allow-all-button
 Clicked on the link.
@@ -471,25 +187,38 @@ product or add to cart
 got to product page
 add to cart branch.
 Added to cart.
-Selected Browser: safari
-Selected Source: paid media
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: deny-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+add to cart branch.
+Added to cart.
+Selected Browser: firefox
+Selected Source: direct
+execute_browsing_flow fired
+browser_setup for firefox
+Selected utms: 
+consent was given successfully as: deny-all-button
+Clicked on the link.
+product or add to cart
+got to product page
+add to cart branch.
+Added to cart.
+Selected Browser: firefox
+Selected Source: organic
 execute_purchase_flow
-Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+Selected utms: ?utm_source=google&utm_medium=organic
 consent was given successfully as: deny-all-button
 got to product page
 Added to cart.
 begin checkout
 purchase happened
-Selected Browser: chrome
-Selected Source: direct
-execute_purchase_flow
-Selected utms: 
-consent was given successfully as: allow-all-button
-got to product page
-Added to cart.
-begin checkout
-purchase happened
-Selected Browser: safari
+Selected Browser: firefox
 Selected Source: paid media
 execute_purchase_flow
 Selected utms: ?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
@@ -498,9 +227,7 @@ got to product page
 Added to cart.
 begin checkout
 purchase happened
-Traceback (most recent call last):
-  File "/Users/elenanesi/Workspace/user-simulation/simulate_users_chrome.py", line 331, in <module>
-    log_execution_time(start_time, arguments)
-  File "/Users/elenanesi/Workspace/user-simulation/simulate_users_chrome.py", line 294, in log_execution_time
-    log_file.write(f"Script executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-AttributeError: 'float' object has no attribute 'strftime'
+Script executed on 2024-01-19 22:45:01
+Execution time: 119.98 seconds
+Script executed on 2024-01-19 22:47:25
+Execution time: 27.10 seconds
