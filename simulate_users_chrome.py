@@ -8,10 +8,10 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
-
 from multiprocessing import Process
 import time
+import datetime
+import warnings
 import random
 import sched
 import sys
@@ -19,22 +19,34 @@ import sys
 
 from elena_util import *
 
+# Suppress all warnings for logs
+warnings.filterwarnings("ignore")
+
+# --- GLOBAL VARS ---- #
+
+# page category options
 page_categories = ["home", "category", "product"]
+# product category options
 product_categories = ["apples", "kiwis", "oranges"]
+# path options
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
+# run headless by default
 HEADLESS = 1
+# number of users and sessions to run at every execution of the script
 NR_USERS = 50
+#location of the chrome driver
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' #using Canary driver
-# Determine the base URL for navigation
+# Base URL for navigation, my localhost website
 base_url = "http://www.thefairycodemother.com/demo_project/"
-# get info from demo_input.json file to get the necessary input for paths
+# get info from demo_input.json file to get the necessary input for paths (CVR and distribution)
 os.chdir('/Users/elenanesi/Workspace/user-simulation/')
 if os.path.exists("demo_input.json"):
     with open("demo_input.json", 'r') as file:
         demo_input = json.load(file)
 else:
     print ("demo_input.json is missing!!")
-
+    with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
+        log_file.write(f"Script failed because demo_input.json is missing. Executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
 def random_choice_based_on_distribution(distribution_dict):
     """
@@ -285,6 +297,10 @@ def log_execution_time(start_time, args):
     with open("execution_log.txt", "a") as file:
         file.write(f"Execution time: {elapsed_time:.2f} seconds, Arguments: {args}\n")
 
+    with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
+        log_file.write(f"Script executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        log_file.write(f"Execution time: {execution_time}\n")
+
 def main():
     global HEADLESS
     global NR_USERS
@@ -301,19 +317,23 @@ def main():
     for p in processes:
         p.join()
 
+    
+
 if __name__ == "__main__":
     start_time = time.time()
+    print(f"Hello I am main and I started at {start_time}")
+    os.chdir('/Users/elenanesi/Workspace/user-simulation/')
     arguments = []
 
-    print(f"Hello I am main at {start_time}")
-
-    if len(sys.argv) > 0:
+    if len(sys.argv) > 1:
         HEADLESS = sys.argv[1]
         arguments.append(sys.argv[1])
         print(f"argument {HEADLESS}{sys.argv[1]}")
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
         NR_USERS = int(sys.argv[2])
         arguments.append(sys.argv[2])
         print(f"argument {sys.argv[2]}")
+
     main()
     log_execution_time(start_time, arguments)
+    
