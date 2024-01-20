@@ -46,7 +46,7 @@ path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
 HEADLESS = 1
 # number of users and sessions to run at every execution of the script
-NR_USERS = 20
+NR_USERS = 100
 #location of the chrome driver
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
@@ -204,16 +204,18 @@ def browser_setup(browser, headless):
 
 
 def execute_purchase_flow(browser, source, headless):
+    # vars
+    temp_client_ids = {}
+    client_ids = []
     global HEADLESS
+
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
-    print(f"execute_purchase_flow")
-    options = ChromeOptions()
-    headless = int(headless)
-    if (headless==1):
-        options.add_argument("--headless")  # Enables headless mode
-    service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
-    driver = webdriver.Chrome(service=service, options=options)
-    # Setup of landing page
+    print("--execute_purchase_flow fired")
+
+    # Define browser; 
+    driver = browser_setup(browser, headless)
+
+    # Setup of utms
     utm_parameters = ""
     if (source != "direct"):
         if "organic" in source:
@@ -224,10 +226,25 @@ def execute_purchase_flow(browser, source, headless):
     
     # Add navigation actions here
 
+    # url is landing page
     url = "http://www.thefairycodemother.com/demo_project/home.php"+ utm_parameters
     driver.get(url)  # Your website URL
+
+    # Give/deny consent
     consent(driver, url)
-    save_user_id(driver)
+    # save device_id in file to reuse later
+    # Load existing cookie pairs from file, if it exists
+    try:
+        if os.path.exists(client_ids_file):
+            with open(client_ids_file, 'r') as file:
+                client_ids = json.load(file)
+
+        if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
+            temp_client_ids = save_user_id(driver)
+
+    except Exception as e:
+        print(f"Error with client_ids.json because: {e}")
+
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     
@@ -250,14 +267,12 @@ def execute_browsing_flow(browser, source, headless):
     client_ids = []
     
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
-    print(f"execute_browsing_flow fired")
+    print(f"--execute_browsing_flow fired")
     # Define browser; 
     driver = browser_setup(browser, headless)
 
     # Mocking the Geolocation
     #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
-
-
 
     # Choose a random landing page
     landing_page = get_landing_page(driver, source)
