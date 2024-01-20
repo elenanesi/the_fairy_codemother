@@ -232,13 +232,14 @@ def execute_purchase_flow(browser, source, headless):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     
     # Stay on the page for 5 seconds and go to the next page
-    time.sleep(5)
+    time.sleep(SHORT_TIME)
     purchase_prm = add_to_cart(driver)
-    time.sleep(5)  
+    time.sleep(SHORT_TIME)  
     driver.get("http://www.thefairycodemother.com/demo_project/checkout.php"+purchase_prm)
     print("begin checkout")
-    time.sleep(5)  
+    time.sleep(SHORT_TIME)  
     driver.get("http://www.thefairycodemother.com/demo_project/purchase.php"+purchase_prm)
+    time.sleep(LONG_TIME) 
     print("purchase happened")
 
     driver.quit()
@@ -276,17 +277,14 @@ def execute_browsing_flow(browser, source, headless):
     # Load existing cookie pairs from file, if it exists
     try:
         if os.path.exists(client_ids_file):
-            print(f"-----file location found")
             with open(client_ids_file, 'r') as file:
                 client_ids = json.load(file)
-                l = len(client_ids)
-                print(f"-----file location found 2 {client_ids} length {l}")
 
         if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
             temp_client_ids = save_user_id(driver)
 
     except Exception as e:
-        print(f"Could not find client_ids.json because: {e}")
+        print(f"Error with client_ids.json because: {e}")
 
 
     # Stay on the page for x seconds
