@@ -117,7 +117,7 @@ def get_landing_page(driver, source):
         driver.get(url)
         return url
 
-def execute_purchase_flow(browser, source, headless):
+def execute_purchase_flow(browser, source, device, headless):
     # vars
     temp_client_ids = {}
     client_ids = []
@@ -127,7 +127,7 @@ def execute_purchase_flow(browser, source, headless):
     print("--execute_purchase_flow fired")
 
     # Define browser; 
-    driver = browser_setup(browser, headless)
+    driver = browser_setup(browser, device, headless)
 
     # Setup of utms
     utm_parameters = ""
@@ -175,7 +175,7 @@ def execute_purchase_flow(browser, source, headless):
 
     driver.quit()
 
-def execute_browsing_flow(browser, source, headless):
+def execute_browsing_flow(browser, source, device, headless):
     #global temp_client_ids
     temp_client_ids = {}
     client_ids = []
@@ -183,7 +183,7 @@ def execute_browsing_flow(browser, source, headless):
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
     print(f"--execute_browsing_flow fired")
     # Define browser; 
-    driver = browser_setup(browser, headless)
+    driver = browser_setup(browser, device, headless)
 
     # Mocking the Geolocation
     #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
@@ -270,14 +270,15 @@ def simulate_user(headless):
     # define an Acquisition source to use; using the dedicated demo_input.json file
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
     print(f"Selected Source: {source}")
-    
+    device = random_choice_based_on_distribution(demo_input['device_distribution'])
+    print(f"Selected Device: {device}")
     # define path: purchase or not?
     is_purchase = random.random() < demo_input['cvr_by_source'][source]
     if is_purchase:
-        temp_client_ids = execute_purchase_flow(browser, source, headless)
+        temp_client_ids = execute_purchase_flow(browser, source, device, headless)
         return temp_client_ids
     else:
-        temp_client_ids = execute_browsing_flow(browser, source, headless)
+        temp_client_ids = execute_browsing_flow(browser, source, device, headless)
         return temp_client_ids   
 
 def main():

@@ -91,7 +91,7 @@ def save_client_id(driver):
         }
     return data_value
 
-def browser_setup(browser, headless):
+def browser_setup(browser, device, headless):
     print(f"browser_setup for {browser}")
     if browser == "firefox":
         # Firefox browser setup
@@ -99,20 +99,22 @@ def browser_setup(browser, headless):
         headless = int(headless)
         if headless == 1:
             options.add_argument("--headless")  # Enables headless mode
+        if device == "mobile":
+            # Here you need to manually set the user agent and window size for Firefox
+            # Replace these values with those corresponding to your desired device
+            user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
+            window_size = "375,812"  # iPhone X screen resolution in pixels
+            options.set_preference("general.useragent.override", user_agent)
         service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
         return webdriver.Firefox(service=service, options=options)
     elif browser == "chrome":
-        options = ChromeOptions()
-        # Set preferences to automatically allow geolocation requests
-        prefs = {
-            "profile.default_content_setting_values.geolocation": 1,  # 1: Allow, 2: Block
-            "profile.default_content_settings.geolocation": 1,  # Allow geolocation access
-        }
-        options.add_experimental_option("prefs", prefs)
-        
+        options = ChromeOptions()       
         headless = int(headless)
         if (headless==1):
             options.add_argument("--headless")  # Enables headless mode
+        if device == "mobile":
+            mobile_emulation = {"deviceName": "iPhone X"}
+            options.add_experimental_option("mobileEmulation", mobile_emulation)
         service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
         return webdriver.Chrome(service=service, options=options)
 

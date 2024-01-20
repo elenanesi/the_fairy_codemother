@@ -11,6 +11,11 @@
         "direct": 30
     },
 
+    "device_distribution": {
+        "mobile":65,
+        "desktop":35
+    },
+
     "cvr_by_source": {
         "paid media": 0.5,
         "organic": 0.3,
