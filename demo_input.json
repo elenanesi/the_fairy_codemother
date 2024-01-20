@@ -16,6 +16,11 @@
         "desktop":35
     },
 
+    "consent_distribution" : {
+        "allow-all-button": 70,
+        "deny-all-button": 30
+    },
+
     "cvr_by_source": {
         "paid media": 0.5,
         "organic": 0.3,

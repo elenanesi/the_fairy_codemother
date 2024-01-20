@@ -21,11 +21,6 @@ import json
 #location of the chrome driver
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
-#define distribution
-consent_distribution = {
-    'allow-all-button': 70,
-    'deny-all-button': 30
-}
 
 def log_execution_time(start_time, args):
     end_time = time.time()
@@ -53,10 +48,7 @@ def random_choice_based_on_distribution(distribution_dict):
     weights = list(distribution_dict.values())
     return random.choices(items, weights=weights, k=1)[0]
 
-def consent(driver, page):
-    # used to click on cookie banner and give/deny consent to cookies with a 70-30 distribution
-    click_class = random_choice_based_on_distribution(consent_distribution)
-
+def consent(driver, page, click_class):
     try: # wait for page load
         WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
     except TimeoutException:

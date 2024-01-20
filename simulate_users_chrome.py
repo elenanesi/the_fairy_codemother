@@ -45,15 +45,6 @@ NR_USERS = 100
 # Base URL for navigation, my localhost website
 base_url = "http://www.thefairycodemother.com/demo_project/"
 
-# get info from demo_input.json file to get the necessary input for paths (CVR and distribution)
-os.chdir('/Users/elenanesi/Workspace/user-simulation/')
-if os.path.exists("demo_input.json"):
-    with open("demo_input.json", 'r') as file:
-        demo_input = json.load(file)
-else:
-    print ("demo_input.json is missing!!")
-    with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
-        log_file.write(f"Script failed because demo_input.json is missing. Executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
 # ---- end of global vars --- #
 
@@ -80,7 +71,7 @@ def add_to_cart(driver):
         print("product page did not load")
         return purchase_prm
 
-def get_landing_page(driver, source):
+def get_landing_page(driver, source, demo_input):
     # Setup of landing page
     utm_parameters = ""
     if (source != "direct"):
@@ -117,7 +108,7 @@ def get_landing_page(driver, source):
         driver.get(url)
         return url
 
-def execute_purchase_flow(browser, source, device, headless):
+def execute_purchase_flow(browser, source, device, consent_level, demo_input, headless):
     # vars
     temp_client_ids = {}
     client_ids = []
@@ -145,7 +136,7 @@ def execute_purchase_flow(browser, source, device, headless):
     driver.get(url)  # Your website URL
 
     # Give/deny consent
-    consent(driver, url)
+    consent(driver, url, consent_level)
     # save device_id in file to reuse later
     # Load existing cookie pairs from file, if it exists
     try:
@@ -175,7 +166,7 @@ def execute_purchase_flow(browser, source, device, headless):
 
     driver.quit()
 
-def execute_browsing_flow(browser, source, device, headless):
+def execute_browsing_flow(browser, source, device, consent_level, demo_input, headless):
     #global temp_client_ids
     temp_client_ids = {}
     client_ids = []
@@ -189,7 +180,7 @@ def execute_browsing_flow(browser, source, device, headless):
     #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
 
     # Choose a random landing page
-    landing_page = get_landing_page(driver, source)
+    landing_page = get_landing_page(driver, source, demo_input)
     
 
     # ----------> Navigation section <----------
@@ -201,7 +192,7 @@ def execute_browsing_flow(browser, source, device, headless):
     time.sleep(SHORT_TIME)
 
     # Give/deny consent
-    consent(driver, landing_page)
+    consent(driver, landing_page, consent_level)
     # save device_id in file to reuse later
     # Load existing cookie pairs from file, if it exists
     try:
@@ -262,8 +253,8 @@ def execute_browsing_flow(browser, source, device, headless):
     driver.quit()
     return temp_client_ids
 
-def simulate_user(headless):
-    
+def simulate_user(headless, demo_input):
+    print(f"------- demo_input {demo_input}")
     # define a browser to use; using the dedicated demo_input.json file
     browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
     print(f"Selected Browser: {browser}")
@@ -272,18 +263,33 @@ def simulate_user(headless):
     print(f"Selected Source: {source}")
     device = random_choice_based_on_distribution(demo_input['device_distribution'])
     print(f"Selected Device: {device}")
+    consent_level = random_choice_based_on_distribution(demo_input['consent_distribution'])
     # define path: purchase or not?
     is_purchase = random.random() < demo_input['cvr_by_source'][source]
     if is_purchase:
-        temp_client_ids = execute_purchase_flow(browser, source, device, headless)
+        temp_client_ids = execute_purchase_flow(browser, source, device, consent_level, demo_input, headless)
         return temp_client_ids
     else:
-        temp_client_ids = execute_browsing_flow(browser, source, device, headless)
+        temp_client_ids = execute_browsing_flow(browser, source, device, consent_level, demo_input, headless)
         return temp_client_ids   
 
 def main():
-    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+    start_time = datetime.now()
+    os.chdir('/Users/elenanesi/Workspace/user-simulation/')
+    
+    # Check if demo_input.json exists
+    if not os.path.exists("demo_input.json"):
+        print("****** Are you kidding me? demo_input.json is missing!! Put it back RIGHT NOW!")
+        with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
+            log_file.write(f"Script failed because demo_input.json is missing. Executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        sys.exit("Exiting: demo_input.json is missing. Shame on you.")
 
+    # Load demo_input.json
+    with open("demo_input.json", 'r') as file:
+        demo_input = json.load(file)
+
+    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+    all_client_ids = []
     # Load existing data from the file, if it exists
     if os.path.exists(client_ids_file):
         with open(client_ids_file, 'r') as file:
@@ -291,14 +297,11 @@ def main():
                 all_client_ids = json.load(file)
             except json.JSONDecodeError:
                 print("Error reading the existing client_ids.json file.")
-                all_client_ids = []
-    else:
-        all_client_ids = []
 
     # Create a pool of processes
     with ProcessPoolExecutor(max_workers=NR_USERS) as executor:
         # Start the simulate_user processes and collect their futures
-        futures = [executor.submit(simulate_user, HEADLESS) for _ in range(NR_USERS)]
+        futures = [executor.submit(simulate_user, HEADLESS, demo_input) for _ in range(NR_USERS)]
 
         # Wait for each process to complete and collect its result
         for future in futures:
@@ -311,8 +314,9 @@ def main():
                     all_client_ids.append(temp_client_ids)
 
     # Write the updated list back to the JSON file
-    with open(client_ids_file, 'w') as file:
-        json.dump(all_client_ids, file)    
+    if all_client_ids:
+        with open(client_ids_file, 'w') as file:
+            json.dump(all_client_ids, file) 
 
 if __name__ == "__main__":
     start_time = time.time()
