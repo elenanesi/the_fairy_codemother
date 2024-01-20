@@ -15,6 +15,8 @@ import warnings
 import random
 import sched
 import sys
+import tempfile
+
 
 
 from elena_util import *
@@ -23,6 +25,15 @@ from elena_util import *
 warnings.filterwarnings("ignore")
 
 # --- GLOBAL VARS ---- #
+# Example coordinates for Paris, France
+coordinates = {
+    "latitude": 48.8566,
+    "longitude": 2.3522,
+    "accuracy": 100
+}
+# locations for client json file
+temp_dir = "/Applications/MAMP/htdocs/demo_project/"
+client_file_json = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
 
 # page category options
 page_categories = ["home", "category", "product"]
@@ -95,28 +106,16 @@ def save_user_id(driver):
     ga_cookie = driver.get_cookie("_ga")
     ga_1L1YW7SZFP_cookie = driver.get_cookie("_ga_1L1YW7SZFP")
 
-    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
-    client_ids = []
+    if ga_cookie and ga_1L1YW7SZFP_cookie:
+        # Construct the data object
+        data = {
+            '_ga': ga_cookie['value'],
+            '_ga_1L1YW7SZFP': ga_1L1YW7SZFP_cookie['value']
+        }
 
-    # Load existing cookie pairs from file, if it exists
-    if os.path.exists(client_ids_file):
-        with open(client_ids_file, 'r') as file:
-            client_ids = json.load(file)
-
-    if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
-        # Check if both cookies are present and add their values
-        if ga_cookie and ga_1L1YW7SZFP_cookie:
-            client_ids.append({
-                '_ga': ga_cookie['value'],
-                '_ga_1L1YW7SZFP': ga_1L1YW7SZFP_cookie['value']
-            })
-
-            # Save the updated list to the file
-            with open(client_ids_file, 'w') as file:
-                json.dump(client_ids, file)
-
-    else: 
-        print(f"sorry, IDs are already {len(client_ids)}")
+        # Write to a temporary file
+        with open(os.path.join(temp_dir, tempfile.mktemp()), 'w') as temp_file:
+            json.dump(data, temp_file)
 
 def get_landing_page(driver, source):
     # Setup of landing page
@@ -180,17 +179,25 @@ def add_to_cart(driver):
 
 def browser_setup(browser, headless):
     print(f"browser_setup for {browser}")
-
     if browser == "firefox":
         # Firefox browser setup
         options = FirefoxOptions()
+        options.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.geolocation": 1, # 1:Allow 2:Block
+        "profile.default_content_settings.geolocation": 1, # Allow geolocation access
+        })
         headless = int(headless)
         if headless == 1:
             options.add_argument("--headless")  # Enables headless mode
         service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
         return webdriver.Firefox(service=service, options=options)
     elif browser == "chrome":
+
         options = ChromeOptions()
+        options.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.geolocation": 1, # 1:Allow 2:Block
+        "profile.default_content_settings.geolocation": 1, # Allow geolocation access
+        })
         headless = int(headless)
         if (headless==1):
             options.add_argument("--headless")  # Enables headless mode
@@ -244,6 +251,11 @@ def execute_browsing_flow(browser, source, headless):
     # Define browser; 
     driver = browser_setup(browser, headless)
 
+
+    # Mocking the Geolocation
+    #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
+
+
     # Choose a random landing page
     landing_page = get_landing_page(driver, source)
     
@@ -253,12 +265,15 @@ def execute_browsing_flow(browser, source, headless):
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-    # Stay on the page for 10 seconds
+    # Stay on the page for x seconds
     time.sleep(5)
 
     # Give/deny consent
     consent(driver, landing_page)
     save_user_id(driver)
+
+    # Stay on the page for x seconds
+    time.sleep(5)
 
     #determine path
     path = random.choice(path_functions)
@@ -307,7 +322,7 @@ def simulate_user(headless):
     
     # define a browser to use; using the dedicated demo_input.json file
     #browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
-    browser = "firefox"
+    browser = "chrome"
     print(f"Selected Browser: {browser}")
     # define an Acquisition source to use; using the dedicated demo_input.json file
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
@@ -333,6 +348,37 @@ def log_execution_time(start_time, args):
         log_file.write(f"Script executed on {start_time_formatted}\n")
         log_file.write(f"Execution time: {elapsed_time:.2f} seconds\n")
 
+def merge_temp_files():
+    global temp_dir, client_file_json
+    client_ids = []
+
+    # Read all temporary files and collect data
+    for temp_file in os.listdir(temp_dir):
+        temp_file_path = os.path.join(temp_dir, temp_file)
+        if os.path.isfile(temp_file_path):  # Check if it's a file
+            with open(temp_file_path, 'r') as file:
+                content = file.read().strip()
+                if content:  # Check if file is not empty
+                    try:
+                        client_ids.append(json.loads(content))
+                    except json.JSONDecodeError as e:
+                        print(f"Error reading {temp_file}: {e}")
+                else:
+                    print(f"Skipping empty file: {temp_file}")
+
+    # Load existing data from the output file
+    if os.path.exists(client_file_json):
+        with open(client_file_json , 'r') as file:
+            try:
+                existing_data = json.load(file)
+                client_ids.extend(existing_data)
+            except json.JSONDecodeError as e:
+                print(f"Error reading {client_file_json}: {e}")
+
+    # Write merged data back to the output file
+    with open(client_file_json , 'w') as file:
+        json.dump(client_ids, file)
+
 def main():
     global HEADLESS
     global NR_USERS
@@ -348,6 +394,8 @@ def main():
     # Wait for all processes to finish
     for p in processes:
         p.join()
+        
+    merge_temp_files()
 
     
 

@@ -5715,3 +5715,17 @@ jg@https://www.googletagmanager.com/gtag/js?id=G-1L1YW7SZFP&l=dataLayer&cx=c:247
 OF.prototype.flush@https://www.googletagmanager.com/gtag/js?id=G-1L1YW7SZFP&l=dataLayer&cx=c:600:89
 OF.prototype.C/this.s<@https://www.googletagmanager.com/gtag/js?id=G-1L1YW7SZFP&l=dataLayer&cx=c:599:85
 
+1705706105045	geckodriver	INFO	Listening on 127.0.0.1:53618
+1705706105569	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/n0/kq4_wcv50_70rj30jzby7v140000gn/T/rust_mozprofileyz8vku"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1705706105814	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1705706106068	Marionette	INFO	Listening on port 53630
+WebDriver BiDi listening on ws://127.0.0.1:53619
+1705706106122	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+DevTools listening on ws://127.0.0.1:53619/devtools/browser/b7d8d9e0-2880-4974-b08b-ea8e1306723f
+1705706136342	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+Exiting due to channel error.
