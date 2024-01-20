@@ -11,31 +11,33 @@ from selenium.common.exceptions import TimeoutException
 from multiprocessing import Process
 from datetime import datetime
 import time
-import warnings
 import random
 import sched
 import sys
 import tempfile
+import os
+import json
+from concurrent.futures import ProcessPoolExecutor
 
 
 
-from elena_util import *
+#from elena_util import *
 
-# Suppress all warnings for logs
-warnings.filterwarnings("ignore")
 
 # --- GLOBAL VARS ---- #
-# Example coordinates for Paris, France
-coordinates = {
-    "latitude": 48.8566,
-    "longitude": 2.3522,
-    "accuracy": 100
-}
-# locations for client json file
-temp_dir = "/Applications/MAMP/htdocs/demo_project/"
-client_file_json = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+
 
 # page category options
+#define distribution
+consent_distribution = {
+    'allow-all-button': 70,
+    'deny-all-button': 30
+}
+#where to save client ids
+SHORT_TIME = 1
+LONG_TIME = 10
+client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+#page category options
 page_categories = ["home", "category", "product"]
 # product category options
 product_categories = ["apples", "kiwis", "oranges"]
@@ -60,6 +62,8 @@ else:
     with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
         log_file.write(f"Script failed because demo_input.json is missing. Executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
+# ---- end of global vars --- #
+
 def random_choice_based_on_distribution(distribution_dict):
     """
     Selects an item based on a distribution of probabilities 
@@ -74,13 +78,6 @@ def random_choice_based_on_distribution(distribution_dict):
 
 def consent(driver, page):
     # used to click on cookie banner and give/deny consent to cookies with a 70-30 distribution
-
-    #define distribution
-    consent_distribution = {
-        'allow-all-button': 70,
-        'deny-all-button': 30
-    }
-
     click_class = random_choice_based_on_distribution(consent_distribution)
 
     try: # wait for page load
@@ -106,16 +103,17 @@ def save_user_id(driver):
     ga_cookie = driver.get_cookie("_ga")
     ga_1L1YW7SZFP_cookie = driver.get_cookie("_ga_1L1YW7SZFP")
 
+    # Initialize an empty dictionary for client IDs
+    data_value = {}
+
+    # Construct the data object
     if ga_cookie and ga_1L1YW7SZFP_cookie:
-        # Construct the data object
-        data = {
+        data_value = {
             '_ga': ga_cookie['value'],
             '_ga_1L1YW7SZFP': ga_1L1YW7SZFP_cookie['value']
         }
+    return data_value
 
-        # Write to a temporary file
-        with open(os.path.join(temp_dir, tempfile.mktemp()), 'w') as temp_file:
-            json.dump(data, temp_file)
 
 def get_landing_page(driver, source):
     # Setup of landing page
@@ -182,27 +180,28 @@ def browser_setup(browser, headless):
     if browser == "firefox":
         # Firefox browser setup
         options = FirefoxOptions()
-        options.add_experimental_option("prefs", {
-        "profile.default_content_setting_values.geolocation": 1, # 1:Allow 2:Block
-        "profile.default_content_settings.geolocation": 1, # Allow geolocation access
-        })
         headless = int(headless)
         if headless == 1:
             options.add_argument("--headless")  # Enables headless mode
         service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
         return webdriver.Firefox(service=service, options=options)
     elif browser == "chrome":
-
         options = ChromeOptions()
-        options.add_experimental_option("prefs", {
-        "profile.default_content_setting_values.geolocation": 1, # 1:Allow 2:Block
-        "profile.default_content_settings.geolocation": 1, # Allow geolocation access
-        })
+        # Set preferences to automatically allow geolocation requests
+        prefs = {
+            "profile.default_content_setting_values.geolocation": 1,  # 1: Allow, 2: Block
+            "profile.default_content_settings.geolocation": 1,  # Allow geolocation access
+        }
+        options.add_experimental_option("prefs", prefs)
+        
         headless = int(headless)
         if (headless==1):
             options.add_argument("--headless")  # Enables headless mode
         service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
         return webdriver.Chrome(service=service, options=options)
+
+    driver.execute_script(script)
+
 
 def execute_purchase_flow(browser, source, headless):
     global HEADLESS
@@ -245,15 +244,18 @@ def execute_purchase_flow(browser, source, headless):
     driver.quit()
 
 def execute_browsing_flow(browser, source, headless):
+    #global temp_client_ids
+    temp_client_ids = {}
+    client_ids = []
     
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
     print(f"execute_browsing_flow fired")
     # Define browser; 
     driver = browser_setup(browser, headless)
 
-
     # Mocking the Geolocation
     #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
+
 
 
     # Choose a random landing page
@@ -266,30 +268,44 @@ def execute_browsing_flow(browser, source, headless):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     # Stay on the page for x seconds
-    time.sleep(5)
+    time.sleep(SHORT_TIME)
 
     # Give/deny consent
     consent(driver, landing_page)
-    save_user_id(driver)
+    # save device_id in file to reuse later
+    # Load existing cookie pairs from file, if it exists
+    try:
+        if os.path.exists(client_ids_file):
+            print(f"-----file location found")
+            with open(client_ids_file, 'r') as file:
+                client_ids = json.load(file)
+                l = len(client_ids)
+                print(f"-----file location found 2 {client_ids} length {l}")
+
+        if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
+            temp_client_ids = save_user_id(driver)
+
+    except Exception as e:
+        print(f"Could not find client_ids.json because: {e}")
+
 
     # Stay on the page for x seconds
-    time.sleep(5)
+    time.sleep(SHORT_TIME)
 
     #determine path
     path = random.choice(path_functions)
-    #path = "add_to_cart"
 
     if path != "bounced":
         # Choose a random category for the product
         # Example: Click on a link with the text "Example Link"
         try:
-            time.sleep(5)
+            time.sleep(SHORT_TIME)
             link = driver.find_element(By.LINK_TEXT,"Yes")
             link.click()
             print("Clicked on the link.")
-            time.sleep(5)
+            time.sleep(SHORT_TIME)
         except Exception as e:
-        	print(f"Elena, an error occurred with click on link with page {landing_page}: {e}")
+        	print(f"An error occurred with click on link with page {landing_page}: {e}")
     else:
     	print("Bounced.")
 
@@ -313,27 +329,32 @@ def execute_browsing_flow(browser, source, headless):
                 link = driver.find_element(By.CLASS_NAME, "cart")
                 link.click()
                 print("Added to cart.")
-                time.sleep(5)
+                time.sleep(SHORT_TIME)
             except Exception as e:
                 print(f"An error occurred w add to cart click on {landing_page}: {e}")
     driver.quit()
+    return temp_client_ids
 
 def simulate_user(headless):
     
     # define a browser to use; using the dedicated demo_input.json file
-    #browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
-    browser = "chrome"
+    browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
     print(f"Selected Browser: {browser}")
     # define an Acquisition source to use; using the dedicated demo_input.json file
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
     print(f"Selected Source: {source}")
+    
     # define path: purchase or not?
     is_purchase = random.random() < demo_input['cvr_by_source'][source]
     if is_purchase:
-        execute_purchase_flow(browser, source, headless)
+        temp_client_ids = execute_purchase_flow(browser, source, headless)
+        return temp_client_ids
     else:
-        execute_browsing_flow(browser, source, headless)	
+        temp_client_ids = execute_browsing_flow(browser, source, headless)
+        return temp_client_ids   
+     
 
+    
 def log_execution_time(start_time, args):
     end_time = time.time()
     elapsed_time = end_time - start_time
@@ -348,55 +369,40 @@ def log_execution_time(start_time, args):
         log_file.write(f"Script executed on {start_time_formatted}\n")
         log_file.write(f"Execution time: {elapsed_time:.2f} seconds\n")
 
-def merge_temp_files():
-    global temp_dir, client_file_json
-    client_ids = []
 
-    # Read all temporary files and collect data
-    for temp_file in os.listdir(temp_dir):
-        temp_file_path = os.path.join(temp_dir, temp_file)
-        if os.path.isfile(temp_file_path):  # Check if it's a file
-            with open(temp_file_path, 'r') as file:
-                content = file.read().strip()
-                if content:  # Check if file is not empty
-                    try:
-                        client_ids.append(json.loads(content))
-                    except json.JSONDecodeError as e:
-                        print(f"Error reading {temp_file}: {e}")
-                else:
-                    print(f"Skipping empty file: {temp_file}")
-
-    # Load existing data from the output file
-    if os.path.exists(client_file_json):
-        with open(client_file_json , 'r') as file:
-            try:
-                existing_data = json.load(file)
-                client_ids.extend(existing_data)
-            except json.JSONDecodeError as e:
-                print(f"Error reading {client_file_json}: {e}")
-
-    # Write merged data back to the output file
-    with open(client_file_json , 'w') as file:
-        json.dump(client_ids, file)
 
 def main():
-    global HEADLESS
-    global NR_USERS
-    # List to hold all the Process objects, needed to support multiple fake users visiting at once
-    processes = []
+    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
 
-    # Create and start a separate process for each user
-    for i in range(NR_USERS):  # Change this number to the number of users you want to simulate
-        p = Process(target=simulate_user, args=(HEADLESS,)) #target the simulate_user function
-        p.start()
-        processes.append(p)
+    # Load existing data from the file, if it exists
+    if os.path.exists(client_ids_file):
+        with open(client_ids_file, 'r') as file:
+            try:
+                all_client_ids = json.load(file)
+            except json.JSONDecodeError:
+                print("Error reading the existing client_ids.json file.")
+                all_client_ids = []
+    else:
+        all_client_ids = []
 
-    # Wait for all processes to finish
-    for p in processes:
-        p.join()
-        
-    merge_temp_files()
+    # Create a pool of processes
+    with ProcessPoolExecutor(max_workers=NR_USERS) as executor:
+        # Start the simulate_user processes and collect their futures
+        futures = [executor.submit(simulate_user, HEADLESS) for _ in range(NR_USERS)]
 
+        # Wait for each process to complete and collect its result
+        for future in futures:
+            temp_client_ids = future.result()
+
+            # Check if temp_client_ids is not empty
+            if temp_client_ids:
+                # Check if the dictionary is already in the list
+                if not any(temp_client_ids == existing for existing in all_client_ids):
+                    all_client_ids.append(temp_client_ids)
+
+    # Write the updated list back to the JSON file
+    with open(client_ids_file, 'w') as file:
+        json.dump(all_client_ids, file)
     
 
 if __name__ == "__main__":
@@ -408,11 +414,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         HEADLESS = sys.argv[1]
         arguments.append(sys.argv[1])
-        print(f"argument {HEADLESS}{sys.argv[1]}")
     if len(sys.argv) > 2:
         NR_USERS = int(sys.argv[2])
         arguments.append(sys.argv[2])
-        print(f"argument {sys.argv[2]}")
 
     main()
     log_execution_time(start_time, arguments)
