@@ -28,6 +28,7 @@ from elena_util import *
 # page category options
 
 #where to save client ids
+SCRIPT_VERSION = "Jan 23rd"
 SHORT_TIME = 1
 LONG_TIME = 10
 client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
@@ -40,7 +41,7 @@ path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
 HEADLESS = 1
 # number of users and sessions to run at every execution of the script
-NR_USERS = 100
+NR_USERS = 250
 
 # Base URL for navigation, my localhost website
 base_url = "http://www.thefairycodemother.com/demo_project/"
