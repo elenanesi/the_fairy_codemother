@@ -18,7 +18,7 @@ import tempfile
 import os
 import json
 
-#location of the chrome driver
+# location of browser drivers
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
@@ -38,7 +38,6 @@ def color_text(text, color_code):
         color = 36
 
     return f"\033[{color}m{text}\033[0m"
-
 
 def log_execution_time(start_time, args):
     end_time = time.time()
@@ -70,7 +69,7 @@ def consent(driver, page, click_class):
     try: # wait for page load
         WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
     except TimeoutException:
-        print("Timed out waiting for page to load")
+        print(color_text("** consent(): Timed out waiting for page to load", "red"))
         return;
 
     try:
@@ -80,9 +79,9 @@ def consent(driver, page, click_class):
             )
         link = driver.find_element(By.CLASS_NAME, click_class)
         link.click()
-        print(f"consent was given successfully as: {click_class}")
+        print(color_text(f"** consent was given successfully as: {click_class}", "green"))
     except TimeoutException:
-        print("Timed out waiting for cookie banner to appear");
+        print(color_text("** consent(): Timed out waiting for cookie banner to appear", "red"))
         return;
 
 def save_client_id(driver):
@@ -101,8 +100,8 @@ def save_client_id(driver):
         }
     return data_value
 
-def browser_setup(browser, device, headless):
-    print(f"browser_setup for {browser}")
+def browser_setup(browser, device, headless, process_number):
+    print(color_text(f"** {process_number}: I'm starting the browser setup for {browser}", "blue"))
     if browser == "firefox":
         # Firefox browser setup
         options = FirefoxOptions()
@@ -128,4 +127,4 @@ def browser_setup(browser, device, headless):
         service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
         return webdriver.Chrome(service=service, options=options)
 
-    driver.execute_script(script)
+# end of file
