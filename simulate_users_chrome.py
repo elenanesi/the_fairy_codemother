@@ -17,6 +17,8 @@ import sched
 import sys
 import os
 import json
+import traceback
+
 from concurrent.futures import ProcessPoolExecutor
 
 
@@ -383,7 +385,13 @@ if __name__ == "__main__":
         # let's log how long it took to execute all of this
         log_execution_time(start_time, arguments)
     except Exception as e:
-        print(color_text(f"---------- Ops, you fracked up here: {e}", "red"))
+        # Get current traceback object
+        tb = traceback.extract_tb(e.__traceback__)
+        # Get the last traceback object as it will point to the line where the error occurred
+        last_tb = tb[-1]       
+        # Extract filename, line number, function name, and text from the last traceback
+        line_no = last_tb.lineno
+        print(color_text(f"---------- Ops, you fracked up here: {e} \n---------- at line: {line_no}", "red"))
 
 # end of script
 
