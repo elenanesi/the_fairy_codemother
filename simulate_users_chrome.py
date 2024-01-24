@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from multiprocessing import Process
 from datetime import datetime
+from datetime import date
 import time
 import random
 import sched
@@ -27,11 +28,16 @@ from elena_util import *
 
 # page category options
 
-#where to save client ids
+
+# workspace location (where the input json file lives)
+WORSPACE_PATH = "/Users/elenanesi/Workspace/user-simulation/"
+# WIP: will be used to perform a dataLayer push and keep the GA data updated with the version in use.
 SCRIPT_VERSION = "Jan 23rd"
-SHORT_TIME = 1
-LONG_TIME = 10
-client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+# intervals of seconds used for time.sleep within the code (make them shorter if you want the script to go faster)
+SHORT_TIME = 5
+LONG_TIME = 7
+# where to save client ids
+CLIENT_IDS_PATH = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
 #page category options
 page_categories = ["home", "category", "product"]
 # product category options
@@ -42,6 +48,8 @@ path_functions = ["bounce","engaged", "product", "add_to_cart"]
 HEADLESS = 1
 # number of users and sessions to run at every execution of the script
 NR_USERS = 250
+
+demo_input = {}
 
 # Base URL for navigation, my localhost website
 base_url = "http://www.thefairycodemother.com/demo_project/"
@@ -111,7 +119,7 @@ def get_landing_page(driver, source, demo_input):
 
 def execute_purchase_flow(browser, source, device, consent_level, demo_input, headless):
     # vars
-    temp_client_ids = {}
+    temp_client_id = {}
     client_ids = []
     global HEADLESS
 
@@ -141,12 +149,12 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     # save device_id in file to reuse later
     # Load existing cookie pairs from file, if it exists
     try:
-        if os.path.exists(client_ids_file):
-            with open(client_ids_file, 'r') as file:
+        if os.path.exists(CLIENT_IDS_PATH):
+            with open(CLIENT_IDS_PATH, 'r') as file:
                 client_ids = json.load(file)
 
         if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
-            temp_client_ids = save_client_id(driver)
+            temp_client_id = save_client_id(driver)
 
     except Exception as e:
         print(f"Error with client_ids.json because: {e}")
@@ -168,8 +176,8 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     driver.quit()
 
 def execute_browsing_flow(browser, source, device, consent_level, demo_input, headless):
-    #global temp_client_ids
-    temp_client_ids = {}
+    #global temp_client_id
+    temp_client_id = {}
     client_ids = []
     
     ## TO ADD: BROWSING VERSION: BOUNCED, ENGAGED, PURCHASE INTENT?
@@ -197,12 +205,12 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     # save device_id in file to reuse later
     # Load existing cookie pairs from file, if it exists
     try:
-        if os.path.exists(client_ids_file):
-            with open(client_ids_file, 'r') as file:
+        if os.path.exists(CLIENT_IDS_PATH):
+            with open(CLIENT_IDS_PATH, 'r') as file:
                 client_ids = json.load(file)
 
         if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
-            temp_client_ids = save_client_id(driver)
+            temp_client_id = save_client_id(driver)
 
     except Exception as e:
         print(f"Error with client_ids.json because: {e}")
@@ -252,52 +260,61 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
             except Exception as e:
                 print(f"An error occurred w add to cart click on {landing_page}: {e}")
     driver.quit()
-    return temp_client_ids
+    return temp_client_id
 
 def simulate_user(headless, demo_input):
-    print(f"------- demo_input {demo_input}")
+    # select randomically the dimensions based on content of demo_input, 
+    # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
+    # (also contained in the demo json file)
+    print(color_text("---- Selecting dimensions...", "blue"))
     # define a browser to use; using the dedicated demo_input.json file
     browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
-    print(f"Selected Browser: {browser}")
+    print(color_text(f"---- Selected Browser: {browser}", "green"))
+    device = random_choice_based_on_distribution(demo_input['device_distribution'])
+    print(color_text(f"---- Selected Device: {device}", "green"))
     # define an Acquisition source to use; using the dedicated demo_input.json file
     source = random_choice_based_on_distribution(demo_input['source_distribution'])
-    print(f"Selected Source: {source}")
-    device = random_choice_based_on_distribution(demo_input['device_distribution'])
-    print(f"Selected Device: {device}")
+    print(color_text(f"---- Selected Source: {source}", "green"))
+    # define consent level for identification/cookies
     consent_level = random_choice_based_on_distribution(demo_input['consent_distribution'])
+    print(color_text(f"---- Selected Consent level: {consent_level}", "green"))
     # define path: purchase or not?
     is_purchase = random.random() < demo_input['cvr_by_source'][source]
     if is_purchase:
-        temp_client_ids = execute_purchase_flow(browser, source, device, consent_level, demo_input, headless)
-        return temp_client_ids
+        print(color_text("---- Selected purchase_flow", "green"))
+        temp_client_id = execute_purchase_flow(browser, source, device, consent_level, demo_input, headless)
+        return temp_client_id
     else:
-        temp_client_ids = execute_browsing_flow(browser, source, device, consent_level, demo_input, headless)
-        return temp_client_ids   
+        print(color_text(f"---- Selected browsing_flow", "green"))
+        temp_client_id = execute_browsing_flow(browser, source, device, consent_level, demo_input, headless)
+        return temp_client_id   
 
 def main():
-    start_time = datetime.now()
-    os.chdir('/Users/elenanesi/Workspace/user-simulation/')
+
+    # move to the right directory where to find the input file (should not be needed but just in case, you never know)
+    os.chdir(WORSPACE_PATH)
     
-    # Check if demo_input.json exists
+    # Check if demo_input.json exists and scold user if it's not there
     if not os.path.exists("demo_input.json"):
-        print("****** Are you kidding me? demo_input.json is missing!! Put it back RIGHT NOW!")
+        print(color_text("------ Are you KIDDING ME? demo_input.json is missing!! \n Put it back RIGHT NOW!", "red"))
         with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
             log_file.write(f"Script failed because demo_input.json is missing. Executed on {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-        sys.exit("Exiting: demo_input.json is missing. Shame on you.")
+        sys.exit("------ Exiting because demo_input.json is missing. SHAME ON YOU.")
 
     # Load demo_input.json
     with open("demo_input.json", 'r') as file:
         demo_input = json.load(file)
 
-    client_ids_file = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+    print(color_text(f"------ Launching {NR_USERS} processes", "blue"))
+    # create an empty array to collect the client_ids produced by the processes we are going to launch
     all_client_ids = []
     # Load existing data from the file, if it exists
-    if os.path.exists(client_ids_file):
-        with open(client_ids_file, 'r') as file:
+    if os.path.exists(CLIENT_IDS_PATH):
+        with open(CLIENT_IDS_PATH, 'r') as file:
             try:
                 all_client_ids = json.load(file)
             except json.JSONDecodeError:
-                print("Error reading the existing client_ids.json file.")
+                print(color_text("------ Error reading the existing client_ids.json file.", "red"))
 
     # Create a pool of processes
     with ProcessPoolExecutor(max_workers=NR_USERS) as executor:
@@ -306,25 +323,49 @@ def main():
 
         # Wait for each process to complete and collect its result
         for future in futures:
-            temp_client_ids = future.result()
+            # save the result (client_id) in temp_client_id, to be merged with all_client_ids
+            temp_client_id = future.result()
 
-            # Check if temp_client_ids is not empty
-            if temp_client_ids:
-                # Check if the dictionary is already in the list
-                if not any(temp_client_ids == existing for existing in all_client_ids):
-                    all_client_ids.append(temp_client_ids)
+            # Check if temp_client_id is not empty
+            if temp_client_id:
+                # Check if the client_id is already in the list (we don't want duplicates in the file!)
+                if not any(temp_client_id == existing for existing in all_client_ids):
+                    all_client_ids.append(temp_client_id)
 
-    # Write the updated list back to the JSON file
+    # Now all processes have provided their temp_client_id: you can write the updated list back to the JSON file
     if all_client_ids:
-        with open(client_ids_file, 'w') as file:
+        with open(CLIENT_IDS_PATH, 'w') as file:
             json.dump(all_client_ids, file) 
 
 if __name__ == "__main__":
+
+    print(color_text("-------- Welcome to simulate_users!", "green"))
+
+    # checking start time so that I can log how long the script takes to execute
     start_time = time.time()
-    print(f"Hello I am main and I started at {start_time}")
-    os.chdir('/Users/elenanesi/Workspace/user-simulation/')
+
+    # define a var for the arguments
     arguments = []
 
+    # are there input arguments?
+    # no arguments:
+    if len(sys.argv) <= 1:
+        print(color_text("-------- Simulate_user was called without arguments, so I will choose them", "blue"))
+        # check today's day
+        today = date.today()
+        weekday = today.weekday()
+
+        # is today a week day?
+        if weekday < 5:
+            #choose a random number of processes to run, which will be the final number of sessions/users 
+            NR_USERS = random.randint(80, 100)
+            print(color_text(f"------ Weeday branch: Today is day {weekday} of the week, I am launching {NR_USERS} processes", "blue"))
+        else:
+            #choose a random number of processes to run, which will be the final number of sessions/users 
+            NR_USERS = random.randint(150, 200)
+            print(color_text(f"------ Weekend branch: Today is day {weekday} of the week, I am launching {NR_USERS} processes", "blue"))
+
+    # script has been called w arguments:
     if len(sys.argv) > 1:
         HEADLESS = sys.argv[1]
         arguments.append(sys.argv[1])
@@ -332,6 +373,13 @@ if __name__ == "__main__":
         NR_USERS = int(sys.argv[2])
         arguments.append(sys.argv[2])
 
+    # go ahead and have fun
     main()
+    # let's log how long it took to execute all of this
     log_execution_time(start_time, arguments)
+
+# end of script
+
+
+
     

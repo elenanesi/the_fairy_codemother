@@ -22,6 +22,24 @@ import json
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
+def color_text(text, color_code):
+    color = 37 # = white
+    if color_code == "red":
+        color = 31
+    elif color_code == "green":
+        color = 32
+    elif color_code == "yellow":
+        color = 33
+    elif color_code == "blue":
+        color = 34
+    elif color_code == "magenta":
+        color = 35
+    elif color_code == "cyan":
+        color = 36
+
+    return f"\033[{color}m{text}\033[0m"
+
+
 def log_execution_time(start_time, args):
     end_time = time.time()
     elapsed_time = end_time - start_time
