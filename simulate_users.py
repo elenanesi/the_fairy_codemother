@@ -319,7 +319,15 @@ if __name__ == "__main__":
         with open("demo_input.json", 'r') as file:
             demo_input = json.load(file)
 
-
+        # initiate global vars with values from the input file
+        BASE_URL = demo_input['BASE_URL']
+        MAX_CLIENT_IDS = demo_input['MAX_CLIENT_IDS']
+        SHORT_TIME = demo_input['SHORT_TIME']
+        LONG_TIME = demo_input['LONG_TIME']
+        CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
+        page_categories = demo_input['page_categories']
+        product_categories = demo_input['product_categories']
+        path_functions = demo_input['path_functions']
 
         # define a var for the arguments
         arguments = []
