@@ -4,19 +4,20 @@ from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 from multiprocessing import Process
-from datetime import datetime
+from concurrent.futures import ProcessPoolExecutor
+from datetime import datetime, date
 import time
 import random
-import sched
 import sys
-import tempfile
 import os
 import json
+import traceback
+
+
 
 # location of browser drivers
 CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 

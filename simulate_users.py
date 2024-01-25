@@ -1,42 +1,14 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from multiprocessing import Process
-from datetime import datetime
-from datetime import date
-import time
-import random
-import sched
-import sys
-import os
-import json
-import traceback
-
-from concurrent.futures import ProcessPoolExecutor
-
-
 from elena_util import *
 
 
-# --- GLOBAL VARS ---- #
+# --- GLOBAL VARS WITH DEFAULT VALUES ---- #
 
-
-# page category options
-
-
-# workspace location (where the input json file lives)
-WORSPACE_PATH = "/Users/elenanesi/Workspace/user-simulation/"
 # WIP: will be used to perform a dataLayer push and keep the GA data updated with the version in use.
 # SCRIPT_VERSION = "Jan 23rd"
-# intervals of seconds used for time.sleep within the code (make them shorter if you want the script to go faster)
-MAX_CLIENT_IDS = 150
+
+# default max number of client ids allowed in the client ids file
+MAX_CLIENT_IDS = 500
+# default intervals of seconds used for time.sleep within the code (make them shorter if you want the script to go faster)
 SHORT_TIME = 5
 LONG_TIME = 7
 # where to save client ids
@@ -45,25 +17,25 @@ CLIENT_IDS_PATH = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
 page_categories = ["home", "category", "product"]
 # product category options
 product_categories = ["apples", "kiwis", "oranges"]
+# product ids range options (assuming the product id is an INT)
+product_ids = [1,3]
 # path options
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
 HEADLESS = 1
 # number of users and sessions to run at every execution of the script
 NR_USERS = 250
-
+# Base URL for navigation, my localhost website
+BASE_URL = "http://www.thefairycodemother.com/demo_project/"
+# helper var to hold demo_input.json content
 demo_input = {}
 
-# Base URL for navigation, my localhost website
-base_url = "http://www.thefairycodemother.com/demo_project/"
-
-
-# ---- end of global vars --- #
+# --- END OF GLOBAL VARS WITH DEFAULT VALUES ---- #
 
 def add_to_cart(driver):
     category = random.choice(product_categories)
-    product_id = str(random.randint(1, 3))
-    url = f"{base_url}{category}/{product_id}.php"
+    product_id = str(random.randint(product_ids[0], product_ids[1]))
+    url = f"{BASE_URL}{category}/{product_id}.php"
     purchase_prm = f"?cat={category}&prod={product_id}"
     driver.get(url)
     try: 
@@ -102,7 +74,7 @@ def get_landing_page(driver, source, demo_input, process_number):
         # Generate a random product ID between 1 and 10
         product_id = str(random.randint(1, 3))
         # Construct and navigate to the product URL
-        url = f"{base_url}{category}/{product_id}.php{utm_parameters}"
+        url = f"{BASE_URL}{category}/{product_id}.php{utm_parameters}"
         driver.get(url)
         return url
 
@@ -110,13 +82,13 @@ def get_landing_page(driver, source, demo_input, process_number):
         # Choose a random category
         category = random.choice(product_categories)
         # Navigate to the category URL
-        url = f"{base_url}{category}.php{utm_parameters}"
+        url = f"{BASE_URL}{category}.php{utm_parameters}"
         driver.get(url)
         return url
 
     else:
         # Navigate to a generic page URL
-        url = f"{base_url}{page}.php{utm_parameters}"
+        url = f"{BASE_URL}{page}.php{utm_parameters}"
         driver.get(url)
         return url
 
@@ -145,7 +117,7 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     # Add navigation actions here
 
     # url is landing page
-    url = base_url + "home.php" + utm_parameters
+    url = BASE_URL + "home.php" + utm_parameters
     driver.get(url)  # Your website URL
 
     # Give/deny consent
@@ -156,7 +128,7 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
             with open(CLIENT_IDS_PATH, 'r') as file:
                 client_ids = json.load(file)
 
-        if len(client_ids)<MAX_CLIENT_IDS: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
+        if len(client_ids)<MAX_CLIENT_IDS: #limit the client_ids to avoid the machine from exploding while calculating length
             temp_client_id = save_client_id(driver)
 
     except Exception as e:
@@ -247,7 +219,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
         #determine product page and go to it
         category = random.choice(product_categories)
         product_id = str(random.randint(1, 3))
-        driver.get(f"{base_url}{category}/{product_id}.php")
+        driver.get(f"{BASE_URL}{category}/{product_id}.php")
         try: 
             WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
             print(color_text(f"-- {process_number}:  got to product page", "green"))
@@ -294,21 +266,6 @@ def simulate_user(headless, demo_input, process_number):
         return temp_client_id   
 
 def main():
-
-    # move to the right directory where to find the input file (should not be needed but just in case, you never know)
-    os.chdir(WORSPACE_PATH)
-    
-    # Check if demo_input.json exists and scold user if it's not there
-    if not os.path.exists("demo_input.json"):
-        print(color_text("------ Are you KIDDING ME? demo_input.json is missing!! \n------ Put it back RIGHT NOW!", "red"))
-        with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
-            log_file.write(f"Script failed because demo_input.json is missing. Executed on {datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')}\n")
-        sys.exit(color_text("------ Imma out of here. Get a proper input file for me, or don't even bother coming back", "red"))
-
-    # Load demo_input.json
-    with open("demo_input.json", 'r') as file:
-        demo_input = json.load(file)
-
     print(color_text(f"------ Launching {NR_USERS} processes", "blue"))
     # create an empty array to collect the client_ids produced by the processes we are going to launch
     all_client_ids = []
@@ -346,10 +303,23 @@ if __name__ == "__main__":
 
     try:
 
-        print(color_text("---------- Welcome to simulate_users!", "green"))
-
         # checking start time so that I can log how long the script takes to execute
         start_time = time.time()
+
+        print(color_text("---------- Welcome to simulate_users!", "green"))
+
+        # Check if demo_input.json exists and scold user if it's not there
+        if not os.path.exists("demo_input.json"):
+            print(color_text("------ Are you KIDDING ME? demo_input.json is missing!! \n------ Put it back RIGHT NOW!", "red"))
+            with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
+                log_file.write(f"Script failed because demo_input.json is missing. Executed on {datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')}\n")
+            sys.exit(color_text("------ Imma out of here. Get a proper input file for me, or don't even bother coming back", "red"))
+
+        # Load demo_input.json
+        with open("demo_input.json", 'r') as file:
+            demo_input = json.load(file)
+
+
 
         # define a var for the arguments
         arguments = []
@@ -392,6 +362,8 @@ if __name__ == "__main__":
         # Extract filename, line number, function name, and text from the last traceback
         line_no = last_tb.lineno
         print(color_text(f"---------- Ops, you fracked up here: {e} \n---------- at line: {line_no}", "red"))
+        # let's log how long it took to execute all of this
+        log_execution_time(start_time, arguments)
 
 # end of script
 
