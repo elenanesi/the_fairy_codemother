@@ -112,7 +112,8 @@ def browser_setup(browser, device, headless, process_number):
         if device == "mobile":
             # Here you need to manually set the user agent and window size for Firefox
             # Replace these values with those corresponding to your desired device
-            user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
+            user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
+            #user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
             window_size = "375,812"  # iPhone X screen resolution in pixels
             options.set_preference("general.useragent.override", user_agent)
         service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver

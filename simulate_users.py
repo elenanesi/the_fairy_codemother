@@ -310,10 +310,13 @@ if __name__ == "__main__":
 
         # Check if demo_input.json exists and scold user if it's not there
         if not os.path.exists("demo_input.json"):
-            print(color_text("------ Are you KIDDING ME? demo_input.json is missing!! \n------ Put it back RIGHT NOW!", "red"))
+            print(color_text("------ Are you KIDDING ME? demo_input.json is missing!!", "red"))
+            time.sleep(1)
+            print(color_text("------ Put it back RIGHT NOW!", "red"))
             with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
                 log_file.write(f"Script failed because demo_input.json is missing. Executed on {datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')}\n")
-            sys.exit(color_text("------ Imma out of here. Get a proper input file for me, or don't even bother coming back", "red"))
+            time.sleep(1)
+            sys.exit(color_text("------ I'm not sure you deserve to win the Golden punchcard. I'm going to the SPA and I am taking Zoli with me. BYE.", "red"))
 
         # Load demo_input.json
         with open("demo_input.json", 'r') as file:

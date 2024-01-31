@@ -1,8 +1,24 @@
-/Users/elenanesi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-[32m---------- Welcome to simulate_users![0m
-[31m------ Are you KIDDING ME? demo_input.json is missing!! 
------- Put it back RIGHT NOW![0m
-[31m------ Imma out of here. Get a proper input file for me, or don't even bother coming back[0m
-Script executed on 2024-01-25 18:18:02
-Execution time: 23.27 seconds
+Script executed on 2024-01-28 15:21:22
+Execution time: 36.06 seconds
+Script executed on 2024-01-29 11:12:26
+Execution time: 36.09 seconds
+Script executed on 2024-01-29 11:21:48
+Execution time: 34.94 seconds
+Script failed because demo_input.json is missing. Executed on 2024-01-29 11:22:59
+Script executed on 2024-01-29 11:23:16
+Execution time: 29.35 seconds
+Script executed on 2024-01-29 12:01:40
+Execution time: 36.55 seconds
+Script failed because demo_input.json is missing. Executed on 2024-01-29 12:02:38
+Script executed on 2024-01-29 12:03:05
+Execution time: 33.29 seconds
+Script executed on 2024-01-29 18:44:47
+Execution time: 35.63 seconds
+Script executed on 2024-01-30 18:57:00
+Execution time: 40.73 seconds
+Script failed because demo_input.json is missing. Executed on 2024-01-30 19:02:29
+Script failed because demo_input.json is missing. Executed on 2024-01-31 12:51:59
+Script failed because demo_input.json is missing. Executed on 2024-01-31 12:52:35
+Script failed because demo_input.json is missing. Executed on 2024-01-31 12:52:53
+Script executed on 2024-01-31 12:53:37
+Execution time: 7.45 seconds
