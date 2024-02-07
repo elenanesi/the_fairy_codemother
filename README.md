@@ -25,13 +25,13 @@ To make this script work, you'll need to have
 
 2) browser drivers installed on the machine.
 	The location of the drivers is currently defined in the global vars of /elena_utils/utils.py:
-	CHROME_DRIVER = '/usr/local/bin/chromedriver' 
-	FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
+	- CHROME_DRIVER = '/usr/local/bin/chromedriver' 
+	- FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
 3) install:
-	python (eg: brew install python)
-	open ssl (eg: brew install openssl)
-	selenium (pip install selenium)
+	- python (eg: brew install python)
+	- open ssl (eg: brew install openssl)
+	- selenium (pip install selenium)
 
 
 # CONFIGURATION
