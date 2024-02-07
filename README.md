@@ -1,9 +1,10 @@
-# demo_dataset
-automation to create a GA4 demo data set 
+# demo_dataset (web data playground)
+automation to create a realistic GA4 demo data set 
 
 # INTRO
 
-The script has 2 arguments: headless mode and number of sessions.
+The script has 2 arguments: headless mode and number of sessions.\n
+
 Eg: if the script is called as: 
 	python simulate_users.py 0 4
 it is going to simulate 4 sessions, without headless mode.
@@ -34,7 +35,7 @@ To make this script work, you'll need to have
 1) use the demo_input.json file to customize the data playground. 
 	IMPORTANT:
 	- Change "BASE_URL" with the base URL you want to crawl (if you downloaded my demo_website, that might be under http://127.0.0.1/demo_project)
-	- Change "GA_STREAM_ID" with the ID of the GA property you want to use (minus the "G-" prefix). This enables the creation of returning users
+	- Change "GA_STREAM_ID" with the ID of the GA stream ID you want to use (minus the "G-" prefix). This enables the creation of returning users
 
 2) Ensure your web server is on!
 
