@@ -20,7 +20,7 @@ import traceback
 
 
 # location of browser drivers
-CHROME_DRIVER = '/Users/elenanesi/Desktop/Workspace/web-drivers/chromedriver' 
+CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
 def color_text(text, color_code):
