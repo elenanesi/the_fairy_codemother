@@ -21,7 +21,16 @@ import traceback
 
 # location of browser drivers
 CHROME_DRIVER = '/usr/local/bin/chromedriver' 
-FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
+FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
+GA_STREAM_ID = 'ABCDEFGH' 
+ga_cookie_name = "_ga_"+GA_STREAM_ID
+
+with open("demo_input.json", 'r') as file:
+    demo_input = json.load(file)
+    # initiate global vars with values from the input file
+    GA_STREAM_ID = demo_input['GA_STREAM_ID']
+    CHROME_DRIVER = demo_input['CHROME_DRIVER']
+    FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
 
 def color_text(text, color_code):
     color = 37 # = white
@@ -88,16 +97,16 @@ def consent(driver, page, click_class):
 def save_client_id(driver):
     # Retrieve cookies
     ga_cookie = driver.get_cookie("_ga")
-    ga_1L1YW7SZFP_cookie = driver.get_cookie("_ga_1L1YW7SZFP")
+    ga_ID_cookie = driver.get_cookie(ga_cookie_name)
 
     # Initialize an empty dictionary for client IDs
     data_value = {}
 
     # Construct the data object
-    if ga_cookie and ga_1L1YW7SZFP_cookie:
+    if ga_cookie and ga_ID_cookie:
         data_value = {
             '_ga': ga_cookie['value'],
-            '_ga_1L1YW7SZFP': ga_1L1YW7SZFP_cookie['value']
+            ga_cookie_name : ga_ID_cookie['value']
         }
     return data_value
 
