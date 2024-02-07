@@ -3,7 +3,7 @@ automation to create a realistic GA4 demo data set
 
 # INTRO
 
-The script has 2 arguments: headless mode and number of sessions.\n
+The script has 2 arguments: headless mode and number of sessions.
 
 Eg: if the script is called as: 
 	python simulate_users.py 0 4
