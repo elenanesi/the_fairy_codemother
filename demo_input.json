@@ -1,12 +1,12 @@
 {
     "BASE_URL" : "http://www.thefairycodemother.com/demo_project/",
+    "GA_STREAM_ID" : "ABCDEFGH", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,
     "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/demo_project/client_ids.json",
     "CHROME_DRIVER" : "/usr/local/bin/chromedriver",
     "FIREFOX_DRIVER" : "/usr/local/bin/geckodriver",
-    "GA_STREAM_ID" : "ABCDEFGH", 
     "page_categories": ["home", "category", "product"],
     "product_categories": ["apples", "kiwis", "oranges"],
     "product_ids":["1","2","3"],
