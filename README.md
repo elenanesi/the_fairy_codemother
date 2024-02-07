@@ -1,4 +1,4 @@
-# demo_dataset (web data playground)
+# the_fairy_codemother (web data playground)
 automation to create a realistic GA4 demo data set 
 
 # INTRO
@@ -27,7 +27,7 @@ To make this script work, you'll need to have
 	you can get them here: 
 	- https://googlechromelabs.github.io/chrome-for-testing/
 	- https://github.com/mozilla/geckodriver/releases
-	
+
 	The location of the drivers is currently defined in the global vars of /elena_utils/utils.py:
 	- CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 	- FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
