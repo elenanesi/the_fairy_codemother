@@ -6,8 +6,13 @@
     "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/demo_project/client_ids.json",
     "page_categories": ["home", "category", "product"],
     "product_categories": ["apples", "kiwis", "oranges"],
-    "product_ids":[1,3],
+    "product_ids":["1","2","3"],
     "path_functions": ["bounce","engaged", "product", "add_to_cart"],
+
+    "consent_distribution" : {
+    "allow-all-button": 70,
+    "deny-all-button": 30
+    },
 
     "browser_distribution": {
         "chrome": 70,
@@ -24,11 +29,6 @@
     "device_distribution": {
         "mobile":65,
         "desktop":35
-    },
-
-    "consent_distribution" : {
-        "allow-all-button": 70,
-        "deny-all-button": 30
     },
 
     "cvr_by_source": {

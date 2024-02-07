@@ -18,7 +18,7 @@ page_categories = ["home", "category", "product"]
 # product category options
 product_categories = ["apples", "kiwis", "oranges"]
 # product ids range options (assuming the product id is an INT)
-product_ids = [1,3]
+product_ids = ["1","2","3"]
 # path options
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
@@ -34,7 +34,7 @@ demo_input = {}
 
 def add_to_cart(driver):
     category = random.choice(product_categories)
-    product_id = str(random.randint(product_ids[0], product_ids[1]))
+    product_id = random.choice(product_ids)
     url = f"{BASE_URL}{category}/{product_id}.php"
     purchase_prm = f"?cat={category}&prod={product_id}"
     driver.get(url)
@@ -72,7 +72,7 @@ def get_landing_page(driver, source, demo_input, process_number):
         # Choose a random category for the product
         category = random.choice(product_categories)
         # Generate a random product ID between 1 and 10
-        product_id = str(random.randint(1, 3))
+        product_id = random.choice(product_ids)
         # Construct and navigate to the product URL
         url = f"{BASE_URL}{category}/{product_id}.php{utm_parameters}"
         driver.get(url)
@@ -218,7 +218,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
         print(color_text(f"-- {process_number}: product page branch started", "blue"))
         #determine product page and go to it
         category = random.choice(product_categories)
-        product_id = str(random.randint(1, 3))
+        product_id = random.choice(product_ids)
         driver.get(f"{BASE_URL}{category}/{product_id}.php")
         try: 
             WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
@@ -316,7 +316,7 @@ if __name__ == "__main__":
             with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
                 log_file.write(f"Script failed because demo_input.json is missing. Executed on {datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')}\n")
             time.sleep(1)
-            sys.exit(color_text("------ I'm not sure you deserve to win the Golden punchcard. I'm going to the SPA and I am taking Zoli with me. BYE.", "red"))
+            sys.exit(color_text("------ I'm not sure you deserve to win the Golden punchcard.\n------ I'm going to the SPA and I am taking Zoli with me. BYE.", "red"))
 
         # Load demo_input.json
         with open("demo_input.json", 'r') as file:
