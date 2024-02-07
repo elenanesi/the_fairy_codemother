@@ -3,7 +3,7 @@ automation to create a realistic GA4 demo data set
 
 # INTRO
 
-The script has 2 arguments: headless mode and number of sessions.
+The script has 2 arguments: headless mode (0-1) and number of sessions (1+).
 
 Eg: if the script is called as: 
 
@@ -24,6 +24,10 @@ To make this script work, you'll need to have
 	The website used to develop this tool is available here: https://github.com/elenanesimm/demo_website
 
 2) browser drivers installed on the machine.
+	you can get them here: 
+	- https://googlechromelabs.github.io/chrome-for-testing/
+	- https://github.com/mozilla/geckodriver/releases
+	
 	The location of the drivers is currently defined in the global vars of /elena_utils/utils.py:
 	- CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 	- FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
