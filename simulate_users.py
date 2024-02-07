@@ -26,7 +26,7 @@ HEADLESS = 1
 # number of users and sessions to run at every execution of the script
 NR_USERS = 250
 # Base URL for navigation, my localhost website
-BASE_URL = "http://www.thefairycodemother.com/demo_project/"
+BASE_URL = "http://127.0.0.1/"
 # helper var to hold demo_input.json content
 demo_input = {}
 
@@ -167,7 +167,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     # Choose a random landing page
     landing_page = get_landing_page(driver, source, demo_input, process_number)
     print(color_text(f"-- {process_number}: Landing page was correctly setup", "green"))
-    print(color_text(f"-- {process_number}: Starting navigation ..", "blue"))
+    print(color_text(f"-- {process_number}: Starting navigation at {landing_page}..", "blue"))
 
     # ----------> Navigation section <----------
 
@@ -239,6 +239,22 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     return temp_client_id
 
 def simulate_user(headless, demo_input, process_number):
+    global BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions
+    # Load demo_input.json
+    with open("demo_input.json", 'r') as file:
+        demo_input = json.load(file)
+
+        # initiate global vars with values from the input file
+        BASE_URL = demo_input['BASE_URL']
+        MAX_CLIENT_IDS = demo_input['MAX_CLIENT_IDS']
+        SHORT_TIME = demo_input['SHORT_TIME']
+        LONG_TIME = demo_input['LONG_TIME']
+        CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
+        page_categories = demo_input['page_categories']
+        product_categories = demo_input['product_categories']
+        path_functions = demo_input['path_functions']
+
+    print(f"demo input url 2 {BASE_URL}" )
     # select randomically the dimensions based on content of demo_input, 
     # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
     # (also contained in the demo json file)
@@ -318,19 +334,18 @@ if __name__ == "__main__":
             time.sleep(1)
             sys.exit(color_text("------ I'm not sure you deserve to win the Golden punchcard.\n------ I'm going to the SPA and I am taking Zoli with me. BYE.", "red"))
 
-        # Load demo_input.json
         with open("demo_input.json", 'r') as file:
             demo_input = json.load(file)
 
-        # initiate global vars with values from the input file
-        BASE_URL = demo_input['BASE_URL']
-        MAX_CLIENT_IDS = demo_input['MAX_CLIENT_IDS']
-        SHORT_TIME = demo_input['SHORT_TIME']
-        LONG_TIME = demo_input['LONG_TIME']
-        CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
-        page_categories = demo_input['page_categories']
-        product_categories = demo_input['product_categories']
-        path_functions = demo_input['path_functions']
+            # initiate global vars with values from the input file
+            BASE_URL = demo_input['BASE_URL']
+            MAX_CLIENT_IDS = demo_input['MAX_CLIENT_IDS']
+            SHORT_TIME = demo_input['SHORT_TIME']
+            LONG_TIME = demo_input['LONG_TIME']
+            CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
+            page_categories = demo_input['page_categories']
+            product_categories = demo_input['product_categories']
+            path_functions = demo_input['path_functions']
 
         # define a var for the arguments
         arguments = []

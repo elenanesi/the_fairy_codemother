@@ -1,6 +1,8 @@
 # demo_dataset
 automation to create a GA4 demo data set 
 
+INSTALLATION
+
 To make this script work, you'll need to have 
 
 1) A localhost website to navigate. 
@@ -11,3 +13,7 @@ The location of the drivers is defined in the global vars of the file simulate_u
 CHROME_DRIVER
 
 3) global vars to initiate: browser drivers and base url for navigation
+
+CONFIGURATION
+
+
