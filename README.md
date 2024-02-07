@@ -6,9 +6,13 @@ automation to create a realistic GA4 demo data set
 The script has 2 arguments: headless mode and number of sessions.
 
 Eg: if the script is called as: 
+
 	python simulate_users.py 0 4
+
 it is going to simulate 4 sessions, without headless mode.
+
 If arguments are missing, the script will run in headless mode, and choose the number of sessions (between 80 and 200) based on the day of the week.
+
 Currently, this is (80, 100) for week days, and (150, 200) for week ends (fixed setup in simulate_users.py)
 
 # INSTALLATION
