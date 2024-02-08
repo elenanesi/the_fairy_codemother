@@ -23,12 +23,17 @@ To make this script work, you'll need to have
 	The script expects a link with text "Yes" in all pages; An "Add to cart" button on product pages, and a "Purchase" link in the checkout page
 	The website used to develop this tool is available here: https://github.com/elenanesimm/demo_website
 
-2) browser drivers installed on the machine.
-	you can get them here: 
+2) install the browser drivers on your machine; move them in /usr/local/bin/ (or wherever your terminal has access to, but then remember to update demo_input.json)
+	NOTE: 
+	- the version of the driver should match the version on the browser you have installed.
+	- ensure they can be opened (might need explicit admin access)
+	
+	you can get the drivers here: 
 	- https://googlechromelabs.github.io/chrome-for-testing/
 	- https://github.com/mozilla/geckodriver/releases
 
-	The location of the drivers is currently defined in the global vars of /elena_utils/utils.py:
+	The location of the drivers can be changed from the demo_input.json file.
+	The default value is currently defined in the global vars of /elena_utils/utils.py:
 	- CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 	- FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
