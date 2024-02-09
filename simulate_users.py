@@ -141,10 +141,12 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     time.sleep(SHORT_TIME)
     purchase_prm = add_to_cart(driver)
     time.sleep(SHORT_TIME)  
-    driver.get("http://www.thefairycodemother.com/demo_project/checkout.php"+purchase_prm)
+    url = BASE_URL + "checkout.php"+purchase_prm
+    driver.get(url)
     print(color_text(f"-- {process_number}: begin checkout", "green")) 
     time.sleep(SHORT_TIME)  
-    driver.get("http://www.thefairycodemother.com/demo_project/purchase.php"+purchase_prm)
+    url = BASE_URL + "purchase.php"+purchase_prm
+    driver.get(url)
     time.sleep(LONG_TIME) 
     print(color_text(f"-- {process_number}: purchase happened", "green")) 
 
@@ -385,7 +387,9 @@ if __name__ == "__main__":
         last_tb = tb[-1]       
         # Extract filename, line number, function name, and text from the last traceback
         line_no = last_tb.lineno
-        print(color_text(f"---------- Ops, you fracked up here: {e} \n---------- at line: {line_no}", "red"))
+        filename = last_tb.filename
+        func_name = last_tb.name
+        print(color_text(f"---------- Ops, you fracked up here: {e} \n ---------- File: {filename}\n ---------- Function: {func_name}\n ---------- at line: {line_no}", "red"))
         # let's log how long it took to execute all of this
         log_execution_time(start_time, arguments)
 
