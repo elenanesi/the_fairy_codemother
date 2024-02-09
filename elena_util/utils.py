@@ -22,15 +22,17 @@ import traceback
 # location of browser drivers
 CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
-GA_STREAM_ID = 'ABCDEFGH' 
-ga_cookie_name = "_ga_"+GA_STREAM_ID
+SCRIPT_PATH = "/Users/elenanesi/Workspace/fairycodemother/"
+GA_MEASUREMENT_ID = 'ABCDEFGH' 
+ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
 with open("demo_input.json", 'r') as file:
     demo_input = json.load(file)
     # initiate global vars with values from the input file
-    GA_STREAM_ID = demo_input['GA_STREAM_ID']
+    GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
     CHROME_DRIVER = demo_input['CHROME_DRIVER']
     FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
+    SCRIPT_PATH = demo_input['SCRIPT_PATH']
 
 def color_text(text, color_code):
     color = 37 # = white

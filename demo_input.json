@@ -1,6 +1,7 @@
 {
     "BASE_URL" : "http://www.thefairycodemother.com/web_playground/",
-    "GA_STREAM_ID" : "ABCDEFGH", 
+    "SCRIPT_PATH": "",
+    "GA_MEASUREMENT_ID" : "ABCDEFGH", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,

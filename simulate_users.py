@@ -329,8 +329,6 @@ if __name__ == "__main__":
             print(color_text("------ Are you KIDDING ME? demo_input.json is missing!!", "red"))
             time.sleep(1)
             print(color_text("------ Put it back RIGHT NOW!", "red"))
-            with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
-                log_file.write(f"Script failed because demo_input.json is missing. Executed on {datetime.fromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')}\n")
             time.sleep(1)
             sys.exit(color_text("------ I'm not sure you deserve to win the Golden punchcard.\n------ I'm going to the SPA and I am taking Zoli with me. BYE.", "red"))
 

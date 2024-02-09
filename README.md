@@ -48,7 +48,7 @@ To make this script work, you'll need to have
 1) use the demo_input.json file to customize the data playground. 
 	IMPORTANT:
 	- Change "BASE_URL" with the base URL you want to crawl (if you downloaded my demo_website, that might be under http://127.0.0.1/demo_project)
-	- Change "GA_STREAM_ID" with the ID of the GA stream ID you want to use (minus the "G-" prefix). This enables the creation of returning users
+	- Change "GA_MEASUREMENT_ID" with the ID of the GA MEASUREMENT ID you want to use (minus the "G-" prefix). This enables the creation of returning users
 
 2) Ensure your web server is on!
 
@@ -80,4 +80,6 @@ To make this script work, you'll need to have
 	30 20 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
 	0 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
 	30 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log 
+
+
 
