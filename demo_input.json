@@ -1,10 +1,10 @@
 {
-    "BASE_URL" : "http://www.thefairycodemother.com/demo_project/",
+    "BASE_URL" : "http://www.thefairycodemother.com/web_playground/",
     "GA_STREAM_ID" : "ABCDEFGH", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,
-    "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/demo_project/client_ids.json",
+    "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/web_playground/client_ids.json",
     "CHROME_DRIVER" : "/usr/local/bin/chromedriver",
     "FIREFOX_DRIVER" : "/usr/local/bin/geckodriver",
     "page_categories": ["home", "category", "product"],
