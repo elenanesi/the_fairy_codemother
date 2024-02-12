@@ -24,7 +24,6 @@ CHROME_DRIVER = '/usr/local/bin/chromedriver'
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
 SCRIPT_PATH = "/Users/elenanesi/Workspace/fairycodemother/"
 GA_MEASUREMENT_ID = 'ABCDEFGH' 
-ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
 with open("demo_input.json", 'r') as file:
     demo_input = json.load(file)
@@ -33,6 +32,8 @@ with open("demo_input.json", 'r') as file:
     CHROME_DRIVER = demo_input['CHROME_DRIVER']
     FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
     SCRIPT_PATH = demo_input['SCRIPT_PATH']
+
+ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
 def color_text(text, color_code):
     color = 37 # = white
@@ -99,6 +100,10 @@ def consent(driver, page, click_class):
 def save_client_id(driver):
     # Retrieve cookies
     ga_cookie = driver.get_cookie("_ga")
+    if ga_cookie is None:
+        print(color_text("** ga_cookie is None" , "red"))
+        return {}  # Return an empty dict or handle as needed
+
     ga_ID_cookie = driver.get_cookie(ga_cookie_name)
 
     # Initialize an empty dictionary for client IDs
@@ -106,11 +111,11 @@ def save_client_id(driver):
 
     # Construct the data object
     if ga_cookie and ga_ID_cookie:
-        data_value = {
-            '_ga': ga_cookie['value'],
-            ga_cookie_name : ga_ID_cookie['value']
-        }
+        data_value['_ga'] = ga_cookie['value']
+        data_value[ga_cookie_name] = ga_ID_cookie['value']
+    
     return data_value
+
 
 def browser_setup(browser, device, headless, process_number):
     print(color_text(f"** {process_number}: I'm starting the browser setup for {browser}", "blue"))
