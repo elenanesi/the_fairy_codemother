@@ -23,7 +23,9 @@ import traceback
 CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
 SCRIPT_PATH = "/Users/elenanesi/Workspace/fairycodemother/"
-GA_MEASUREMENT_ID = 'ABCDEFGH' 
+GA_MEASUREMENT_ID = 'ABCDEFGH'
+SHORT_TIME = 2 
+LONG_TIME = 5
 
 with open("demo_input.json", 'r') as file:
     demo_input = json.load(file)
@@ -32,6 +34,8 @@ with open("demo_input.json", 'r') as file:
     CHROME_DRIVER = demo_input['CHROME_DRIVER']
     FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
     SCRIPT_PATH = demo_input['SCRIPT_PATH']
+    SHORT_TIME = demo_input['SHORT_TIME']
+    LONG_TIME = demo_input['LONG_TIME']
 
 ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
@@ -80,7 +84,7 @@ def random_choice_based_on_distribution(distribution_dict):
 
 def consent(driver, page, click_class):
     try: # wait for page load
-        WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+        WebDriverWait(driver, LONG_TIME).until(lambda d: d.execute_script('return document.readyState') == 'complete')
     except TimeoutException:
         print(color_text("** consent(): Timed out waiting for page to load", "red"))
         return;
@@ -90,9 +94,14 @@ def consent(driver, page, click_class):
         element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "cookie-banner"))
             )
-        link = driver.find_element(By.CLASS_NAME, click_class)
-        link.click()
-        print(color_text(f"** consent was given successfully as: {click_class}", "green"))
+        link = WebDriverWait(driver, SHORT_TIME).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, click_class))
+        )
+        try:
+            link.click()
+            print(color_text(f"** consent was given successfully as: {click_class}", "green"))
+        except(e):
+            print(f"Cookie banner was not cliccable {e}")
     except TimeoutException:
         print(color_text("** consent(): Timed out waiting for cookie banner to appear", "red"))
         return;
