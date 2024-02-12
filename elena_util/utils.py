@@ -101,7 +101,7 @@ def consent(driver, page, click_class):
             link.click()
             print(color_text(f"** consent was given successfully as: {click_class}", "green"))
         except(e):
-            print(f"Cookie banner was not cliccable {e}")
+            print(color_text(f"Cookie banner was not cliccable {e}"), "magenta")
     except TimeoutException:
         print(color_text("** consent(): Timed out waiting for cookie banner to appear", "red"))
         return;
