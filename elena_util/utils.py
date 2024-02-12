@@ -85,32 +85,34 @@ def random_choice_based_on_distribution(distribution_dict):
 def consent(driver, page, click_class):
     try: # wait for page load
         WebDriverWait(driver, LONG_TIME).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+        time.sleep(SHORT_TIME)
+        cookie_consent = driver.get_cookie("cookie_consent")
+        if cookie_consent is None:
+            try:
+                # Wait up to 10 seconds for the cookie banner to appear and click on it if does, otherwise throw a TimeoutException
+                element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "cookie-banner"))
+                    )
+                link = WebDriverWait(driver, SHORT_TIME).until(
+                    EC.element_to_be_clickable((By.CLASS_NAME, click_class))
+                )
+                try:
+                    link.click()
+                    print(color_text(f"** consent was given successfully as: {click_class}", "green"))
+                except(e):
+                    print(color_text(f"Cookie banner was not cliccable {e}"), "magenta")
+            except TimeoutException:
+                print(color_text("** consent(): Timed out waiting for cookie banner to appear", "red"))
+                return;
     except TimeoutException:
         print(color_text("** consent(): Timed out waiting for page to load", "red"))
-        return;
-
-    try:
-        # Wait up to 10 seconds for the cookie banner to appear and click on it if does, otherwise throw a TimeoutException
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "cookie-banner"))
-            )
-        link = WebDriverWait(driver, SHORT_TIME).until(
-            EC.element_to_be_clickable((By.CLASS_NAME, click_class))
-        )
-        try:
-            link.click()
-            print(color_text(f"** consent was given successfully as: {click_class}", "green"))
-        except(e):
-            print(color_text(f"Cookie banner was not cliccable {e}"), "magenta")
-    except TimeoutException:
-        print(color_text("** consent(): Timed out waiting for cookie banner to appear", "red"))
         return;
 
 def save_client_id(driver):
     # Retrieve cookies
     ga_cookie = driver.get_cookie("_ga")
     if ga_cookie is None:
-        print(color_text("** ga_cookie is None" , "red"))
+        print(color_text("** ga_cookie is None" , "magenta"))
         return {}  # Return an empty dict or handle as needed
 
     ga_ID_cookie = driver.get_cookie(ga_cookie_name)
