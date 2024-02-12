@@ -15,6 +15,9 @@ If arguments are missing, the script will run in headless mode, and choose the n
 
 Currently, this is (80, 100) for week days, and (150, 200) for week ends (fixed setup in simulate_users.py)
 
+ # NOTE: It might take few scans for returning users to appear. 
+ The first scans are needed to generate enough client_ids to simulate returning users. Currently the choice for new vs returning is set to 50-50, within the demo website at line 28 of all pages of https://github.com/elenanesimm/demo_website
+
 # INSTALLATION
 
 To make this script work, you'll need to have 
@@ -27,6 +30,7 @@ To make this script work, you'll need to have
 	NOTE: 
 	- the version of the driver should match the version on the browser you have installed.
 	- ensure they can be opened (might need explicit admin access)
+	- might need to quarantine drivers on MAC: xattr -d com.apple.quarantine chromedrive
 	
 	you can get the drivers here: 
 	- https://googlechromelabs.github.io/chrome-for-testing/

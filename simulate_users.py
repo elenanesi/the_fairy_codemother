@@ -256,7 +256,6 @@ def simulate_user(headless, demo_input, process_number):
         product_categories = demo_input['product_categories']
         path_functions = demo_input['path_functions']
 
-    print(f"demo input url 2 {BASE_URL}" )
     # select randomically the dimensions based on content of demo_input, 
     # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
     # (also contained in the demo json file)
@@ -287,6 +286,7 @@ def main():
     print(color_text(f"------ Launching {NR_USERS} processes", "blue"))
     # create an empty array to collect the client_ids produced by the processes we are going to launch
     all_client_ids = []
+    global process_number
     # Load existing data from the file, if it exists
     if os.path.exists(CLIENT_IDS_PATH):
         with open(CLIENT_IDS_PATH, 'r') as file:
@@ -318,6 +318,7 @@ def main():
             json.dump(all_client_ids, file) 
 
 if __name__ == "__main__":
+    process_number = 0
 
     try:
 
@@ -389,7 +390,7 @@ if __name__ == "__main__":
         line_no = last_tb.lineno
         filename = last_tb.filename
         func_name = last_tb.name
-        print(color_text(f"---------- Ops, you fracked up here: {e} \n ---------- File: {filename}\n ---------- Function: {func_name}\n ---------- at line: {line_no}", "red"))
+        print(color_text(f"---------- {process_number} Ops, you fracked up here: {e} \n ---------- File: {filename}\n ---------- Function: {func_name}\n ---------- at line: {line_no}", "red"))
         # let's log how long it took to execute all of this
         log_execution_time(start_time, arguments)
 
