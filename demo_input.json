@@ -1,7 +1,7 @@
 {
     "BASE_URL" : "http://www.thefairycodemother.com/web_playground/",
     "SCRIPT_PATH": "/Users/elenanesi/Workspace/user-simulation/",
-    "GA_MEASUREMENT_ID" : "1L1YW7SZFP", 
+    "GA_MEASUREMENT_ID" : "ABCDEFGH", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,
