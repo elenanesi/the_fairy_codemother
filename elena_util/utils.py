@@ -23,7 +23,7 @@ import traceback
 CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
 SCRIPT_PATH = "/Users/elenanesi/Workspace/fairycodemother/"
-GA_MEASUREMENT_ID = 'ABCDEFGH'
+GA_MEASUREMENT_ID = '1L1YW7SZFP'
 SHORT_TIME = 2 
 LONG_TIME = 5
 
