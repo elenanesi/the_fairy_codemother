@@ -129,7 +129,7 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
                 client_ids = json.load(file)
 
         if len(client_ids)<MAX_CLIENT_IDS: #limit the client_ids to avoid the machine from exploding while calculating length
-            temp_client_id = save_client_id(driver)
+            temp_client_id = save_client_id(driver, ga_cookie_name)
 
     except Exception as e:
         print(color_text(f"-- {process_number}: Error with client_ids.json because: {e}", "red")) 
@@ -160,7 +160,12 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     client_ids = []
 
     # Define browser; 
-    driver = browser_setup(browser, device, headless, process_number)
+    if browser == "firefox":
+        DRIVER = FIREFOX_DRIVER
+    else:
+        DRIVER = CHROME_DRIVER
+
+    driver = browser_setup(browser, device, headless, process_number, DRIVER)
     print(color_text(f"-- {process_number}: browser was correctly setup", "green"))
 
     # Mocking the Geolocation
@@ -190,7 +195,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
                 client_ids = json.load(file)
 
         if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
-            temp_client_id = save_client_id(driver)
+            temp_client_id = save_client_id(driver, ga_cookie_name)
 
     except Exception as e:
         print(color_text(f"-- {process_number}: Error with client_ids.json because: {e}", "red"))
@@ -347,6 +352,14 @@ if __name__ == "__main__":
             page_categories = demo_input['page_categories']
             product_categories = demo_input['product_categories']
             path_functions = demo_input['path_functions']
+            GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
+            CHROME_DRIVER = demo_input['CHROME_DRIVER']
+            FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
+            SCRIPT_PATH = demo_input['SCRIPT_PATH']
+            SHORT_TIME = demo_input['SHORT_TIME']
+            LONG_TIME = demo_input['LONG_TIME']
+
+        ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
         # define a var for the arguments
         arguments = []

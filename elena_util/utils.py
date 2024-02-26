@@ -20,24 +20,9 @@ import traceback
 
 
 # location of browser drivers
-CHROME_DRIVER = '/usr/local/bin/chromedriver' 
-FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
-SCRIPT_PATH = "/Users/elenanesi/Workspace/fairycodemother/"
-GA_MEASUREMENT_ID = '1L1YW7SZFP'
 SHORT_TIME = 2 
 LONG_TIME = 5
 
-with open("demo_input.json", 'r') as file:
-    demo_input = json.load(file)
-    # initiate global vars with values from the input file
-    GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
-    CHROME_DRIVER = demo_input['CHROME_DRIVER']
-    FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
-    SCRIPT_PATH = demo_input['SCRIPT_PATH']
-    SHORT_TIME = demo_input['SHORT_TIME']
-    LONG_TIME = demo_input['LONG_TIME']
-
-ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
 def color_text(text, color_code):
     color = 37 # = white
@@ -104,7 +89,7 @@ def consent(driver, page, click_class):
         print(color_text("** consent(): Timed out waiting for page to load", "red"))
         return;
 
-def save_client_id(driver):
+def save_client_id(driver, ga_cookie_name):
     # Retrieve cookies
     ga_cookie = driver.get_cookie("_ga")
     if ga_cookie is None:
@@ -124,7 +109,7 @@ def save_client_id(driver):
     return data_value
 
 
-def browser_setup(browser, device, headless, process_number):
+def browser_setup(browser, device, headless, process_number, DRIVER):
     print(color_text(f"** {process_number}: I'm starting the browser setup for {browser}", "blue"))
     if browser == "firefox":
         # Firefox browser setup
@@ -139,7 +124,7 @@ def browser_setup(browser, device, headless, process_number):
             #user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
             window_size = "375,812"  # iPhone X screen resolution in pixels
             options.set_preference("general.useragent.override", user_agent)
-        service = FirefoxService(executable_path=FIREFOX_DRIVER)  # Update the path to GeckoDriver
+        service = FirefoxService(executable_path=DRIVER)  # Update the path to GeckoDriver
         return webdriver.Firefox(service=service, options=options)
     elif browser == "chrome":
         options = ChromeOptions()       
@@ -149,7 +134,7 @@ def browser_setup(browser, device, headless, process_number):
         if device == "mobile":
             mobile_emulation = {"deviceName": "iPhone X"}
             options.add_experimental_option("mobileEmulation", mobile_emulation)
-        service = ChromeService(executable_path=CHROME_DRIVER)  # Update the path
+        service = ChromeService(executable_path=DRIVER)  # Update the path
         return webdriver.Chrome(service=service, options=options)
 
 # end of file
