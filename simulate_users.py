@@ -29,6 +29,10 @@ NR_USERS = 250
 BASE_URL = "http://127.0.0.1/"
 # helper var to hold demo_input.json content
 demo_input = {}
+# location of browser drivers
+CHROME_DRIVER = '/usr/local/bin/chromedriver' 
+FIREFOX_DRIVER = '/usr/local/bin/geckodriver'
+ga_cookie_name = ""
 
 # --- END OF GLOBAL VARS WITH DEFAULT VALUES ---- #
 
@@ -102,7 +106,12 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     print(color_text(f"-- {process_number}: execute_purchase_flow fired", "green")) 
 
     # Define browser; 
-    driver = browser_setup(browser, device, headless, process_number)
+    if browser == "firefox":
+        DRIVER = FIREFOX_DRIVER
+    else:
+        DRIVER = CHROME_DRIVER
+
+    driver = browser_setup(browser, device, headless, process_number, DRIVER)
 
     # Setup of utms
     utm_parameters = ""
@@ -127,6 +136,8 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
         if os.path.exists(CLIENT_IDS_PATH):
             with open(CLIENT_IDS_PATH, 'r') as file:
                 client_ids = json.load(file)
+        else:
+            client_ids = []
 
         if len(client_ids)<MAX_CLIENT_IDS: #limit the client_ids to avoid the machine from exploding while calculating length
             temp_client_id = save_client_id(driver, ga_cookie_name)
@@ -193,6 +204,8 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
         if os.path.exists(CLIENT_IDS_PATH):
             with open(CLIENT_IDS_PATH, 'r') as file:
                 client_ids = json.load(file)
+        else:
+            client_ids = []
 
         if len(client_ids)<150: #limit the client_ids to 150ish in total to avoid the machine from exploding while calculating length
             temp_client_id = save_client_id(driver, ga_cookie_name)
@@ -246,7 +259,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     return temp_client_id
 
 def simulate_user(headless, demo_input, process_number):
-    global BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions
+    global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions, GA_MEASUREMENT_ID, CHROME_DRIVER, FIREFOX_DRIVER, SCRIPT_PATH, ga_cookie_name
     # Load demo_input.json
     with open("demo_input.json", 'r') as file:
         demo_input = json.load(file)
@@ -260,6 +273,11 @@ def simulate_user(headless, demo_input, process_number):
         page_categories = demo_input['page_categories']
         product_categories = demo_input['product_categories']
         path_functions = demo_input['path_functions']
+        GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
+        CHROME_DRIVER = demo_input['CHROME_DRIVER']
+        FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
+        SCRIPT_PATH = demo_input['SCRIPT_PATH']
+        ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
     # select randomically the dimensions based on content of demo_input, 
     # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
@@ -298,6 +316,7 @@ def main():
             try:
                 all_client_ids = json.load(file)
             except json.JSONDecodeError:
+                all_client_ids = []
                 print(color_text("------ Error reading the existing client_ids.json file.", "red"))
 
     # Create a pool of processes
@@ -358,8 +377,7 @@ if __name__ == "__main__":
             SCRIPT_PATH = demo_input['SCRIPT_PATH']
             SHORT_TIME = demo_input['SHORT_TIME']
             LONG_TIME = demo_input['LONG_TIME']
-
-        ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
+            ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
 
         # define a var for the arguments
         arguments = []
