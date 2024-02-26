@@ -66,10 +66,6 @@ def log_execution_time(start_time, args):
     with open("execution_log.txt", "a") as file:
         file.write(f"Execution time: {elapsed_time:.2f} seconds, Arguments: {args}\n")
 
-    with open("/Users/elenanesi/Workspace/user-simulation/logfile.log", "a") as log_file:
-        log_file.write(f"Script executed on {start_time_formatted}\n")
-        log_file.write(f"Execution time: {elapsed_time:.2f} seconds\n")
-
 def random_choice_based_on_distribution(distribution_dict):
     """
     Selects an item based on a distribution of probabilities 
