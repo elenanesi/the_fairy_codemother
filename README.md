@@ -60,30 +60,7 @@ To make this script work, you'll need to have
 	You can create one by typing "crontab -e" in the terminal.
 	Here's an example of mine:
 
-	0 10 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 10 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 11 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 11 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 12 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 12 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 13 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 13 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 14 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 14 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 15 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 15 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 16 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 16 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 17 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 17 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 18 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 18 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 19 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 19 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 20 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 20 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/simulate_users.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log 
+	0 19 * * * cd /Users/elenanesi/Workspace/user-simulation && /Users/elenanesi/.pyenv/shims/python3 simulate_users.py > output.log 2>> logfile.log
 
 
 
