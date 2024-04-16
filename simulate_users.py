@@ -13,12 +13,24 @@ SHORT_TIME = 5
 LONG_TIME = 7
 # where to save client ids
 CLIENT_IDS_PATH = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
-#page category options
+# page category options
 page_categories = ["home", "category", "product"]
-# product category options
-product_categories = ["apples", "kiwis", "oranges"]
-# product ids range options (assuming the product id is an INT)
-product_ids = ["1","2","3"]
+
+products = {
+    'electronics': [
+        {'item_id': 1, 'item_name': 'Laptop', 'item_category': 'electronics', 'price': 800, 'quantity': 0, 'description': 'High-performance laptop.', 'image': 'url_to_image'},
+        {'item_id': 2, 'item_name': 'Smartphone', 'item_category': 'electronics', 'price': 500, 'quantity': 0, 'description': 'Latest model smartphone.', 'image': 'url_to_image'},
+    ],
+    'clothing': [
+        {'item_id': 1, 'item_name': 'T-Shirt', 'item_category': 'clothing', 'price': 20, 'quantity': 0, 'description': 'Cotton t-shirt.', 'image': 'url_to_image'},
+        {'item_id': 2, 'item_name': 'Jeans', 'item_category': 'clothing', 'price': 40, 'quantity': 0, 'description': 'Denim jeans.', 'image': 'url_to_image'},
+    ]
+}
+
+
+# product ids range options
+product_ids = [1,2]
+
 # path options
 path_functions = ["bounce","engaged", "product", "add_to_cart"]
 # run headless by default
@@ -36,28 +48,6 @@ ga_cookie_name = ""
 
 # --- END OF GLOBAL VARS WITH DEFAULT VALUES ---- #
 
-def add_to_cart(driver):
-    category = random.choice(product_categories)
-    product_id = random.choice(product_ids)
-    url = f"{BASE_URL}{category}/{product_id}.php"
-    purchase_prm = f"?cat={category}&prod={product_id}"
-    driver.get(url)
-    try: 
-        WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
-        print(color_text("-- got to product page", "green"))
-        try:
-            link = driver.find_element(By.CLASS_NAME, "cart")
-            link.click()
-            print(color_text("** Added to cart", "green"))
-            time.sleep(5)
-            return purchase_prm
-        except Exception as e:
-            print(color_text(f"** An error occurred w add to cart click on {url}: {e}", "red"))
-            return purchase_prm
-
-    except TimeoutException:
-        print(color_text("** product page did not load", "red"))
-        return purchase_prm
 
 def get_landing_page(driver, source, demo_input, process_number):
     # Setup of landing page
@@ -72,13 +62,20 @@ def get_landing_page(driver, source, demo_input, process_number):
     
 
     # Assign a random landing page
+    # product category options
+    product_categories = list(products.keys())
     if page == "product":
         # Choose a random category for the product
         category = random.choice(product_categories)
         # Generate a random product ID between 1 and 10
         product_id = random.choice(product_ids)
+        product_name = ""
+        for product in products.get(category, []):  # Default to empty list if category not found
+            if product['item_id'] == product_id:
+                product_name = product['item_name']
+        
         # Construct and navigate to the product URL
-        url = f"{BASE_URL}{category}/{product_id}.php{utm_parameters}"
+        url = f"{BASE_URL}{category}/{product_name}{utm_parameters}"
         driver.get(url)
         return url
 
@@ -86,13 +83,13 @@ def get_landing_page(driver, source, demo_input, process_number):
         # Choose a random category
         category = random.choice(product_categories)
         # Navigate to the category URL
-        url = f"{BASE_URL}{category}.php{utm_parameters}"
+        url = f"{BASE_URL}category/{category}{utm_parameters}"
         driver.get(url)
         return url
 
     else:
         # Navigate to a generic page URL
-        url = f"{BASE_URL}{page}.php{utm_parameters}"
+        url = f"{BASE_URL}{utm_parameters}"
         driver.get(url)
         return url
 
@@ -101,6 +98,8 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     temp_client_id = {}
     client_ids = []
     global HEADLESS
+    # product category options
+    product_categories = list(products.keys())
 
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
     print(color_text(f"-- {process_number}: execute_purchase_flow fired", "green")) 
@@ -126,7 +125,7 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
     # Add navigation actions here
 
     # url is landing page
-    url = BASE_URL + "home.php" + utm_parameters
+    url = BASE_URL + utm_parameters
     driver.get(url)  # Your website URL
 
     # Give/deny consent
@@ -147,19 +146,49 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
 
     # Scroll to the bottom of the page
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    print(color_text(f"-- {process_number}: product page started", "blue"))
+    # Choose a random category for the product
+    category = random.choice(product_categories)
+    # Generate a random product ID between 1 and 10
+    product_id = random.choice(product_ids)
+    product_name = ""
+    for product in products.get(category, []):  # Default to empty list if category not found
+        if product['item_id'] == product_id:
+            product_name = product['item_name']
+
+    driver.get(f"{BASE_URL}{category}/{product_name}")
+    try: 
+        WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+        print(color_text(f"-- {process_number}:  got to product page", "green"))
+    except TimeoutException:
+        print(color_text(f"-- {process_number}: Page did not load", "red"))
+
+    print(color_text(f"-- {process_number}: add to cart started", "blue"))       
+    try:
+        link = driver.find_element(By.CLASS_NAME, "cart")
+        link.click()
+        print(color_text(f"-- {process_number}: added to cart", "green")) 
+        time.sleep(SHORT_TIME)
+    except Exception as e:
+        print(color_text(f"-- {process_number}: An error occurred w add to cart click on {landing_page}: {e}", "red"))
+
+    try:
+        link = driver.find_element(By.CLASS_NAME, "your-cart")
+        link.click()
+        print(color_text(f"-- {process_number}: your-cart clicked", "green")) 
+        time.sleep(SHORT_TIME)
+    except Exception as e:
+        print(color_text(f"-- {process_number}: An error occurred w checkout: {e}", "red"))
+
+    try:
+        link = driver.find_element(By.CLASS_NAME, "checkout")
+        print(color_text(f"-- {process_number}: checkout started", "green")) 
+        link.click()
+        print(color_text(f"-- {process_number}: Purchase completed", "green")) 
+        time.sleep(LONG_TIME)
+    except Exception as e:
+        print(color_text(f"-- {process_number}: An error occurred w checkout: {e}", "red"))
     
-    # Stay on the page for 5 seconds and go to the next page
-    time.sleep(SHORT_TIME)
-    purchase_prm = add_to_cart(driver)
-    time.sleep(SHORT_TIME)  
-    url = BASE_URL + "checkout.php"+purchase_prm
-    driver.get(url)
-    print(color_text(f"-- {process_number}: begin checkout", "green")) 
-    time.sleep(SHORT_TIME)  
-    url = BASE_URL + "purchase.php"+purchase_prm
-    driver.get(url)
-    time.sleep(LONG_TIME) 
-    print(color_text(f"-- {process_number}: purchase happened", "green")) 
 
     driver.quit()
 
@@ -219,13 +248,15 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
 
     #determine path
     path = random.choice(path_functions)
+    # product category options
+    product_categories = list(products.keys())
 
     if path != "bounced":
         # Choose a random category for the product
         # Example: Click on a link with the text "Example Link"
         try:
             time.sleep(SHORT_TIME)
-            link = driver.find_element(By.LINK_TEXT,"Yes")
+            link = driver.find_element(By.CLASS_NAME, "next")
             link.click()
             print(color_text(f"-- {process_number}: Clicked on an internal link", "green"))
             time.sleep(SHORT_TIME)
@@ -239,7 +270,15 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
         #determine product page and go to it
         category = random.choice(product_categories)
         product_id = random.choice(product_ids)
-        driver.get(f"{BASE_URL}{category}/{product_id}.php")
+        # Choose a random category for the product
+        category = random.choice(product_categories)
+        # Generate a random product ID between 1 and 10
+        product_id = random.choice(product_ids)
+        product_name = ""
+        for product in products.get(category, []):  # Default to empty list if category not found
+            if product['item_id'] == product_id:
+                product_name = product['item_name']
+        driver.get(f"{BASE_URL}{category}/{product_name}")
         try: 
             WebDriverWait(driver, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
             print(color_text(f"-- {process_number}:  got to product page", "green"))
@@ -259,7 +298,7 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     return temp_client_id
 
 def simulate_user(headless, demo_input, process_number):
-    global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions, GA_MEASUREMENT_ID, CHROME_DRIVER, FIREFOX_DRIVER, SCRIPT_PATH, ga_cookie_name
+    global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, path_functions, GA_MEASUREMENT_ID, CHROME_DRIVER, FIREFOX_DRIVER, SCRIPT_PATH, ga_cookie_name
     # Load demo_input.json
     with open("demo_input.json", 'r') as file:
         demo_input = json.load(file)
@@ -271,7 +310,7 @@ def simulate_user(headless, demo_input, process_number):
         LONG_TIME = demo_input['LONG_TIME']
         CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
         page_categories = demo_input['page_categories']
-        product_categories = demo_input['product_categories']
+        # products = demo_input['products']
         path_functions = demo_input['path_functions']
         GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
         CHROME_DRIVER = demo_input['CHROME_DRIVER']
@@ -369,7 +408,7 @@ if __name__ == "__main__":
             LONG_TIME = demo_input['LONG_TIME']
             CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
             page_categories = demo_input['page_categories']
-            product_categories = demo_input['product_categories']
+            # products = demo_input['products']
             path_functions = demo_input['path_functions']
             GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
             CHROME_DRIVER = demo_input['CHROME_DRIVER']
