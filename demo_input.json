@@ -1,16 +1,16 @@
 {
-    "BASE_URL" : "http://www.thefairycodemother.com/web_playground/",
-    "SCRIPT_PATH": "/Users/elenanesi/Workspace/user-simulation/",
-    "GA_MEASUREMENT_ID" : "ABCDEFGH", 
+    "BASE_URL" : "https://the-fairy-codemother.nw.r.appspot.com/",
+    "SCRIPT_PATH": "/Users/elenanesi/Workspace/user-simulation-cloud/",
+    "GA_MEASUREMENT_ID" : "ABCDEFG", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,
     "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/web_playground/client_ids.json",
-    "CHROME_DRIVER" : "/Users/elenanesi/Workspace/user-simulation/elena_util/chromedriver",
-    "FIREFOX_DRIVER" : "/Users/elenanesi/Workspace/user-simulation/elena_util/geckodriver",
+    "CHROME_DRIVER" : "/Users/elenanesi/Workspace/user-simulation-cloud/elena_util/chromedriver",
+    "FIREFOX_DRIVER" : "/Users/elenanesi/Workspace/user-simulation-cloud/elena_util/geckodriver",
     "page_categories": ["home", "category", "product"],
-    "product_categories": ["apples", "kiwis", "oranges"],
-    "product_ids":["1","2","3"],
+
+    "product_ids":["1","2"],
     "path_functions": ["bounce","engaged", "product", "add_to_cart"],
 
     "consent_distribution" : {
@@ -19,8 +19,8 @@
     },
 
     "browser_distribution": {
-        "chrome": 70,
-        "firefox": 30
+        "chrome": 50,
+        "firefox": 50
     },
 
     "source_distribution": {
