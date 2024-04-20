@@ -4,7 +4,7 @@ from elena_util import *
 # --- GLOBAL VARS WITH DEFAULT VALUES ---- #
 
 # WIP: will be used to perform a dataLayer push and keep the GA data updated with the version in use.
-# SCRIPT_VERSION = "Jan 23rd"
+# SCRIPT_VERSION = "April 19"
 
 # default max number of client ids allowed in the client ids file
 MAX_CLIENT_IDS = 500
@@ -12,10 +12,12 @@ MAX_CLIENT_IDS = 500
 SHORT_TIME = 5
 LONG_TIME = 7
 # where to save client ids
-CLIENT_IDS_PATH = '/Applications/MAMP/htdocs/demo_project/client_ids.json'
+CLIENT_IDS_PATH = '/Users/elenanesi/Desktop/Workspace/web_data_playground_flask/client_ids.json'
 # page category options
 page_categories = ["home", "category", "product"]
 
+# Product "feed"
+# to be substituted with JSON/Other file to be shared w the Flask website
 products = {
     'electronics': [
         {'item_id': 1, 'item_name': 'Laptop', 'item_category': 'electronics', 'price': 800, 'quantity': 0, 'description': 'High-performance laptop.', 'image': 'url_to_image'},
@@ -38,7 +40,7 @@ HEADLESS = 1
 # number of users and sessions to run at every execution of the script
 NR_USERS = 250
 # Base URL for navigation, my localhost website
-BASE_URL = "http://127.0.0.1/"
+BASE_URL = "http://127.0.0.1:8080/"
 # helper var to hold demo_input.json content
 demo_input = {}
 # location of browser drivers
@@ -208,8 +210,8 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     driver = browser_setup(browser, device, headless, process_number, DRIVER)
     print(color_text(f"-- {process_number}: browser was correctly setup", "green"))
 
-    # Mocking the Geolocation
-    #driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
+    # Mocking the Geolocation (does not work for now :( , investigating.)
+    # driver.execute_cdp_cmd("Emulation.setGeolocationOverride", coordinates)
 
     # Choose a random landing page
     landing_page = get_landing_page(driver, source, demo_input, process_number)
@@ -342,6 +344,7 @@ def simulate_user(headless, demo_input, process_number):
     else:
         print(color_text(f"---- {process_number}: Selected browsing_flow", "green"))
         temp_client_id = execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+        # print(f"temp_client_id: {temp_client_id}")
         return temp_client_id   
 
 def main():
@@ -368,6 +371,7 @@ def main():
         for future in futures:
             # save the result (client_id) in temp_client_id, to be merged with all_client_ids
             temp_client_id = future.result()
+            # print(f"temp_client_id: {temp_client_id}")
 
             # Check if temp_client_id is not empty
             if temp_client_id:
@@ -377,6 +381,7 @@ def main():
 
     # Now all processes have provided their temp_client_id: you can write the updated list back to the JSON file
     if all_client_ids:
+        # print(f"all_client_ids: {all_client_ids}")
         with open(CLIENT_IDS_PATH, 'w') as file:
             json.dump(all_client_ids, file) 
 
