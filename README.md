@@ -16,7 +16,9 @@ If arguments are missing, the script will run in headless mode, and choose the n
 Currently, this is (80, 100) for week days, and (150, 200) for week ends (fixed setup in simulate_users.py)
 
  # NOTE: It might take few scans for returning users to appear. 
- The first scans are needed to generate enough client_ids to simulate returning users. Currently the choice for new vs returning is set to 50-50, within the demo website at line 28 of all pages of https://github.com/elenanesimm/demo_website
+ The first scans are needed to generate enough client_ids to simulate returning users. Currently the choice for new vs returning is set to 50-50:
+ - at @app.before_request (currently at line 41) for the Flask website available here https://github.com/elenanesi/web_playground_flask
+ - at line 28 of all pages for the localhost website https://github.com/elenanesi/demo_website
 
 # INSTALLATION
 
@@ -24,7 +26,7 @@ To make this script work, you'll need to have
 
 1) A localhost website to navigate. 
 	The script expects a link with text "Yes" in all pages; An "Add to cart" button on product pages, and a "Purchase" link in the checkout page
-	The website used to develop this tool is available here: https://github.com/elenanesimm/demo_website
+	The website used to develop this tool is available here: https://github.com/elenanesi/web_playground_flask
 
 2) install the browser drivers on your machine; move them in /usr/local/bin/ (or wherever your terminal has access to, but then remember to update demo_input.json)
 	NOTE: 
@@ -51,7 +53,7 @@ To make this script work, you'll need to have
 
 1) use the demo_input.json file to customize the data playground. 
 	IMPORTANT:
-	- Change "BASE_URL" with the base URL you want to crawl (if you downloaded my demo_website, that might be under http://127.0.0.1/demo_project)
+	- Change "BASE_URL" with the base URL you want to crawl (if you downloaded my demo_website, that might be under http://127.0.0.1:8080)
 	- Change "GA_MEASUREMENT_ID" with the ID of the GA MEASUREMENT ID you want to use (minus the "G-" prefix). This enables the creation of returning users
 
 2) Ensure your web server is on!
