@@ -1,13 +1,12 @@
 {
-    "BASE_URL" : "https://the-fairy-codemother.nw.r.appspot.com/",
+    "BASE_URL_0": "http://127.0.0.1:8080/",
+    "BASE_URL": "https://the-fairy-codemother.nw.r.appspot.com/",
     "SCRIPT_PATH": "/Users/elenanesi/Workspace/user-simulation-cloud/",
-    "GA_MEASUREMENT_ID" : "ABCDEFG", 
+    "GA_MEASUREMENT_ID": "1L1YW7SZFP", 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 3,
     "LONG_TIME": 5,
-    "CLIENT_IDS_PATH": "/Applications/MAMP/htdocs/web_playground/client_ids.json",
-    "CHROME_DRIVER" : "/Users/elenanesi/Workspace/user-simulation-cloud/elena_util/chromedriver",
-    "FIREFOX_DRIVER" : "/Users/elenanesi/Workspace/user-simulation-cloud/elena_util/geckodriver",
+    "CLIENT_IDS_PATH": "/Users/elenanesi/Desktop/Workspace/web_data_playground_flask/client_ids.json",
     "page_categories": ["home", "category", "product"],
 
     "product_ids":["1","2"],
