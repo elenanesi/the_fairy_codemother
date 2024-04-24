@@ -43,17 +43,17 @@ To make this script work, you'll need to have
 	- CHROME_DRIVER = '/usr/local/bin/chromedriver' 
 	- FIREFOX_DRIVER = '/usr/local/bin/geckodriver' 
 
-3) install:
+3) install the following: (you can use pip install -r requirements.txt)
 	- python (eg: brew install python)
-	- open ssl (eg: brew install openssl)
 	- selenium (pip install selenium)
+	- webdriver (pip install webdriver_manager)
 
 
 # CONFIGURATION
 
 1) use the demo_input.json file to customize the data playground. 
 	IMPORTANT:
-	- Change "BASE_URL" with the base URL you want to crawl (if you downloaded my demo_website, that might be under http://127.0.0.1:8080)
+	- Change "BASE_URL" with the base URL you want to crawl. Add a final slash (if you downloaded my demo_website, that might be under http://127.0.0.1:8080/)
 	- Change "GA_MEASUREMENT_ID" with the ID of the GA MEASUREMENT ID you want to use (minus the "G-" prefix). This enables the creation of returning users
 
 2) Ensure your web server is on!
