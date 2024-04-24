@@ -1,8 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver import ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -25,6 +27,7 @@ LONG_TIME = 5
 
 
 def color_text(text, color_code):
+    # this function is used to beautify log prints
     color = 37 # = white
     if color_code == "red":
         color = 31
@@ -51,16 +54,16 @@ def log_execution_time(start_time, args):
     with open("execution_log.txt", "a") as file:
         file.write(f"Execution time: {elapsed_time:.2f} seconds, Arguments: {args}\n")
 
-def random_choice_based_on_distribution(distribution_dict):
+def random_choice_based_on_distribution(distribution):
     """
     Selects an item based on a distribution of probabilities 
     In this script it is called with a distribution from the demo_input.json file as an input
 
-    :param distribution_dict: A dictionary where keys are items to choose from and values are their corresponding probabilities.
+    :param distribution: A dictionary where keys are items to choose from and values are their corresponding probabilities.
     :return: A randomly selected key based on the distribution.
     """
-    items = list(distribution_dict.keys())
-    weights = list(distribution_dict.values())
+    items = list(distribution.keys())
+    weights = list(distribution.values())
     return random.choices(items, weights=weights, k=1)[0]
 
 def consent(driver, page, click_class):
@@ -109,32 +112,27 @@ def save_client_id(driver, ga_cookie_name):
     return data_value
 
 
-def browser_setup(browser, device, headless, process_number, DRIVER):
+def browser_setup(browser, device, headless, process_number):
     print(color_text(f"** {process_number}: I'm starting the browser setup for {browser}", "blue"))
+    headless = int(headless)
     if browser == "firefox":
         # Firefox browser setup
-        options = FirefoxOptions()
-        headless = int(headless)
+        options = FirefoxOptions()       
         if headless == 1:
             options.add_argument("--headless")  # Enables headless mode
         if device == "mobile":
-            # Here you need to manually set the user agent and window size for Firefox
-            # Replace these values with those corresponding to your desired device
             user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
-            #user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
             window_size = "375,812"  # iPhone X screen resolution in pixels
             options.set_preference("general.useragent.override", user_agent)
-        service = FirefoxService(executable_path=DRIVER)  # Update the path to GeckoDriver
-        return webdriver.Firefox(service=service, options=options)
+            options.add_argument(f"--window-size={window_size}")
+        return webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
     elif browser == "chrome":
         options = ChromeOptions()       
-        headless = int(headless)
-        if (headless==1):
+        if headless==1:
             options.add_argument("--headless")  # Enables headless mode
         if device == "mobile":
             mobile_emulation = {"deviceName": "iPhone X"}
             options.add_experimental_option("mobileEmulation", mobile_emulation)
-        service = ChromeService(executable_path=DRIVER)  # Update the path
-        return webdriver.Chrome(service=service, options=options)
-
+        return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+        
 # end of file
