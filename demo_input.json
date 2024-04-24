@@ -1,6 +1,5 @@
 {
-    "BASE_URL_0": "http://127.0.0.1:8080/",
-    "BASE_URL": "https://the-fairy-codemother.nw.r.appspot.com/",
+    "BASE_URL": "http://127.0.0.1:8080/",
     "SCRIPT_PATH": "/Users/elenanesi/Workspace/user-simulation-cloud/",
     "GA_MEASUREMENT_ID": "1L1YW7SZFP", 
     "MAX_CLIENT_IDS": 500,
