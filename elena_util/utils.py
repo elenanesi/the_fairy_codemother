@@ -20,6 +20,9 @@ import json
 import traceback
 
 
+# Pre-install drivers
+ChromeDriverManager().install()
+GeckoDriverManager().install()
 
 # location of browser drivers
 SHORT_TIME = 2 
@@ -125,7 +128,7 @@ def browser_setup(browser, device, headless, process_number):
             window_size = "375,812"  # iPhone X screen resolution in pixels
             options.set_preference("general.useragent.override", user_agent)
             options.add_argument(f"--window-size={window_size}")
-        return webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
+        return webdriver.Firefox(options=options)
     elif browser == "chrome":
         options = ChromeOptions()       
         if headless==1:
@@ -133,6 +136,6 @@ def browser_setup(browser, device, headless, process_number):
         if device == "mobile":
             mobile_emulation = {"deviceName": "iPhone X"}
             options.add_experimental_option("mobileEmulation", mobile_emulation)
-        return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+        return webdriver.Chrome(options=options)
         
 # end of file
