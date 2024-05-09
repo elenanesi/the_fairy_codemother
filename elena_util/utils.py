@@ -1,3 +1,4 @@
+from flask import Flask, request, jsonify
 from playwright.sync_api import sync_playwright
 from multiprocessing import Process
 from concurrent.futures import ProcessPoolExecutor
