@@ -1,0 +1,2 @@
+Execution time: 37.77 seconds, Arguments: ['1']
+Execution time: 39.25 seconds, Arguments: ['0', '1']

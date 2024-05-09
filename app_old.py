@@ -40,6 +40,8 @@ NR_USERS = 250
 # helper var to hold demo_input.json content
 demo_input = {}
 ga_cookie_name = ""
+CHROME_DRIVER = "/usr/local/bin/chromedriver";
+FIREFOX_DRIVER = "/usr/local/bin/geckodriver";
 
 # --- END OF GLOBAL VARS WITH DEFAULT VALUES ---- #
 
@@ -99,8 +101,13 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
 	## TO ADD: PURCHASE VERSION: NEW/RETURNING CLIENT, FROM BEGINNING OR FROM ADD TO CART OR OTHER?
     print(color_text(f"-- {process_number}: execute_purchase_flow fired", "green")) 
 
-    # Setup browser; 
-    driver = browser_setup(browser, device, headless, process_number)
+    # Define browser; 
+    if browser == "firefox":
+        DRIVER = FIREFOX_DRIVER
+    else:
+        DRIVER = CHROME_DRIVER
+
+    driver = browser_setup(browser, device, headless, process_number, DRIVER)
 
     # Setup of utms
     utm_parameters = ""
@@ -180,7 +187,7 @@ def execute_purchase_flow(browser, source, device, consent_level, demo_input, he
         print(color_text(f"-- {process_number}: An error occurred w checkout: {e}", "red"))
     
 
-    driver.quit()
+    driver.close()
 
 def execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number):
     print(color_text(f"-- {process_number}: execute_browsing_flow fired", "green"))
@@ -189,8 +196,14 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     temp_client_id = {}
     client_ids = []
 
-    # Setup browser; 
-    driver = browser_setup(browser, device, headless, process_number)
+    # Define browser; 
+    if browser == "firefox":
+        DRIVER = FIREFOX_DRIVER
+    else:
+        DRIVER = CHROME_DRIVER
+
+    driver = browser_setup(browser, device, headless, process_number, DRIVER)
+    
     print(color_text(f"-- {process_number}: browser was correctly setup", "green"))
 
     # Mocking the Geolocation (does not work for now :( , investigating.)
@@ -282,8 +295,55 @@ def execute_browsing_flow(browser, source, device, consent_level, demo_input, he
     driver.quit()
     return temp_client_id
 
+    def simulate_user(headless, demo_input, process_number):
+        global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions, GA_MEASUREMENT_ID, CHROME_DRIVER, FIREFOX_DRIVER, SCRIPT_PATH, ga_cookie_name
+        # Load demo_input.json
+        with open("demo_input.json", 'r') as file:
+            demo_input = json.load(file)
+
+            # initiate global vars with values from the input file
+            BASE_URL = demo_input['BASE_URL']
+            MAX_CLIENT_IDS = demo_input['MAX_CLIENT_IDS']
+            SHORT_TIME = demo_input['SHORT_TIME']
+            LONG_TIME = demo_input['LONG_TIME']
+            CLIENT_IDS_PATH = demo_input['CLIENT_IDS_PATH']
+            page_categories = demo_input['page_categories']
+            product_categories = demo_input['product_categories']
+            path_functions = demo_input['path_functions']
+            GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
+            CHROME_DRIVER = demo_input['CHROME_DRIVER']
+            FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
+            SCRIPT_PATH = demo_input['SCRIPT_PATH']
+            ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
+
+        # select randomically the dimensions based on content of demo_input, 
+        # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
+        # (also contained in the demo json file)
+        print(color_text(f"---- {process_number}: Selecting dimensions...", "blue"))
+        # define a browser to use; using the dedicated demo_input.json file
+        browser = random_choice_based_on_distribution(demo_input['browser_distribution'])
+        print(color_text(f"---- {process_number}: Selected Browser: {browser}", "green"))
+        device = random_choice_based_on_distribution(demo_input['device_distribution'])
+        print(color_text(f"---- {process_number}: Selected Device: {device}", "green"))
+        # define an Acquisition source to use; using the dedicated demo_input.json file
+        source = random_choice_based_on_distribution(demo_input['source_distribution'])
+        print(color_text(f"---- {process_number}: Selected Source: {source}", "green"))
+        # define consent level for identification/cookies
+        consent_level = random_choice_based_on_distribution(demo_input['consent_distribution'])
+        print(color_text(f"---- {process_number}: Selected Consent level: {consent_level}", "green"))
+        # define path: purchase or not?
+        is_purchase = random.random() < demo_input['cvr_by_source'][source]
+        if is_purchase:
+            print(color_text(f"---- {process_number}: Selected purchase_flow", "green"))
+            temp_client_id = execute_purchase_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+            return temp_client_id
+        else:
+            print(color_text(f"---- {process_number}: Selected browsing_flow", "green"))
+            temp_client_id = execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+            return temp_client_id   
+
 def simulate_user(headless, demo_input, process_number):
-    global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, path_functions, GA_MEASUREMENT_ID, SCRIPT_PATH, ga_cookie_name
+    global CLIENT_IDS_PATH, BASE_URL, MAX_CLIENT_IDS, SHORT_TIME, LONG_TIME, page_categories, product_categories, path_functions, GA_MEASUREMENT_ID, CHROME_DRIVER, FIREFOX_DRIVER, SCRIPT_PATH, ga_cookie_name
     # Load demo_input.json
     with open("demo_input.json", 'r') as file:
         demo_input = json.load(file)
@@ -300,6 +360,8 @@ def simulate_user(headless, demo_input, process_number):
         GA_MEASUREMENT_ID = demo_input['GA_MEASUREMENT_ID']
         SCRIPT_PATH = demo_input['SCRIPT_PATH']
         ga_cookie_name = "_ga_"+GA_MEASUREMENT_ID
+        CHROME_DRIVER = demo_input['CHROME_DRIVER']
+        FIREFOX_DRIVER = demo_input['FIREFOX_DRIVER']
 
     # select randomically the dimensions based on content of demo_input, 
     # and launch either browsing_flow or execution flow based on the CVR associated with the source selected 
@@ -452,4 +514,3 @@ if __name__ == "__main__":
 
 
 
-    
