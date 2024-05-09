@@ -1,5 +1,5 @@
 from elena_util import *
-
+app = Flask(__name__)
 
 # --- GLOBAL VARS WITH DEFAULT VALUES ---- #
 
@@ -339,7 +339,14 @@ def main(demo_input):
 
         print(color_text("All processes completed successfully.", "green"))
 
-if __name__ == "__main__":
+
+@app.route('/', defaults={'headless': 1, 'nr_users': 0})
+
+@app.route('/<int:headless>/', defaults={'nr_users': 0})
+
+@app.route('/<int:headless>/<int:nr_users>')
+def run_script(headless, nr_users):
+    global HEADLESS, NR_USERS
     process_number = 0
 
     # checking start time so that I can log how long the script takes to execute
@@ -361,12 +368,8 @@ if __name__ == "__main__":
         # initiate global vars with values from the input file
         BASE_URL = demo_input['BASE_URL']
 
-    # define a var for the arguments
-    arguments = []
-
-    # are there input arguments?
-    # no arguments:
-    if len(sys.argv) <= 1:
+    HEADLESS = bool(headless)
+    if nr_users == 0:
         print(color_text("---------- Simulate_user was called without arguments, so I will choose them", "blue"))
         # check today's day
         today = date.today()
@@ -381,20 +384,18 @@ if __name__ == "__main__":
             #choose a random number of processes to run, which will be the final number of sessions/users 
             NR_USERS = random.randint(150, 200)
             print(color_text(f"-------- Weekend branch: Today is day {weekday} of the week, I am launching {NR_USERS} processes", "blue"))
-
-    # script has been called w arguments:
-    if len(sys.argv) > 1:
-        if sys.argv[1] == '0':
-            HEADLESS = False
-            arguments.append(sys.argv[1])
-    if len(sys.argv) > 2:
-        NR_USERS = int(sys.argv[2])
-        arguments.append(sys.argv[2])
-
+    else:
+        NR_USERS = nr_users
     # go ahead and have fun
-    main(demo_input)
+    response = main(demo_input)
     # let's log how long it took to execute all of this
     log_execution_time(start_time, arguments)
+    return response
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
+
 
 # end of script
 
