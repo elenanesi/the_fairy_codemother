@@ -1,4 +1,5 @@
 from elena_util import *
+
 app = Flask(__name__)
 
 # --- GLOBAL VARS WITH DEFAULT VALUES ---- #
@@ -389,15 +390,13 @@ def run_script(headless, nr_users):
     # go ahead and have fun
     response = main(demo_input)
     # let's log how long it took to execute all of this
-    log_execution_time(start_time, arguments)
+
+    log_execution_time(start_time)
     return response
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
 
 
 # end of script
 
-
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
 
