@@ -1,0 +1,9 @@
+Execution time: 30.72 seconds, Arguments: {0, 1}
+Execution time: 24.24 seconds, Arguments: {0, 1}
+Execution time: 23.95 seconds, Arguments: {0, 1}
+Execution time: 12.22 seconds, Arguments: {0, 1}
+Execution time: 10.60 seconds, Arguments: {0, 1}
+Execution time: 10.72 seconds, Arguments: {0, 1}
+Execution time: 24.51 seconds, Arguments: {0, 1}
+Execution time: 36.54 seconds, Arguments: {0, 1}
+Execution time: 7.86 seconds, Arguments: {0, 1}

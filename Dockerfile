@@ -16,10 +16,13 @@ RUN pip install -r requirements.txt
 RUN playwright install
 
 # Set display environment variable for Xvfb
-ENV DISPLAY=:99
+# ENV DISPLAY=:99
 
 # Copy the application's files to the container
 COPY . /app
 
 # Initialize Xvfb and run the Python script
-CMD Xvfb :99 -screen 0 1024x768x16 & sleep 2; python3 app.py 1 5
+# CMD Xvfb :99 -screen 0 1024x768x16 & sleep 2; python3 app.py
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]

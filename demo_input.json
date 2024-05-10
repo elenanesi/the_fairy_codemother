@@ -2,8 +2,8 @@
     "SCRIPT_TYPE":"flask - deleted save ids branch and moved to flask - w/out drivers",
     "BASE_URL": "https://the-fairy-codemother.nw.r.appspot.com/",
     "MAX_CLIENT_IDS": 500,
-    "SHORT_TIME": 5,
-    "LONG_TIME": 7,
+    "SHORT_TIME": 1,
+    "LONG_TIME": 2,
 
     "page_categories": ["home", "category", "product"],
     "product_ids":["1","2"],

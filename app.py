@@ -1,5 +1,6 @@
 from elena_util import *
 
+
 app = Flask(__name__)
 
 # --- GLOBAL VARS WITH DEFAULT VALUES ---- #
@@ -339,6 +340,12 @@ def main(demo_input):
             future.result()  # Ensures each process completes; no value is expected
 
         print(color_text("All processes completed successfully.", "green"))
+        result = {
+            "headless": HEADLESS,
+            "nr_users": NR_USERS,
+            "message": "Script executed with the provided parameters."
+        }
+        return result
 
 
 @app.route('/', defaults={'headless': 1, 'nr_users': 0})
@@ -390,13 +397,33 @@ def run_script(headless, nr_users):
     # go ahead and have fun
     response = main(demo_input)
     # let's log how long it took to execute all of this
-
-    log_execution_time(start_time)
+    args = {headless, nr_users}
+    log_execution_time(start_time, args)
     return response
 
 
-# end of script
+def trigger_startup(headless, nr_users):
+    # Replace `http://localhost:8080/action` with the URL that your application needs to invoke
+    url = "http://localhost:8080/"
+    if headless is not None:
+        url += f"{headless}/"
+        if nr_users is not None:
+            url += f"{nr_users}"
+    response = requests.get(url)
+    print(f'Status Code: {response.status_code}, Response: {response.text}')
+    return response
+    sys.exit()
 
 if __name__ == "__main__":
+    # Setting up argparse to handle command line arguments
+    parser = argparse.ArgumentParser(description='Start the Flask app with optional arguments.')
+    parser.add_argument('arg1', nargs='?', default='0', help='First argument (optional)')
+    parser.add_argument('arg2', nargs='?', default='1', help='Second argument (optional)')
+    args = parser.parse_args()
+    threading.Thread(target=trigger_startup, args=(args.arg1, args.arg2)).start()
     app.run(host='0.0.0.0', port=8080)
+
+
+
+# end of script
 
