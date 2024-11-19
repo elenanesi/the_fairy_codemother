@@ -1,0 +1,1224 @@
+Process SpawnProcess-40:
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 237, in _process_worker
+    call_item = call_queue.get(block=True)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+KeyboardInterrupt
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/electronics/", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/electronics/", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x105c07f40>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c07f40>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105c07f40>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x1049918e0>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1049918e0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 251, in simulate_user
+    execute_purchase_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 112, in execute_purchase_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1049918e0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 205, in execute_browsing_flow
+    page.wait_for_load_state('networkidle')
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8762, in wait_for_load_state
+    self._sync(self._impl_obj.wait_for_load_state(state=state, timeout=timeout))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 516, in wait_for_load_state
+    return await self._main_frame.wait_for_load_state(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 243, in wait_for_load_state
+    return await self._wait_for_load_state_impl(state, timeout)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 271, in _wait_for_load_state_impl
+    await waiter.result()
+playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 206, in execute_browsing_flow
+    except TimeoutException:
+NameError: name 'TimeoutException' is not defined
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+NameError: name 'TimeoutException' is not defined
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x1073b8040>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1073b8040>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1073b8040>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x106134fd0>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x106134fd0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x106134fd0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com//?utm_source=google&utm_medium=organic", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com//?utm_source=google&utm_medium=organic", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/?utm_source=google&utm_medium=organic", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/?utm_source=google&utm_medium=organic", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/?utm_source=google&utm_medium=organic", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/?utm_source=google&utm_medium=organic", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x107259670>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x107259670>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x107259670>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x105f0f730>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105f0f730>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105f0f730>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/category/clothing/", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x1094977c0>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1094977c0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1094977c0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x105e2e070>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105e2e070>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 199, in execute_browsing_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105e2e070>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x1066ebdf0>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1066ebdf0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 251, in simulate_user
+    execute_purchase_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 112, in execute_purchase_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1066ebdf0>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x105332b50>: Failed to establish a new connection: [Errno 60] Operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105332b50>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 251, in simulate_user
+    execute_purchase_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 112, in execute_purchase_flow
+    url = get_random_page(demo_input["product_sitemap"])
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 33, in get_random_page
+    response = requests.get(sitemap_url)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='the-fairy-codemother.nw.r.appspot.com', port=443): Max retries exceeded with url: /sitemap-products.xml (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x105332b50>: Failed to establish a new connection: [Errno 60] Operation timed out'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+requests.exceptions.ConnectionError: None: Max retries exceeded with url: /sitemap-products.xml (Caused by None)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: Page.goto: net::ERR_NETWORK_CHANGED at https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.Error: Page.goto: net::ERR_NETWORK_CHANGED at https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign", waiting until "load"
+
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 255, in simulate_user
+    execute_browsing_flow(browser, source, device, consent_level, demo_input, headless, process_number)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 160, in execute_browsing_flow
+    page.goto(landing_page)
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/sync_api/_generated.py", line 8667, in goto
+    self._sync(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_page.py", line 500, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/site-packages/playwright/_impl/_connection.py", line 513, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 334, in <module>
+    main(demo_input)
+  File "/Users/elenanesi/Desktop/Workspace/my_simulator/Local/the_fairy_codemother_local_pw/app.py", line 268, in main
+    future.result()  # Ensures each process completes; no value is expected
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 445, in result
+    return self.__get_result()
+  File "/Users/elenanesi/.pyenv/versions/3.9.6/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1", waiting until "load"
+

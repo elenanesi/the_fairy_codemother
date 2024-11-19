@@ -1,0 +1,459 @@
+[32m---------- Welcome to simulate_users![0m
+[34m---------- Simulate_user was called without arguments, so I will choose them[0m
+[34m-------- Weeday branch: Today is day 1 of the week, I am launching 30 processes[0m
+[34m------ Launching 30 processes, headless is True[0m
+[34m---- 6: Selecting dimensions...[0m
+[32m---- 6: Selected Browser: firefox[0m
+[32m---- 6: Selected Device: mobile[0m
+[32m---- 6: Selected Source: organic[0m
+[32m---- 6: Selected Consent level: allow-all-button[0m
+[32m---- 6: Selected browsing_flow[0m
+[32m-- 6: execute_browsing_flow fired[0m
+[34m** 6: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 6: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/?utm_source=google&utm_medium=organic[0m
+[32m-- 6: consent allow-all-button applied[0m
+[32m-- 6: Clicked on an internal link[0m
+[34m---- 2: Selecting dimensions...[0m
+[32m---- 2: Selected Browser: chrome[0m
+[32m---- 2: Selected Device: desktop[0m
+[32m---- 2: Selected Source: direct[0m
+[32m---- 2: Selected Consent level: deny-all-button[0m
+[32m---- 2: Selected browsing_flow[0m
+[32m-- 2: execute_browsing_flow fired[0m
+[34m** 2: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 2: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/[0m
+[32m-- 2: consent deny-all-button applied[0m
+[32m-- 2: Clicked on an internal link[0m
+[34m---- 20: Selecting dimensions...[0m
+[32m---- 20: Selected Browser: firefox[0m
+[32m---- 20: Selected Device: mobile[0m
+[32m---- 20: Selected Source: paid media[0m
+[32m---- 20: Selected Consent level: allow-all-button[0m
+[32m---- 20: Selected browsing_flow[0m
+[32m-- 20: execute_browsing_flow fired[0m
+[34m** 20: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 20: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m-- 20: consent allow-all-button applied[0m
+[32m-- 20: Clicked on an internal link[0m
+[34m-- 20: product page branch started[0m
+[34m-- 20: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 20: add to cart branch started[0m
+[32m-- 20: added to cart[0m
+[34m---- 23: Selecting dimensions...[0m
+[32m---- 23: Selected Browser: firefox[0m
+[32m---- 23: Selected Device: mobile[0m
+[32m---- 23: Selected Source: direct[0m
+[32m---- 23: Selected Consent level: deny-all-button[0m
+[32m---- 23: Selected browsing_flow[0m
+[32m-- 23: execute_browsing_flow fired[0m
+[34m** 23: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 23: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/[0m
+[32m** 23: consent was given successfully as: deny-all-button[0m
+[32m-- 23: consent deny-all-button applied[0m
+[32m-- 23: Clicked on an internal link[0m
+[34m---- 16: Selecting dimensions...[0m
+[32m---- 16: Selected Browser: chrome[0m
+[32m---- 16: Selected Device: desktop[0m
+[32m---- 16: Selected Source: paid media[0m
+[32m---- 16: Selected Consent level: allow-all-button[0m
+[32m---- 16: Selected browsing_flow[0m
+[32m-- 16: execute_browsing_flow fired[0m
+[34m** 16: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 16: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m-- 16: consent allow-all-button applied[0m
+[32m-- 16: Clicked on an internal link[0m
+[34m---- 9: Selecting dimensions...[0m
+[32m---- 9: Selected Browser: chrome[0m
+[32m---- 9: Selected Device: mobile[0m
+[32m---- 9: Selected Source: direct[0m
+[32m---- 9: Selected Consent level: allow-all-button[0m
+[32m---- 9: Selected browsing_flow[0m
+[32m-- 9: execute_browsing_flow fired[0m
+[34m** 9: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 9: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//[0m
+[32m** 9: consent was given successfully as: allow-all-button[0m
+[32m-- 9: consent allow-all-button applied[0m
+[32m-- 9: Clicked on an internal link[0m
+[34m---- 10: Selecting dimensions...[0m
+[32m---- 10: Selected Browser: firefox[0m
+[32m---- 10: Selected Device: mobile[0m
+[32m---- 10: Selected Source: direct[0m
+[32m---- 10: Selected Consent level: deny-all-button[0m
+[32m---- 10: Selected browsing_flow[0m
+[32m-- 10: execute_browsing_flow fired[0m
+[34m** 10: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 10: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//[0m
+[32m** 10: consent was given successfully as: deny-all-button[0m
+[32m-- 10: consent deny-all-button applied[0m
+[32m-- 10: Clicked on an internal link[0m
+[34m---- 3: Selecting dimensions...[0m
+[32m---- 3: Selected Browser: chrome[0m
+[32m---- 3: Selected Device: mobile[0m
+[32m---- 3: Selected Source: paid media[0m
+[32m---- 3: Selected Consent level: allow-all-button[0m
+[32m---- 3: Selected browsing_flow[0m
+[32m-- 3: execute_browsing_flow fired[0m
+[34m** 3: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 3: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m** 3: consent was given successfully as: allow-all-button[0m
+[32m-- 3: consent allow-all-button applied[0m
+[32m-- 3: Clicked on an internal link[0m
+[34m---- 0: Selecting dimensions...[0m
+[32m---- 0: Selected Browser: chrome[0m
+[32m---- 0: Selected Device: mobile[0m
+[32m---- 0: Selected Source: social media[0m
+[32m---- 0: Selected Consent level: allow-all-button[0m
+[32m---- 0: Selected purchase_flow[0m
+[32m-- 0: execute_purchase_flow fired[0m
+[34m** 0: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 0: browser was correctly setup[0m
+[32m-- 0: Selected utms: utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1[0m
+[32m-- 0: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1[0m
+[34m-- 0: product page started[0m
+[34m-- 0: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 0: add to cart started[0m
+[32m-- 0: added to cart[0m
+[32m-- 0: your-cart clicked[0m
+[32m-- 0: checkout started[0m
+[32m-- 0: Purchase completed[0m
+[34m---- 26: Selecting dimensions...[0m
+[32m---- 26: Selected Browser: firefox[0m
+[32m---- 26: Selected Device: mobile[0m
+[32m---- 26: Selected Source: direct[0m
+[32m---- 26: Selected Consent level: allow-all-button[0m
+[32m---- 26: Selected browsing_flow[0m
+[32m-- 26: execute_browsing_flow fired[0m
+[34m** 26: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 26: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/[0m
+[32m** 26: consent was given successfully as: allow-all-button[0m
+[32m-- 26: consent allow-all-button applied[0m
+[32m-- 26: Clicked on an internal link[0m
+[34m---- 28: Selecting dimensions...[0m
+[32m---- 28: Selected Browser: chrome[0m
+[32m---- 28: Selected Device: mobile[0m
+[32m---- 28: Selected Source: organic[0m
+[32m---- 28: Selected Consent level: allow-all-button[0m
+[32m---- 28: Selected purchase_flow[0m
+[32m-- 28: execute_purchase_flow fired[0m
+[34m** 28: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 28: browser was correctly setup[0m
+[32m-- 28: Selected utms: utm_source=google&utm_medium=organic[0m
+[32m-- 28: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=organic[0m
+[34m-- 28: product page started[0m
+[34m-- 28: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/[0m
+[34m-- 28: add to cart started[0m
+[32m-- 28: added to cart[0m
+[32m-- 28: your-cart clicked[0m
+[32m-- 28: checkout started[0m
+[32m-- 28: Purchase completed[0m
+[34m---- 4: Selecting dimensions...[0m
+[32m---- 4: Selected Browser: chrome[0m
+[32m---- 4: Selected Device: mobile[0m
+[32m---- 4: Selected Source: direct[0m
+[32m---- 4: Selected Consent level: allow-all-button[0m
+[32m---- 4: Selected purchase_flow[0m
+[32m-- 4: execute_purchase_flow fired[0m
+[34m** 4: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 4: browser was correctly setup[0m
+[32m-- 4: Selected utms: [0m
+[32m-- 4: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?[0m
+[34m-- 4: product page started[0m
+[32m** 4: consent was given successfully as: allow-all-button[0m
+[34m-- 4: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 4: add to cart started[0m
+[32m-- 4: added to cart[0m
+[32m-- 4: your-cart clicked[0m
+[32m-- 4: checkout started[0m
+[32m-- 4: Purchase completed[0m
+[34m---- 25: Selecting dimensions...[0m
+[32m---- 25: Selected Browser: firefox[0m
+[32m---- 25: Selected Device: mobile[0m
+[32m---- 25: Selected Source: paid media[0m
+[32m---- 25: Selected Consent level: allow-all-button[0m
+[32m---- 25: Selected browsing_flow[0m
+[32m-- 25: execute_browsing_flow fired[0m
+[34m** 25: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 25: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m** 25: consent was given successfully as: allow-all-button[0m
+[32m-- 25: consent allow-all-button applied[0m
+[32m-- 25: Clicked on an internal link[0m
+[34m-- 25: product page branch started[0m
+[34m-- 25: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/[0m
+[34m---- 8: Selecting dimensions...[0m
+[32m---- 8: Selected Browser: chrome[0m
+[32m---- 8: Selected Device: mobile[0m
+[32m---- 8: Selected Source: direct[0m
+[32m---- 8: Selected Consent level: allow-all-button[0m
+[32m---- 8: Selected browsing_flow[0m
+[32m-- 8: execute_browsing_flow fired[0m
+[34m** 8: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 8: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/[0m
+[32m-- 8: consent allow-all-button applied[0m
+[32m-- 8: Clicked on an internal link[0m
+[34m-- 8: product page branch started[0m
+[34m-- 8: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/[0m
+[34m-- 8: add to cart branch started[0m
+[32m-- 8: added to cart[0m
+[34m---- 19: Selecting dimensions...[0m
+[32m---- 19: Selected Browser: firefox[0m
+[32m---- 19: Selected Device: mobile[0m
+[32m---- 19: Selected Source: organic[0m
+[32m---- 19: Selected Consent level: allow-all-button[0m
+[32m---- 19: Selected browsing_flow[0m
+[32m-- 19: execute_browsing_flow fired[0m
+[34m** 19: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 19: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/?utm_source=google&utm_medium=organic[0m
+[32m** 19: consent was given successfully as: allow-all-button[0m
+[32m-- 19: consent allow-all-button applied[0m
+[32m-- 19: Clicked on an internal link[0m
+[34m---- 7: Selecting dimensions...[0m
+[32m---- 7: Selected Browser: firefox[0m
+[32m---- 7: Selected Device: mobile[0m
+[32m---- 7: Selected Source: social media[0m
+[32m---- 7: Selected Consent level: allow-all-button[0m
+[32m---- 7: Selected browsing_flow[0m
+[32m-- 7: execute_browsing_flow fired[0m
+[34m** 7: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 7: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1[0m
+[32m** 7: consent was given successfully as: allow-all-button[0m
+[32m-- 7: consent allow-all-button applied[0m
+[32m-- 7: Clicked on an internal link[0m
+[34m---- 15: Selecting dimensions...[0m
+[32m---- 15: Selected Browser: chrome[0m
+[32m---- 15: Selected Device: mobile[0m
+[32m---- 15: Selected Source: organic[0m
+[32m---- 15: Selected Consent level: allow-all-button[0m
+[32m---- 15: Selected browsing_flow[0m
+[32m-- 15: execute_browsing_flow fired[0m
+[34m** 15: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 15: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/clothing/?utm_source=google&utm_medium=organic[0m
+[32m-- 15: consent allow-all-button applied[0m
+[32m-- 15: Clicked on an internal link[0m
+[34m-- 15: product page branch started[0m
+[34m-- 15: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/[0m
+[34m-- 15: add to cart branch started[0m
+[32m-- 15: added to cart[0m
+[34m---- 29: Selecting dimensions...[0m
+[32m---- 29: Selected Browser: firefox[0m
+[32m---- 29: Selected Device: mobile[0m
+[32m---- 29: Selected Source: paid media[0m
+[32m---- 29: Selected Consent level: allow-all-button[0m
+[32m---- 29: Selected browsing_flow[0m
+[32m-- 29: execute_browsing_flow fired[0m
+[34m** 29: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 29: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m** 29: consent was given successfully as: allow-all-button[0m
+[32m-- 29: consent allow-all-button applied[0m
+[32m-- 29: Clicked on an internal link[0m
+[34m-- 29: product page branch started[0m
+[34m-- 29: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 29: add to cart branch started[0m
+[32m-- 29: added to cart[0m
+[34m---- 27: Selecting dimensions...[0m
+[32m---- 27: Selected Browser: chrome[0m
+[32m---- 27: Selected Device: desktop[0m
+[32m---- 27: Selected Source: direct[0m
+[32m---- 27: Selected Consent level: deny-all-button[0m
+[32m---- 27: Selected purchase_flow[0m
+[32m-- 27: execute_purchase_flow fired[0m
+[34m** 27: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 27: browser was correctly setup[0m
+[32m-- 27: Selected utms: [0m
+[32m-- 27: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?[0m
+[34m-- 27: product page started[0m
+[32m** 27: consent was given successfully as: deny-all-button[0m
+[34m-- 27: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/[0m
+[34m-- 27: add to cart started[0m
+[32m-- 27: added to cart[0m
+[32m-- 27: your-cart clicked[0m
+[32m-- 27: checkout started[0m
+[32m-- 27: Purchase completed[0m
+[34m---- 13: Selecting dimensions...[0m
+[32m---- 13: Selected Browser: chrome[0m
+[32m---- 13: Selected Device: desktop[0m
+[32m---- 13: Selected Source: organic[0m
+[32m---- 13: Selected Consent level: deny-all-button[0m
+[32m---- 13: Selected purchase_flow[0m
+[32m-- 13: execute_purchase_flow fired[0m
+[34m** 13: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 13: browser was correctly setup[0m
+[32m-- 13: Selected utms: utm_source=google&utm_medium=organic[0m
+[32m-- 13: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=organic[0m
+[34m-- 13: product page started[0m
+[32m** 13: consent was given successfully as: deny-all-button[0m
+[34m-- 13: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/[0m
+[34m-- 13: add to cart started[0m
+[32m-- 13: added to cart[0m
+[32m-- 13: your-cart clicked[0m
+[32m-- 13: checkout started[0m
+[32m-- 13: Purchase completed[0m
+[34m---- 5: Selecting dimensions...[0m
+[32m---- 5: Selected Browser: firefox[0m
+[32m---- 5: Selected Device: desktop[0m
+[32m---- 5: Selected Source: paid media[0m
+[32m---- 5: Selected Consent level: allow-all-button[0m
+[32m---- 5: Selected purchase_flow[0m
+[32m-- 5: execute_purchase_flow fired[0m
+[34m** 5: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 5: browser was correctly setup[0m
+[32m-- 5: Selected utms: utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m-- 5: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[34m-- 5: product page started[0m
+[32m** 5: consent was given successfully as: allow-all-button[0m
+[34m-- 5: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 5: add to cart started[0m
+[32m-- 5: added to cart[0m
+[32m-- 5: your-cart clicked[0m
+[32m-- 5: checkout started[0m
+[32m-- 5: Purchase completed[0m
+[34m---- 1: Selecting dimensions...[0m
+[32m---- 1: Selected Browser: chrome[0m
+[32m---- 1: Selected Device: desktop[0m
+[32m---- 1: Selected Source: social media[0m
+[32m---- 1: Selected Consent level: allow-all-button[0m
+[32m---- 1: Selected browsing_flow[0m
+[32m-- 1: execute_browsing_flow fired[0m
+[34m** 1: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 1: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/?utm_source=facebook.com&utm_medium=paid_social&utm_campaign=social_campaign_test1[0m
+[32m** 1: consent was given successfully as: allow-all-button[0m
+[32m-- 1: consent allow-all-button applied[0m
+[32m-- 1: Clicked on an internal link[0m
+[34m-- 1: product page branch started[0m
+[34m-- 1: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 1: add to cart branch started[0m
+[32m-- 1: added to cart[0m
+[34m---- 17: Selecting dimensions...[0m
+[32m---- 17: Selected Browser: firefox[0m
+[32m---- 17: Selected Device: mobile[0m
+[32m---- 17: Selected Source: organic[0m
+[32m---- 17: Selected Consent level: deny-all-button[0m
+[32m---- 17: Selected browsing_flow[0m
+[32m-- 17: execute_browsing_flow fired[0m
+[34m** 17: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 17: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/?utm_source=google&utm_medium=organic[0m
+[32m-- 17: consent deny-all-button applied[0m
+[32m-- 17: Clicked on an internal link[0m
+[34m-- 17: product page branch started[0m
+[34m-- 17: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/Jeans/[0m
+[34m-- 17: add to cart branch started[0m
+[32m-- 17: added to cart[0m
+[34m---- 21: Selecting dimensions...[0m
+[32m---- 21: Selected Browser: firefox[0m
+[32m---- 21: Selected Device: desktop[0m
+[32m---- 21: Selected Source: direct[0m
+[32m---- 21: Selected Consent level: allow-all-button[0m
+[32m---- 21: Selected browsing_flow[0m
+[32m-- 21: execute_browsing_flow fired[0m
+[34m** 21: I'm starting the browser setup for firefox with headless True[0m
+[32m-- 21: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com//[0m
+[32m** 21: consent was given successfully as: allow-all-button[0m
+[32m-- 21: consent allow-all-button applied[0m
+[32m-- 21: Clicked on an internal link[0m
+[34m-- 21: product page branch started[0m
+[34m-- 21: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/[0m
+[34m-- 21: add to cart branch started[0m
+[32m-- 21: added to cart[0m
+[34m---- 22: Selecting dimensions...[0m
+[32m---- 22: Selected Browser: chrome[0m
+[32m---- 22: Selected Device: mobile[0m
+[32m---- 22: Selected Source: organic[0m
+[32m---- 22: Selected Consent level: allow-all-button[0m
+[32m---- 22: Selected browsing_flow[0m
+[32m-- 22: execute_browsing_flow fired[0m
+[34m** 22: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 22: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/category/electronics/?utm_source=google&utm_medium=organic[0m
+[32m** 22: consent was given successfully as: allow-all-button[0m
+[32m-- 22: consent allow-all-button applied[0m
+[32m-- 22: Clicked on an internal link[0m
+[34m-- 22: product page branch started[0m
+[34m-- 22: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m---- 18: Selecting dimensions...[0m
+[32m---- 18: Selected Browser: chrome[0m
+[32m---- 18: Selected Device: mobile[0m
+[32m---- 18: Selected Source: paid media[0m
+[32m---- 18: Selected Consent level: allow-all-button[0m
+[32m---- 18: Selected browsing_flow[0m
+[32m-- 18: execute_browsing_flow fired[0m
+[34m** 18: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 18: Landing page was correctly setup, visiting https://the-fairy-codemother.nw.r.appspot.com/electronics/Laptop/?utm_source=google&utm_medium=cpc&utm_campaign=test_SEM_campaign[0m
+[32m-- 18: consent allow-all-button applied[0m
+[32m-- 18: Clicked on an internal link[0m
+[34m-- 18: product page branch started[0m
+[34m-- 18: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m---- 11: Selecting dimensions...[0m
+[32m---- 11: Selected Browser: chrome[0m
+[32m---- 11: Selected Device: mobile[0m
+[32m---- 11: Selected Source: direct[0m
+[32m---- 11: Selected Consent level: allow-all-button[0m
+[32m---- 11: Selected purchase_flow[0m
+[32m-- 11: execute_purchase_flow fired[0m
+[34m** 11: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 11: browser was correctly setup[0m
+[32m-- 11: Selected utms: [0m
+[32m-- 11: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?[0m
+[34m-- 11: product page started[0m
+[32m** 11: consent was given successfully as: allow-all-button[0m
+[34m-- 11: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/electronics/Smartphone/[0m
+[34m-- 11: add to cart started[0m
+[32m-- 11: added to cart[0m
+[32m-- 11: your-cart clicked[0m
+[32m-- 11: checkout started[0m
+[32m-- 11: Purchase completed[0m
+[34m---- 14: Selecting dimensions...[0m
+[32m---- 14: Selected Browser: chrome[0m
+[32m---- 14: Selected Device: desktop[0m
+[32m---- 14: Selected Source: organic[0m
+[32m---- 14: Selected Consent level: deny-all-button[0m
+[32m---- 14: Selected purchase_flow[0m
+[32m-- 14: execute_purchase_flow fired[0m
+[34m** 14: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 14: browser was correctly setup[0m
+[32m-- 14: Selected utms: utm_source=google&utm_medium=organic[0m
+[32m-- 14: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=organic[0m
+[34m-- 14: product page started[0m
+[32m** 14: consent was given successfully as: deny-all-button[0m
+[34m-- 14: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 14: add to cart started[0m
+[32m-- 14: added to cart[0m
+[32m-- 14: your-cart clicked[0m
+[32m-- 14: checkout started[0m
+[32m-- 14: Purchase completed[0m
+[34m---- 12: Selecting dimensions...[0m
+[32m---- 12: Selected Browser: chrome[0m
+[32m---- 12: Selected Device: mobile[0m
+[32m---- 12: Selected Source: organic[0m
+[32m---- 12: Selected Consent level: deny-all-button[0m
+[32m---- 12: Selected purchase_flow[0m
+[32m-- 12: execute_purchase_flow fired[0m
+[34m** 12: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 12: browser was correctly setup[0m
+[32m-- 12: Selected utms: utm_source=google&utm_medium=organic[0m
+[32m-- 12: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=organic[0m
+[34m-- 12: product page started[0m
+[32m** 12: consent was given successfully as: deny-all-button[0m
+[34m-- 12: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 12: add to cart started[0m
+[32m-- 12: added to cart[0m
+[32m-- 12: your-cart clicked[0m
+[32m-- 12: checkout started[0m
+[32m-- 12: Purchase completed[0m
+[34m---- 24: Selecting dimensions...[0m
+[32m---- 24: Selected Browser: chrome[0m
+[32m---- 24: Selected Device: mobile[0m
+[32m---- 24: Selected Source: organic[0m
+[32m---- 24: Selected Consent level: deny-all-button[0m
+[32m---- 24: Selected purchase_flow[0m
+[32m-- 24: execute_purchase_flow fired[0m
+[34m** 24: I'm starting the browser setup for chrome with headless True[0m
+[32m-- 24: browser was correctly setup[0m
+[32m-- 24: Selected utms: utm_source=google&utm_medium=organic[0m
+[32m-- 24: Starting navigation at https://the-fairy-codemother.nw.r.appspot.com/?utm_source=google&utm_medium=organic[0m
+[34m-- 24: product page started[0m
+[32m** 24: consent was given successfully as: deny-all-button[0m
+[34m-- 24: product page branch started at https://the-fairy-codemother.nw.r.appspot.com/clothing/T-Shirt/[0m
+[34m-- 24: add to cart started[0m
+[32m-- 24: added to cart[0m
+[32m-- 24: your-cart clicked[0m
+[32m-- 24: checkout started[0m
+[32m-- 24: Purchase completed[0m
+[32mAll processes completed successfully.[0m

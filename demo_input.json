@@ -1,13 +1,22 @@
 {
     "SCRIPT_TYPE":"flask - deleted save ids branch and moved to flask - w/out drivers",
     "BASE_URL": "https://the-fairy-codemother.nw.r.appspot.com/",
+
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 1,
     "LONG_TIME": 2,
 
-    "page_categories": ["home", "category", "product"],
-    "product_ids":["1","2"],
     "path_functions": ["bounce","engaged", "product", "add_to_cart"],
+    "page_categories": ["home", "category", "product"],
+
+    "category_sitemap": "https://the-fairy-codemother.nw.r.appspot.com/sitemap-product-categories.xml",
+    "product_sitemap": "https://the-fairy-codemother.nw.r.appspot.com/sitemap-products.xml",
+    
+
+    "first_click_selector" : ".next",
+    "add_to_cart_selector" : ".cart",
+    "cart_selector" : ".your-cart",
+    "checkout_selector" : ".checkout",
 
     "consent_distribution" : {
     "allow-all-button": 70,
@@ -15,8 +24,8 @@
     },
 
     "browser_distribution": {
-        "chrome": 100,
-        "firefox": 0
+        "chrome": 50,
+        "firefox": 50
     },
 
     "source_distribution": {

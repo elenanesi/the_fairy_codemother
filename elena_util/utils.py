@@ -13,7 +13,7 @@ import requests
 import subprocess
 import threading
 import argparse
-
+import xml.etree.ElementTree as ET
 
 # location of browser drivers
 SHORT_TIME = 2 
@@ -80,14 +80,26 @@ def consent(page, process_number, url, click_class):
     except(e):
         print(color_text(f"Cookie banner was not cliccable {e} at {url}"), "magenta")
 
-def browser_setup(browser, device, headless, process_number):
-    print(color_text(f"** {process_number}: I'm starting the browser setup for {browser}", "blue"))
+def browser_setup(browser_input, device, headless, process_number):
+    print(color_text(f"** {process_number}: I'm starting the browser setup for {browser_input} with headless {headless}", "blue"))
+    if device == "mobile":
+        if browser_input == "firefox":
+            # use iphone and safari
+            user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
+        else:
+            user_agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1"
+
+    else: 
+        # chrome desktop
+        user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        if browser_input == "firefox":
+            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+        
+    # geolocation = {'latitude': 37.7749, 'longitude': -122.4194} 
     playwright = sync_playwright().start()
-    browser = playwright.chromium.launch(headless=headless)
-    #if device == "mobile":
-        #mobile_device = playwright.devices["iPhone 11 Pro Max"]
-        #context = browser.new_context(**device)
-    #else:
-    return browser
+    browser = playwright.chromium.launch( headless=headless)
+    context = browser.new_context(user_agent=user_agent)
+    # context.set_geolocation(geolocation)
+    return browser, context
         
 # end of file
