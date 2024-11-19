@@ -1,6 +1,6 @@
 {
     "SCRIPT_TYPE":"flask - deleted save ids branch and moved to flask - w/out drivers",
-    "BASE_URL": "https://the-fairy-codemother.nw.r.appspot.com/",
+    "BASE_URL": "https://example.com/",
 
     "MAX_CLIENT_IDS": 500,
     "SHORT_TIME": 1,
@@ -9,8 +9,8 @@
     "path_functions": ["bounce","engaged", "product", "add_to_cart"],
     "page_categories": ["home", "category", "product"],
 
-    "category_sitemap": "https://the-fairy-codemother.nw.r.appspot.com/sitemap-product-categories.xml",
-    "product_sitemap": "https://the-fairy-codemother.nw.r.appspot.com/sitemap-products.xml",
+    "category_sitemap": "https://example.com/sitemap-product-categories.xml",
+    "product_sitemap": "https://example.com/sitemap-products.xml",
     
 
     "first_click_selector" : ".next",
