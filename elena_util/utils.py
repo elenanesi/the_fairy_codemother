@@ -3,6 +3,7 @@ from playwright.sync_api import sync_playwright
 from multiprocessing import Process
 from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime, date
+from codecarbon import EmissionsTracker
 import time
 import random
 import sys

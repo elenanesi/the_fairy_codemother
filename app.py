@@ -5,19 +5,6 @@ from elena_util import *
 # WIP: will be used to perform a dataLayer push and keep the GA data updated with the version in use.
 # SCRIPT_VERSION = "May 14 - working w google cloud"
 
-# Product "feed"
-# to be substituted with JSON/Other file to be shared w the Flask website
-products = {
-    'electronics': [
-        {'item_id': 1, 'item_name': 'Laptop', 'item_category': 'electronics', 'price': 800, 'quantity': 1, 'description': 'High-performance laptop.', 'image': 'url_to_image'},
-        {'item_id': 2, 'item_name': 'Smartphone', 'item_category': 'electronics', 'price': 500, 'quantity': 1, 'description': 'Latest model smartphone.', 'image': 'url_to_image'},
-    ],
-    'clothing': [
-        {'item_id': 1, 'item_name': 'T-Shirt', 'item_category': 'clothing', 'price': 20, 'quantity': 1, 'description': 'Cotton t-shirt.', 'image': 'url_to_image'},
-        {'item_id': 2, 'item_name': 'Jeans', 'item_category': 'clothing', 'price': 40, 'quantity': 1, 'description': 'Denim jeans.', 'image': 'url_to_image'},
-    ]
-}
-product_ids = [1,2]
 # run headless by default
 HEADLESS = True
 # number of users and sessions to run at every execution of the script
@@ -178,8 +165,6 @@ def execute_browsing_flow(browser_input, source, device, consent_level, demo_inp
 
     #determine path
     path = random.choice(path_functions)
-    # product category options
-    product_categories = list(products.keys())
 
     if path != "bounced":
         # Choose a random category for the product
@@ -272,6 +257,9 @@ def main(demo_input):
 
 if __name__ == "__main__":
     process_number = 0
+    #Track CO2 improvements over time with the CodeCarbon PY lib
+    tracker = EmissionsTracker()
+    tracker.start()
 
     # checking start time so that I can log how long the script takes to execute
     start_time = time.time()
@@ -334,5 +322,6 @@ if __name__ == "__main__":
     main(demo_input)
     # let's log how long it took to execute all of this
     log_execution_time(start_time, arguments)
+    tracker.stop()
 
 # end of script

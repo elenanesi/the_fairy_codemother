@@ -1,0 +1,19 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environment
+venv/
+
+# Ignore environment files
+.env
+
+# Ignore logs
+*.log
+
+# Ignore specific file
+*.DS_Store
+emissions.csv
+powermetrics_log.txt
+execution_log.txt
+
