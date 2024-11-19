@@ -48,29 +48,3 @@ To make this script work, you'll need to have
 	Here's an example of mine:
 
 	0 10 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 10 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 11 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 11 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 12 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 12 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 13 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 13 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 14 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 14 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 15 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 15 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 16 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 16 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 17 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 17 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 18 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 18 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 19 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 19 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 20 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 20 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	0 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log
-	30 21 * * * /usr/bin/python3 /Users/elenanesi/Workspace/user-simulation/app.py > /dev/null 2>> Users/elenanesi/Workspace/user-simulation/logfile.log 
-
-
-
