@@ -24,13 +24,21 @@ Currently, this is (80, 100) for week days, and (150, 200) for week ends (fixed 
 
 To make this script work, you'll need to have 
 
-1) A website to navigate. 
-	The script expects a link with text "Yes" in all pages; An "Add to cart" button on product pages, and a "Purchase" link in the checkout page
-	The website used to develop this tool is available here: https://github.com/elenanesi/web_playground_flask
+1) A website to navigate.
 
-2) install the following: (you can use pip install -r requirements.txt)
+2) Setup the config file "demo_input.json" adding the:
+- URL of the website you want to visit
+- URL to the sitemaps you want to use
+- identifiers of the HTML elements you want to click
+- identifiers of the cookie banner buttons
+- desired distributions for dimensions (or leave as is)
+- desired CVR for each acquisition source (or leave as is)
+- campaign names (or leave as is)
+
+3) install the following: (you can use pip install -r requirements.txt)
 	- python (eg: brew install python)
 	- playwright (pip install playwright)
+ 	- requests	
 
 
 # CONFIGURATION
