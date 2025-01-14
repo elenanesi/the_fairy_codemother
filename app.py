@@ -257,12 +257,13 @@ def main(demo_input):
 
 if __name__ == "__main__":
     process_number = 0
+    # The following lines are for testing purposes only. I am commenting them to save on energy consumption (hence CO2)
     #Track CO2 improvements over time with the CodeCarbon PY lib
-    tracker = EmissionsTracker()
-    tracker.start()
+    #tracker = EmissionsTracker()
+    #tracker.start()
 
     # checking start time so that I can log how long the script takes to execute
-    start_time = time.time()
+    # start_time = time.time()
 
     print(color_text("---------- Welcome to simulate_users!", "green"))
 
@@ -321,7 +322,7 @@ if __name__ == "__main__":
     # go ahead and have fun
     main(demo_input)
     # let's log how long it took to execute all of this
-    log_execution_time(start_time, arguments)
-    tracker.stop()
+    #log_execution_time(start_time, arguments)
+    #tracker.stop()
 
 # end of script
